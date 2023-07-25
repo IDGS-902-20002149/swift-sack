@@ -1,0 +1,139 @@
+<h2>Valores Calculados</h2>
+<div class="card-container">
+  <div class="card" *ngFor="let valor of valoresCalculados">
+    <div class="card-header">
+      Beneficio Bruto
+    </div>
+    <div class="card-body">
+      {{ valor.gross_profit }}
+    </div>
+  </div>
+  
+  <div class="card" *ngFor="let valor of valoresCalculados">
+    <div class="card-header">
+      Valor de Compra Promedio
+    </div>
+    <div class="card-body">
+      {{ valor.average_purchase_value }}
+    </div>
+  </div>
+  
+  <div class="card" *ngFor="let valor of valoresCalculados">
+    <div class="card-header">
+      Total de Usuarios
+    </div>
+    <div class="card-body">
+      {{ valor.total_users }}
+    </div>
+  </div>
+  
+  <div class="card" *ngFor="let valor of valoresCalculados">
+    <div class="card-header">
+      Nuevos Usuarios Semanales
+    </div>
+    <div class="card-body">
+      {{ valor.new_users_weekly }}
+    </div>
+  </div>
+</div>
+
+<div class="cardTable">
+  <div class="cardTable-wrapper">
+    <div class="cardTable-card">
+      <h2>Productos Más Vendidos</h2>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Costo</th>
+            <th>Total obtenido</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of productosMasVendidos">
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.cantidad }}</td>
+            <td>{{ producto.costo }}</td>
+            <td>{{ producto.total_obtenido }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+ 
+    <div class="cardTable-card">
+      <h2>Productos Menos Vendidos</h2>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Costo</th>
+            <th>Total obtenido</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of productosMenosVendidos">
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.cantidad }}</td>
+            <td>{{ producto.costo }}</td>
+            <td>{{ producto.total_obtenido }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+  
+  
+
+
+<!--
+  <h2>Ventas Mensuales</h2>
+<ul>
+  <li *ngFor="let venta of ventasMensuales">{{ venta.month }}{{ venta.total_Sales}}</li>
+</ul>
+
+
+<div class="chart-container">
+  <ngx-charts-bar-vertical
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="single"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    (select)="onSelect($event)">
+  </ngx-charts-bar-vertical>
+</div>
+-->
+<div class="chart-container chart-card">
+  <div class="cardGrapf rounded-card">
+    <label for="year-filter" class="filter-label">Filtrar por año:</label>
+    <select id="year-filter" [(ngModel)]="selectedYear" (change)="filtrarVentasPorAnio(selectedYear)" class="custom-select">
+      <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    </select>
+  </div>
+  <br>
+  <ngx-charts-bar-vertical
+    [view]="view"
+    [scheme]="colorScheme"
+    [results]="single"
+    [gradient]="gradient"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    (select)="onSelect($event)">
+  </ngx-charts-bar-vertical>
+</div>
