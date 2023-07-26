@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProyectoAPIService } from '../proyecto-api.service';
+import { ProyectoApiService } from '../../proyecto-api.service';
 import {  ColorHelper, ScaleType } from '@swimlane/ngx-charts';
-
-
-
-
 
 @Component({
   selector: 'app-finanzas',
@@ -22,7 +18,7 @@ export class FinanzasComponent implements OnInit {
 
   
 
-  constructor(private apiService: ProyectoAPIService) { }
+  constructor(private apiService: ProyectoApiService) { }
 
   ngOnInit(): void {
     this.obtenerProductosMasVendidos();
