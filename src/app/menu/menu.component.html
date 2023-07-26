@@ -14,7 +14,11 @@
     </mat-toolbar>
     <mat-sidenav-container class="contenido">
       <mat-sidenav style="min-width: 300px;" #cajon mode="side" opened>
-        <mat-nav-list>
+        <mat-nav-list>          
+          <a mat-list-item routerLinkActive="active" routerLink="finanzas">
+            <mat-icon color="primary">perm_identity</mat-icon>
+            Finanzas
+          </a>
           <a mat-list-item routerLinkActive="active" routerLink="Agregar">
             <mat-icon color="accent">add</mat-icon>
             Agregar Proveedor

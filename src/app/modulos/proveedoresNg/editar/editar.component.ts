@@ -30,9 +30,6 @@ export class EditarComponent implements OnInit {
     this.obtenerIdAlumno();
   }
 
-
-
-
   obtenerIdAlumno() {
     const idProveedor = this.route.snapshot.params['id'];
     this.regProveedor.id = Number(idProveedor);

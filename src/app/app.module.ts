@@ -8,6 +8,8 @@ import { ProveedoresComponent } from './modulos/proveedoresNg/proveedores/provee
 import { AgregarComponent } from './modulos/proveedoresNg/agregar/agregar.component'; 
 import { EditarComponent } from './modulos/proveedoresNg/editar/editar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MaterialModule } from './material/material.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,6 +22,7 @@ import { AgregarMPComponent } from './modulos/materiaPNg/agregar/agregar/agregar
 @NgModule({
   declarations: [
     AppComponent,
+    FinanzasComponent,
     MenuComponent,
     ProveedoresComponent,
     AgregarComponent,
@@ -36,6 +39,7 @@ import { AgregarMPComponent } from './modulos/materiaPNg/agregar/agregar/agregar
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    NgxChartsModule,
     HttpClientModule
   ],
   providers: [],
