@@ -18,6 +18,9 @@ import { MateriaPComponent } from './modulos/materiaPNg/materiaP/materia-p/mater
 import { MateriaPFilterPipe } from './materiaP-filter.pipe';
 import { EditarMPComponent } from './modulos/materiaPNg/editar/editar/editar.component';
 import { AgregarMPComponent } from './modulos/materiaPNg/agregar/agregar/agregar.component';
+import { TarjetasMModule } from './modulos/tarjetas/tarjetas-m/tarjetas-m.module';
+import { DireccionMModule } from './modulos/direccion/direccion-m/direccion-m.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,8 @@ import { AgregarMPComponent } from './modulos/materiaPNg/agregar/agregar/agregar
     MateriaPComponent,
     MateriaPFilterPipe,
     EditarMPComponent,
-    AgregarMPComponent
+    AgregarMPComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ import { AgregarMPComponent } from './modulos/materiaPNg/agregar/agregar/agregar
     MaterialModule,
     FormsModule,
     NgxChartsModule,
-    HttpClientModule
+    HttpClientModule,
+    TarjetasMModule,
+    DireccionMModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -23,8 +23,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
       MatToolbarModule,
       MatListModule,
       MatIconModule ,
-      MatExpansionModule,
-     
+      MatExpansionModule
     ]
 })
 export class MaterialModule{}

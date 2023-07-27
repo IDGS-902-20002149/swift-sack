@@ -1,14 +1,17 @@
 <div class="contenedor-padre">
-    <mat-toolbar class="barra" color="warn">
+    <mat-toolbar class="barra" color="dark">
       <mat-toolbar-row>
         <button (click)="cajon.toggle()" mat-icon-button>
           <mat-icon>menu</mat-icon>
         </button>
         <span>
-          CRUD Angular&nbsp;
+          <img src="../../assets/img/swiftsack_logo_letras.png" height="50px" width="auto"> &nbsp;
         </span>
         <span>
-          <a mat-stroked-button href="">IDGS - UTL</a>
+          <a mat-stroked-button href="">HOME</a>&nbsp;
+        </span>
+        <span>
+          <a mat-stroked-button href="">PRODUCTOS</a>
         </span>
       </mat-toolbar-row>
     </mat-toolbar>
@@ -36,6 +39,46 @@
             Ver Materia Prima
           </a>
         </mat-nav-list>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Mis tarjetas
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+     
+            <mat-nav-list>
+              <a mat-list-item routerLinkActive="active" routerLink="verTarjetas">
+                <mat-icon color="primary">credit_card</mat-icon>
+                Ver Tarjetas
+              </a>
+              <a mat-list-item routerLinkActive="active" routerLink="AgregarTar">
+                <mat-icon color="primary">add</mat-icon>
+                Agregar Tarjeta
+              </a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Mis Direcciones
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+     
+            <mat-nav-list>
+              <a mat-list-item routerLinkActive="active" routerLink="verDirecciones">
+                <mat-icon color="primary">pin_drop</mat-icon>
+                Ver Direcciones
+              </a>
+              <a mat-list-item routerLinkActive="active" routerLink="AgregarDir">
+                <mat-icon color="primary">add_location</mat-icon>
+                Agregar Direcci&oacute;n
+              </a>
+            </mat-nav-list>
+          </mat-expansion-panel>
+        </mat-accordion>
         <mat-accordion>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
