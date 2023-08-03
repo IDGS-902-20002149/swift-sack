@@ -17,6 +17,8 @@ import { DireccionComponent } from './modulos/direccion/direcciones/direccion.co
 import { AgregarDirComponent } from './modulos/direccion/agregar-dir/agregar-dir.component';
 import { EditarDirComponent } from './modulos/direccion/editar-dir/editar-dir.component';
 import { HomeComponent } from './home/home.component';
+import { PreviewComponent } from './modulos/carrito/preview/preview.component'; 
+import { GotopayComponent } from './modulos/carrito/gotopay/gotopay.component';
 
 const routes: Routes = [
   {path: '',redirectTo: '/home', pathMatch:'full'},
@@ -30,10 +32,12 @@ const routes: Routes = [
   {path:'AgregarMP', component: AgregarMPComponent},
   {path: 'verTarjetas', component: TarjetasComponent},
   {path: 'AgregarTar', component: AgregarTarComponent},
-  {path: 'EditarTar', component: EditarTarComponent},
+  {path: 'EditarTar/:id', component: EditarTarComponent},
   {path: 'verDirecciones', component: DireccionComponent},
   {path: 'AgregarDir', component: AgregarDirComponent},
-  {path: 'EditarDir', component: EditarDirComponent} 
+  {path: 'EditarDir/:id', component: EditarDirComponent},
+  {path: 'PreviewCar', component: PreviewComponent},
+  {path: 'GoToPay', component: GotopayComponent}
 ];
 
 @NgModule({

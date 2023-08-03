@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MateriaPSS, ProveedorSS } from './interfaces/swiftsack';
 import { Observable } from 'rxjs';
+import { Direccion } from './interfaces/direccion';
+import { Tarjeta } from './interfaces/tarjeta';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +37,16 @@ export class ProyectoApiService {
     },
   ]
 
+  _direccion:Direccion[]=[
+    {
+      idDireccion: 0, 
+      idUser: 0, 
+      nombreCompleto: '',
+      calleNumero: '',
+      codigoPostal: '',
+      telefono: '',
+    },
+  ]
 
   constructor(private http:HttpClient) { }
  
@@ -44,6 +56,10 @@ export class ProyectoApiService {
 
   get materiap():MateriaPSS[]{
     return[...this._materiaP]
+  }
+
+  get direccion():Direccion[]{
+    return[...this._direccion]
   }
    
   public getProveedor():Observable<ProveedorSS[]>{
@@ -102,6 +118,52 @@ export class ProyectoApiService {
 
   public getVentasMensuales(): Observable<VentasMensuales[]> {
     return this.http.get<VentasMensuales[]>('https://localhost:7160/api/Finanzas/VtaMes');
+  }
+
+  /* Links de Direccion */
+  public getDireccion():Observable<Direccion[]>{
+    return this.http.get<Direccion[]>('https://localhost:7267/api/Direccion')
+  }
+  
+  addDireccion(datos:Direccion){
+    return this.http.post('https://localhost:7267/api/Direccion',datos)
+  }
+  
+  editarDireccion(datos: Direccion) {
+    const url = `https://localhost:7267/api/Direccion/${datos.idDireccion}`;
+    return this.http.put(url, datos);
+  }
+
+  eliminarDireccion(id:number) {
+    const url = `https://localhost:7267/api/Direccion?Id=${id}`;
+    return this.http.delete(url);
+  }
+
+  obtenerDireccion(id:number):Observable<Direccion[]>{
+    return this.http.get<Direccion[]>(`https://localhost:7267/api/Direccion/${id}`);
+  }
+
+  /* Links de Tarjetas */
+  public getTarjeta():Observable<Tarjeta[]>{
+    return this.http.get<Tarjeta[]>('https://localhost:7267/api/Tarjeta')
+  }
+
+  addTarjeta(datos:Tarjeta){
+    return this.http.post('https://localhost:7267/api/Tarjeta',datos)
+  }
+  
+  editarTarjeta(datos: Tarjeta) {
+    const url = `https://localhost:7267/api/Tarjeta/${datos.idTarjeta}`;
+    return this.http.put(url, datos);
+  }
+
+  eliminarTarjeta(id:number) {
+    const url = `https://localhost:7267/api/Tarjeta?Id=${id}`;
+    return this.http.delete(url);
+  }
+
+  obtenerTarjeta(id:number):Observable<Tarjeta[]>{
+    return this.http.get<Tarjeta[]>(`https://localhost:7267/api/Tarjeta/${id}`);
   }
 
 }

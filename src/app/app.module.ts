@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MaterialModule } from './material/material.module';
+
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProveedoresFilterPipe } from './proveedores-filter.pipe';
@@ -21,6 +22,10 @@ import { AgregarMPComponent } from './modulos/materiaPNg/agregar/agregar/agregar
 import { TarjetasMModule } from './modulos/tarjetas/tarjetas-m/tarjetas-m.module';
 import { DireccionMModule } from './modulos/direccion/direccion-m/direccion-m.module';
 import { HomeComponent } from './home/home.component';
+import { direccionFilterPipe } from './direccion-filter.pipe';
+import { tarjetaFilterPipe } from './tarjeta-filter.pipe';
+
+import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +41,8 @@ import { HomeComponent } from './home/home.component';
     EditarMPComponent,
     AgregarMPComponent,
     HomeComponent,
+    direccionFilterPipe,
+    tarjetaFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -47,6 +54,7 @@ import { HomeComponent } from './home/home.component';
     HttpClientModule,
     TarjetasMModule,
     DireccionMModule,
+    CarritoMModule
   ],
   providers: [],
   bootstrap: [AppComponent]
