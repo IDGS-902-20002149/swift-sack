@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProyectoAPIService } from '../proyecto-api.service';
 import {  ColorHelper, ScaleType } from '@swimlane/ngx-charts';
 
-
-
-
-
 @Component({
   selector: 'app-finanzas',
   templateUrl: './finanzas.component.html',
@@ -18,9 +14,10 @@ export class FinanzasComponent implements OnInit {
 
   ventasMensuales!: any[];
   single: any[] = [];
-  monthNames: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  //monthNames: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  name!:string;
+  monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Representación numérica de los meses
 
-  
 
   constructor(private apiService: ProyectoAPIService) { }
 
@@ -69,44 +66,46 @@ export class FinanzasComponent implements OnInit {
     this.apiService.getVentasMensuales().subscribe(
       data => {
         this.ventasMensuales = data;
-        this.years = this.obtenerUniqueYears();
-        this.selectedYear = this.years[0]; // Establecer el primer año como seleccionado inicialmente
-        this.filtrarVentasPorAnio(this.selectedYear); // Filtrar las ventas por el año seleccionado
-        this.mostrarGraficaVentasMensuales()
+        this.filtrarVentasPorMes(); // Filtrar las ventas por el mes seleccionado inicialmente
       },
       error => {
         console.log(error);
       }
     );
   }
-  selectedYear!: number;
-  filteredSales!: any[]; 
-  years!: number[]; 
-
-
-obtenerUniqueYears(): number[] {
-  return Array.from(new Set(this.ventasMensuales.map(item => item.year)));
-}
-
-filtrarVentasPorAnio(year: number): void {
-  this.filteredSales = this.ventasMensuales.filter(item => item.year === year);
-}
   
+  // Elimina la llamada a mostrarGraficaVentasMensuales() desde obtenerVentasMensuales()
+  filteredSales!: any[]; 
+  selectedMonth: number = 7;
+  hayDatosDisponibles: boolean = true;
+  
+  filtrarVentasPorMes(): void {
+    
+    const selectedMonthIndex = this.selectedMonth - 1; // Restamos 1 para obtener el índice correcto en monthNames
+    const selectedMonth = this.monthNames[selectedMonthIndex];
+    this.filteredSales = this.ventasMensuales.filter(item => item.month === selectedMonth);
+    console.log(this.selectedMonth);
+    this.hayDatosDisponibles = this.filteredSales.length > 0;
+    this.mostrarGraficaVentasMensuales();
+  }
+  
+  mostrarGraficaVentasMensuales(): void {
+    const salesData = this.filteredSales.map(item => {
+      return {
+        name: item.nombre,
+        value: item.total_vendido
+      };
+    });
 
-mostrarGraficaVentasMensuales(): void {
-  const salesData = this.filteredSales.map(item => {
-    const monthName = this.monthNames[item.month - 1];
-    return {
-      name: monthName,
-      value: item.total_Sales
-    };
-  });
-
-  this.single = salesData;
-  const grayPalette = ['#F0F0F0', '#D8D8D8', '#C0C0C0', '#A8A8A8', '#909090'];
-  this.colorScale = new ColorHelper(this.colorScheme, ScaleType.Linear, [0, salesData.length], [0.2, 1]);
-  this.colorScheme.domain = grayPalette.map(color => this.colorScale.getColor(color));
-}
+      this.single = salesData;
+      const grayPalette = ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'];
+  
+      //this.colorScale = new ColorHelper(this.colorScheme, ScaleType.Linear, [0, salesData.length], [0.2, 6]);
+      this.colorScheme.domain = grayPalette;
+      //.map(color => this.colorScale.getColor(color));
+    }
+  
+  
 
   // options
   showXAxis = true;
@@ -125,7 +124,7 @@ mostrarGraficaVentasMensuales(): void {
   margin: any = { top: 20, right: 20, bottom: 50, left: 70 }; 
 
   colorScheme: any = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
   };
 
  
@@ -139,4 +138,3 @@ mostrarGraficaVentasMensuales(): void {
   }
   
   
-

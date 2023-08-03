@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -19,13 +19,13 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
   ],
   imports: [
     BrowserModule,
+    NgxChartsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    HttpClientModule,
-    NgxChartsModule
- 
+    HttpClientModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

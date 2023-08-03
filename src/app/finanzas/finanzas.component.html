@@ -29,10 +29,10 @@
   
   <div class="card" *ngFor="let valor of valoresCalculados">
     <div class="card-header">
-      Nuevos Usuarios Semanales
+      Valor de Venta Promedio
     </div>
     <div class="card-body">
-      {{ valor.new_users_weekly }}
+      {{ valor.average_order_value }}
     </div>
   </div>
 </div>
@@ -114,26 +114,13 @@
   </ngx-charts-bar-vertical>
 </div>
 -->
-<div class="chart-container chart-card">
-  <div class="cardGrapf rounded-card">
-    <label for="year-filter" class="filter-label">Filtrar por año:</label>
-    <select id="year-filter" [(ngModel)]="selectedYear" (change)="filtrarVentasPorAnio(selectedYear)" class="custom-select">
-      <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-    </select>
-  </div>
-  <br>
-  <ngx-charts-bar-vertical
-    [view]="view"
-    [scheme]="colorScheme"
-    [results]="single"
-    [gradient]="gradient"
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis"
-    [legend]="showLegend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    (select)="onSelect($event)">
-  </ngx-charts-bar-vertical>
-</div>
+<select [(ngModel)]="selectedMonth" (ngModelChange)="filtrarVentasPorMes()">
+  <option *ngFor="let month of monthNames" [value]="month">{{ month }}</option>
+</select>
+<div *ngIf="!hayDatosDisponibles">Aún no hay ventas disponibles para el mes seleccionado.</div>
+<ngx-charts-pie-grid
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="single"
+  (select)="onSelect($event)">
+</ngx-charts-pie-grid>
