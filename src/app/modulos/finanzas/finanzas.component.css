@@ -1,3 +1,7 @@
+h2, h3, h4, h5, th {
+  color: black;
+}
+
 .cardTable {
   display: flex;
   margin-top: 20px;
@@ -37,13 +41,6 @@
 .cardTable-card th {
   background-color: #e6e6e6;
 }
-
-
-
-
-
-
-
   .card-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* Define cuatro columnas con igual ancho */
@@ -59,12 +56,15 @@
 
 .card-header {
   font-size: 18px;
+  height: 5rem;
   font-weight: bold;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+  color: black;
 }
 
 .card-body {
-  font-size: 16px;
+  font-size: 18px;
+  color: black;
 }
 
 /* Estilos para la gráfica */
@@ -77,6 +77,7 @@
   height: 400px; /* Ajusta la altura deseada */
   width: 80%; /* Ajusta el ancho deseado */
 }
+
 .chart-card {
   text-align: center;
   border: 1px solid #ccc;

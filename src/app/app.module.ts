@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MaterialModule } from './material/material.module';
+
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProveedoresFilterPipe } from './proveedores-filter.pipe';
@@ -21,6 +22,7 @@ import { AgregarMPComponent } from './modulos/materiaPNg/agregar/agregar/agregar
 import { TarjetasMModule } from './modulos/tarjetas/tarjetas-m/tarjetas-m.module';
 import { DireccionMModule } from './modulos/direccion/direccion-m/direccion-m.module';
 import { HomeComponent } from './home/home.component';
+
 import { ProductosComponent } from './modulos/productosNg/productos/productos.component';
 import { ProductosFilterPipe } from './productos-filter.pipe';
 import { EditarProductoComponent } from './modulos/productosNg/editar-producto/editar-producto.component';
@@ -29,6 +31,12 @@ import { DetalleComponent } from './modulos/detallePNG/detalle/detalle.component
 import { AgregarDetalleComponent } from './modulos/detallePNG/agregar-detalle/agregar-detalle.component';
 import { EditarDetalleComponent } from './modulos/detallePNG/editar-detalle/editar-detalle.component';
 import { AgregarStockComponent } from './modulos/productosNg/agregar-stock/agregar-stock.component';
+
+import { direccionFilterPipe } from './direccion-filter.pipe';
+import { tarjetaFilterPipe } from './tarjeta-filter.pipe';
+
+import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
+
 
 @NgModule({
   declarations: [
@@ -52,6 +60,8 @@ import { AgregarStockComponent } from './modulos/productosNg/agregar-stock/agreg
     AgregarDetalleComponent,
     EditarDetalleComponent,
     AgregarStockComponent
+    direccionFilterPipe,
+    tarjetaFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -63,6 +73,7 @@ import { AgregarStockComponent } from './modulos/productosNg/agregar-stock/agreg
     HttpClientModule,
     TarjetasMModule,
     DireccionMModule,
+    CarritoMModule
   ],
   providers: [],
   bootstrap: [AppComponent]
