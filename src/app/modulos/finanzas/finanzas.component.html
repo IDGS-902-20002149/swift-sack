@@ -1,25 +1,25 @@
-<h2>Valores Calculados</h2>
+<h1>Valores Calculados</h1>
 <div class="card-container">
-  <div class="card" *ngFor="let valor of valoresCalculados">
+  <div class="card text-center" *ngFor="let valor of valoresCalculados">
     <div class="card-header">
       Beneficio Bruto
     </div>
     <div class="card-body">
-      {{ valor.gross_profit }}
+      $ {{ valor.gross_profit }}
     </div>
   </div>
   
-  <div class="card" *ngFor="let valor of valoresCalculados">
+  <div class="card text-center" *ngFor="let valor of valoresCalculados">
     <div class="card-header">
       Valor de Compra Promedio
     </div>
     <div class="card-body">
-      {{ valor.average_purchase_value }}
+      $ {{ valor.average_purchase_value }}
     </div>
   </div>
   
   <div class="card" *ngFor="let valor of valoresCalculados">
-    <div class="card-header">
+    <div class="card-header text-center">
       Total de Usuarios
     </div>
     <div class="card-body">
@@ -39,9 +39,9 @@
 
 <div class="cardTable">
   <div class="cardTable-wrapper">
-    <div class="cardTable-card">
+    <div class="cardTable-card text-center">
       <h2>Productos Más Vendidos</h2>
-      <table class="custom-table">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -61,9 +61,9 @@
       </table>
     </div>
  
-    <div class="cardTable-card">
+    <div class="cardTable-card text-center">
       <h2>Productos Menos Vendidos</h2>
-      <table class="custom-table">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Nombre</th>

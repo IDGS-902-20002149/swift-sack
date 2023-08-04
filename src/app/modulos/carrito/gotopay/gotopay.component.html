@@ -1,0 +1,78 @@
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Direcci&oacute;n de env&iacute;o</ng-template>
+        <div class="d-flex justify-content-center">
+          <div class="col-6">
+            <mat-radio-group formControlName="firstCtrl">
+              <div *ngFor="let direccion of direcciones" class="card mt-5 bg-dark">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-2 form-check d-flex align-items-center">
+                      <mat-radio-button color="primary" value="{{direccion.idDireccion}}" class="btnRadio" aria-label="Establecer predeterminado"></mat-radio-button>
+                    </div>
+                    <div class="col-7">
+                      <h3 class="mb-0">{{direccion.nombreCompleto}}</h3>
+                      <h3 class="mb-0">{{direccion.calleNumero}}</h3>
+                      <h3 class="mb-0">{{direccion.codigoPostal}}</h3>
+                      <h3 class="mb-0">{{direccion.telefono}}</h3>
+                    </div>
+                    <div class="col-1 d-flex align-items-center">
+                      <button mat-mini-fab color="primary" style="width: 4rem; height:4rem;">
+                        <mat-icon> pin_drop</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center mt-3 mb-3">
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Seleccionar una forma de pago">
+      <form [formGroup]="secondFormGroup">
+        <div class="d-flex justify-content-center">
+          <div class="col-6">
+            <mat-radio-group formControlName="secondCtrl">
+              <div *ngFor="let tarjeta of tarjetas" class="card mt-5 bg-dark">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-2 form-check d-flex align-items-center">
+                      <mat-radio-button color="primary" value="{{tarjeta.idTarjeta}}" class="btnRadio" required></mat-radio-button>
+                    </div>
+                    <div class="col-6">
+                      <h3 class="mb-0">**** **** **** {{tarjeta.numTarEncryp}}</h3>
+                      <h3 class="mb-0">{{tarjeta.nombreTarjeta | uppercase }}</h3>
+                      <h3 class="mb-0">{{tarjeta.mesVencimiento}}/ {{tarjeta.annioVencimiento}}</h3>
+                    </div>
+                    <div class="col-1 d-flex align-items-center">
+                      <button mat-mini-fab color="primary" style="width: 4rem; height:4rem;">
+                        <mat-icon>credit_card</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center mt-3 mb-3">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Finalizar pedido</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+  
