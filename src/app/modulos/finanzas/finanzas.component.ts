@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProyectoAPIService } from '../proyecto-api.service';
+import { ProyectoApiService } from '../../proyecto-api.service';
 import {  ColorHelper, ScaleType } from '@swimlane/ngx-charts';
 
 @Component({
@@ -19,7 +19,7 @@ export class FinanzasComponent implements OnInit {
   monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Representación numérica de los meses
 
 
-  constructor(private apiService: ProyectoAPIService) { }
+  constructor(private apiService: ProyectoApiService) { }
 
   ngOnInit(): void {
     this.obtenerProductosMasVendidos();
