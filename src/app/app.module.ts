@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +18,9 @@ import { MateriaPComponent } from './modulos/materiaPNg/materiaP/materia-p/mater
 import { MateriaPFilterPipe } from './materiaP-filter.pipe';
 import { EditarMPComponent } from './modulos/materiaPNg/editar/editar/editar.component';
 import { AgregarMPComponent } from './modulos/materiaPNg/agregar/agregar/agregar.component';
+
+import { BrowserModule } from '@angular/platform-browser';
+
 import { TarjetasMModule } from './modulos/tarjetas/tarjetas-m/tarjetas-m.module';
 import { DireccionMModule } from './modulos/direccion/direccion-m/direccion-m.module';
 import { HomeComponent } from './home/home.component';
@@ -36,7 +38,6 @@ import { direccionFilterPipe } from './direccion-filter.pipe';
 import { tarjetaFilterPipe } from './tarjeta-filter.pipe';
 
 import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
-
 
 @NgModule({
   declarations: [
@@ -65,10 +66,12 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
   ],
   imports: [
     BrowserModule,
+    NgxChartsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    HttpClientModule,
     NgxChartsModule,
     HttpClientModule,
     TarjetasMModule,
