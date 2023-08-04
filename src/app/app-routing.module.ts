@@ -3,6 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
 
+import { ProductosComponent } from './modulos/productosNg/productos/productos.component';
+import { AgregarProductoComponent } from './modulos/productosNg/agregar-producto/agregar-producto.component';
+import { AgregarStockComponent } from './modulos/productosNg/agregar-stock/agregar-stock.component';
+import { EditarProductoComponent } from './modulos/productosNg/editar-producto/editar-producto.component';
+
+import { DetalleComponent } from './modulos/detallePNG/detalle/detalle.component';
+import { AgregarDetalleComponent } from './modulos/detallePNG/agregar-detalle/agregar-detalle.component';
+import { EditarDetalleComponent } from './modulos/detallePNG/editar-detalle/editar-detalle.component';
+
 import { AgregarComponent } from './modulos/proveedoresNg/agregar/agregar.component';
 import { ProveedoresComponent } from './modulos/proveedoresNg/proveedores/proveedores.component';
 import { EditarComponent } from './modulos/proveedoresNg/editar/editar.component';
@@ -35,9 +44,17 @@ const routes: Routes = [
   {path: 'EditarTar/:id', component: EditarTarComponent},
   {path: 'verDirecciones', component: DireccionComponent},
   {path: 'AgregarDir', component: AgregarDirComponent},
-  {path: 'EditarDir/:id', component: EditarDirComponent},
   {path: 'PreviewCar', component: PreviewComponent},
-  {path: 'GoToPay', component: GotopayComponent}
+  {path: 'GoToPay', component: GotopayComponent},
+  
+  {path: 'EditarDir', component: EditarDirComponent},
+  {path: 'verProductos', component: ProductosComponent},
+  {path: 'AgregarProd', component: AgregarProductoComponent},
+  {path: 'AgregarStock', component: AgregarStockComponent},
+  {path: 'EditarProd/:id', component: EditarProductoComponent},
+  {path: 'verDetalle/:id', component: DetalleComponent},
+  {path: 'AgregarDetalle/:id', component: AgregarDetalleComponent},
+  {path: 'EditarDetalle/:id', component: EditarDetalleComponent},
 ];
 
 @NgModule({

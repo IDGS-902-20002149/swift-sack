@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { ProveedoresComponent } from './modulos/proveedoresNg/proveedores/proveedores.component';
-import { AgregarComponent } from './modulos/proveedoresNg/agregar/agregar.component'; 
+import { AgregarComponent } from './modulos/proveedoresNg/agregar/agregar.component';
 import { EditarComponent } from './modulos/proveedoresNg/editar/editar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
@@ -22,10 +22,21 @@ import { AgregarMPComponent } from './modulos/materiaPNg/agregar/agregar/agregar
 import { TarjetasMModule } from './modulos/tarjetas/tarjetas-m/tarjetas-m.module';
 import { DireccionMModule } from './modulos/direccion/direccion-m/direccion-m.module';
 import { HomeComponent } from './home/home.component';
+
+import { ProductosComponent } from './modulos/productosNg/productos/productos.component';
+import { ProductosFilterPipe } from './productos-filter.pipe';
+import { EditarProductoComponent } from './modulos/productosNg/editar-producto/editar-producto.component';
+import { AgregarProductoComponent } from './modulos/productosNg/agregar-producto/agregar-producto.component';
+import { DetalleComponent } from './modulos/detallePNG/detalle/detalle.component';
+import { AgregarDetalleComponent } from './modulos/detallePNG/agregar-detalle/agregar-detalle.component';
+import { EditarDetalleComponent } from './modulos/detallePNG/editar-detalle/editar-detalle.component';
+import { AgregarStockComponent } from './modulos/productosNg/agregar-stock/agregar-stock.component';
+
 import { direccionFilterPipe } from './direccion-filter.pipe';
 import { tarjetaFilterPipe } from './tarjeta-filter.pipe';
 
 import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
+
 
 @NgModule({
   declarations: [
@@ -36,11 +47,19 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
     AgregarComponent,
     EditarComponent,
     ProveedoresFilterPipe,
+    ProductosFilterPipe,
     MateriaPComponent,
     MateriaPFilterPipe,
     EditarMPComponent,
     AgregarMPComponent,
     HomeComponent,
+    ProductosComponent,
+    EditarProductoComponent,
+    AgregarProductoComponent,
+    DetalleComponent,
+    AgregarDetalleComponent,
+    EditarDetalleComponent,
+    AgregarStockComponent
     direccionFilterPipe,
     tarjetaFilterPipe
   ],
