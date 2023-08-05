@@ -3,8 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MateriaPSS, ProveedorSS, ProductoSS, DetalleProductoSS } from './interfaces/swiftsack';
 import { Observable } from 'rxjs';
+
+import { map } from 'rxjs/operators'; // Agrega esta importación
+import { Usuario, UsuarioMod, UsuarioRegistro } from './interfaces/usuario';
+
 import { Direccion } from './interfaces/direccion';
 import { Tarjeta } from './interfaces/tarjeta';
+
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +54,42 @@ export class ProyectoApiService {
   ]
 
   constructor(private http:HttpClient) { }
+  
+  /*Links de usuarios*/
+  public register(usuario: UsuarioRegistro): Observable<any> {
+    return this.http.post<any>('https://localhost:7267/api/Auth/register', usuario);
+  }
+ 
+  public login(datos:Usuario): Observable<any> {
+    return this.http.post<any>('https://localhost:7267/api/Auth/Login', datos);
+  }
+
+  public getProfile(id: number): Observable<UsuarioMod> {
+    return this.http.get<UsuarioMod>(`https://localhost:7267/api/Auth/profile/${id}`);
+  }
+
+  public updateProfile(id: number, updatedUser: any): Observable<any> {
+    return this.http.put<any>(`https://localhost:7267/api/Auth/profile/${id}`, updatedUser);
+  }
+
+  private getRoleName(roleId: number): string {
+    const roles = [
+      { id: 1, name: 'admin', description: 'Administrador del sistema' },
+      { id: 2, name: 'empleado', description: 'Empleado de la empresa' },
+      { id: 3, name: 'cliente', description: 'Cliente' }
+    ];
+
+    const role = roles.find(r => r.id === roleId);
+    return role ? role.description : '';
+  }
+
+  getUserProfile(id: number): Observable<UsuarioMod> {
+    return this.getProfile(id).pipe(
+      map((userProfile: UsuarioMod) => {
+        return userProfile;
+      })
+    );
+  }
 
   get provedor():ProveedorSS[]{
     return[...this._proveedoresss]
@@ -122,53 +163,54 @@ export class ProyectoApiService {
   }
 
   public getProducto():Observable<ProductoSS[]>{
-    return this.http.get<ProductoSS[]>('https://localhost:7165/api/Productos')
+    return this.http.get<ProductoSS[]>('https://localhost:7267/api/Productos')
   }
   
   /* Links de Producto*/
   agregarProducto(datos:ProductoSS){
-    return this.http.post('https://localhost:7165/api/Productos',datos)
+    return this.http.post('https://localhost:7267/api/Productos',datos)
   }
 
   editarProducto(datos: ProductoSS) {
-    const url = `https://localhost:7165/api/Productos/${datos.id}`;
+    const url = `https://localhost:7267/api/Productos/${datos.id}`;
     return this.http.put(url, datos);
   }
 
   eliminarProducto(id:number) {
-    const url = `https://localhost:7165/api/Productos/${id}`;
+    const url = `https://localhost:7267/api/Productos/${id}`;
     return this.http.delete(url);
   }
 
   obtenerProducto(id:number):Observable<ProductoSS[]>{
-    return this.http.get<ProductoSS[]>(`https://localhost:7165/api/Productos/${id}`);
+    return this.http.get<ProductoSS[]>(`https://localhost:7267/api/Productos/${id}`);
   }
 
   verDetalle(id:number):Observable<DetalleProductoSS[]>{
-    return this.http.get<DetalleProductoSS[]>(`https://localhost:7165/api/DetalleProducto/${id}`);
+    return this.http.get<DetalleProductoSS[]>(`https://localhost:7267/api/DetalleProducto/${id}`);
   }
 
   agregarStock(stock: number, id:number) {
-    const url = `https://localhost:7165/api/Productos/agregar-stock/${id}`;
+    const url = `https://localhost:7267/api/Productos/agregar-stock/${id}`;
     return this.http.put(url, stock);
   }
 
   agregarDetalle(datos:DetalleProductoSS){
-    return this.http.post('https://localhost:7165/api/DetalleProducto',datos)
+    return this.http.post('https://localhost:7267/api/DetalleProducto',datos)
   }
 
   editarDetalle(datos: DetalleProductoSS) {
-    const url = `https://localhost:7165/api/DetalleProducto/${datos.id}`;
+    const url = `https://localhost:7267/api/DetalleProducto/${datos.id}`;
     return this.http.put(url, datos);
   }
 
   eliminarDetalle(id:number) {
-    const url = `https://localhost:7165/api/DetalleProducto/${id}`;
+    const url = `https://localhost:7267/api/DetalleProducto/${id}`;
     return this.http.delete(url);
   }
 
   obtenerDetalle(id:number):Observable<DetalleProductoSS[]>{
-    return this.http.get<DetalleProductoSS[]>(`https://localhost:7165/api/DetalleProducto/obtener-id/${id}`);
+    return this.http.get<DetalleProductoSS[]>(`https://localhost:7267/api/DetalleProducto/obtener-id/${id}`);
+  }
     
   /* Links de Direccion */
   public getDireccion():Observable<Direccion[]>{

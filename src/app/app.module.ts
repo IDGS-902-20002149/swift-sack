@@ -24,6 +24,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TarjetasMModule } from './modulos/tarjetas/tarjetas-m/tarjetas-m.module';
 import { DireccionMModule } from './modulos/direccion/direccion-m/direccion-m.module';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './modulos/loginNG/login/login.component';
+import { RegistrarComponent } from './modulos/usuarioNG/registrar/registrar.component';
+import { ModificarComponent } from './modulos/usuarioNG/modificar/modificar.component';
 
 import { ProductosComponent } from './modulos/productosNg/productos/productos.component';
 import { ProductosFilterPipe } from './productos-filter.pipe';
@@ -54,6 +57,9 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
     EditarMPComponent,
     AgregarMPComponent,
     HomeComponent,
+    LoginComponent,
+    RegistrarComponent,
+    ModificarComponent,
     ProductosComponent,
     EditarProductoComponent,
     AgregarProductoComponent,
