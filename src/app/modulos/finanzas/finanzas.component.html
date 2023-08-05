@@ -1,25 +1,25 @@
-<h2>Valores Calculados</h2>
+<h1>Valores Calculados</h1>
 <div class="card-container">
-  <div class="card" *ngFor="let valor of valoresCalculados">
+  <div class="card text-center" *ngFor="let valor of valoresCalculados">
     <div class="card-header">
       Beneficio Bruto
     </div>
     <div class="card-body">
-      {{ valor.gross_profit }}
+      $ {{ valor.gross_profit }}
     </div>
   </div>
   
-  <div class="card" *ngFor="let valor of valoresCalculados">
+  <div class="card text-center" *ngFor="let valor of valoresCalculados">
     <div class="card-header">
       Valor de Compra Promedio
     </div>
     <div class="card-body">
-      {{ valor.average_purchase_value }}
+      $ {{ valor.average_purchase_value }}
     </div>
   </div>
   
   <div class="card" *ngFor="let valor of valoresCalculados">
-    <div class="card-header">
+    <div class="card-header text-center">
       Total de Usuarios
     </div>
     <div class="card-body">
@@ -29,19 +29,19 @@
   
   <div class="card" *ngFor="let valor of valoresCalculados">
     <div class="card-header">
-      Nuevos Usuarios Semanales
+      Valor de Venta Promedio
     </div>
     <div class="card-body">
-      {{ valor.new_users_weekly }}
+      {{ valor.average_order_value }}
     </div>
   </div>
 </div>
 
 <div class="cardTable">
   <div class="cardTable-wrapper">
-    <div class="cardTable-card">
+    <div class="cardTable-card text-center">
       <h2>Productos Más Vendidos</h2>
-      <table class="custom-table">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -61,9 +61,9 @@
       </table>
     </div>
  
-    <div class="cardTable-card">
+    <div class="cardTable-card text-center">
       <h2>Productos Menos Vendidos</h2>
-      <table class="custom-table">
+      <table class="table table-striped">
         <thead>
           <tr>
             <th>Nombre</th>
@@ -114,26 +114,13 @@
   </ngx-charts-bar-vertical>
 </div>
 -->
-<div class="chart-container chart-card">
-  <div class="cardGrapf rounded-card">
-    <label for="year-filter" class="filter-label">Filtrar por año:</label>
-    <select id="year-filter" [(ngModel)]="selectedYear" (change)="filtrarVentasPorAnio(selectedYear)" class="custom-select">
-      <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-    </select>
-  </div>
-  <br>
-  <ngx-charts-bar-vertical
-    [view]="view"
-    [scheme]="colorScheme"
-    [results]="single"
-    [gradient]="gradient"
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis"
-    [legend]="showLegend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    (select)="onSelect($event)">
-  </ngx-charts-bar-vertical>
-</div>
+<select [(ngModel)]="selectedMonth" (ngModelChange)="filtrarVentasPorMes()">
+  <option *ngFor="let month of monthNames" [value]="month">{{ month }}</option>
+</select>
+<div *ngIf="!hayDatosDisponibles">Aún no hay ventas disponibles para el mes seleccionado.</div>
+<ngx-charts-pie-grid
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="single"
+  (select)="onSelect($event)">
+</ngx-charts-pie-grid>

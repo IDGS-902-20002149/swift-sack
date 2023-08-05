@@ -17,7 +17,7 @@ export class MateriaPComponent implements OnInit {
   alumnoTitle!:string
   dataSource:any=[];
   constructor(public materiaPss:ProyectoApiService){}
- 
+
   showImage():void{
     this.muestraImg=!this.muestraImg;
   }
@@ -27,7 +27,7 @@ export class MateriaPComponent implements OnInit {
     const endIndex = startIndex + this.pageSize;
     return this.dataSource.slice(startIndex, endIndex);
   }
- 
+
   proveedorIric:MateriaPSS[]=[
     {
       id:0,
@@ -37,13 +37,13 @@ export class MateriaPComponent implements OnInit {
       costo:0,
       idProveedor:0,
       estatus:true
- 
+
     },
-    
+
   ]
 
   eliminarMateria(id:number){
-    
+
       this.materiaPss.eliminarMateria(id).subscribe(
         () => {
           console.log('Materia Prima eliminado correctamente');
@@ -53,12 +53,12 @@ export class MateriaPComponent implements OnInit {
           console.error('Error al eliminar el materia prima:', error);
         }
       );
-    
+
   }
- 
+
   onCalificaClick(message:string){
     this.alumnoTitle=` ${message}`;
- 
+
   }
 
   actualizarTabla(){
