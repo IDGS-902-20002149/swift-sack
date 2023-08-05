@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { LoginComponent } from './modulos/loginNG/login/login.component'; // Ajusta la ruta según la ubicación de tu archivo
+import { ModificarComponent } from './modulos/usuarioNG/modificar/modificar.component'; // Importa el componente de modificación
+import { RegistrarComponent } from './modulos/usuarioNG/registrar/registrar.component'; // Importa el componente de modificación
+
+
 import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
 
 import { AgregarComponent } from './modulos/proveedoresNg/agregar/agregar.component';
@@ -33,7 +38,11 @@ const routes: Routes = [
   {path: 'EditarTar', component: EditarTarComponent},
   {path: 'verDirecciones', component: DireccionComponent},
   {path: 'AgregarDir', component: AgregarDirComponent},
-  {path: 'EditarDir', component: EditarDirComponent} 
+  {path: 'EditarDir', component: EditarDirComponent},
+  { path: 'login', component: LoginComponent }, // Agrega esta línea para la ruta de inicio de sesión
+  { path: 'modificar', component: ModificarComponent }, // Agrega esta línea para la ruta de modificación
+  { path: 'registrar', component: RegistrarComponent }
+
 ];
 
 @NgModule({

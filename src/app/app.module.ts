@@ -21,6 +21,9 @@ import { AgregarMPComponent } from './modulos/materiaPNg/agregar/agregar/agregar
 import { TarjetasMModule } from './modulos/tarjetas/tarjetas-m/tarjetas-m.module';
 import { DireccionMModule } from './modulos/direccion/direccion-m/direccion-m.module';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './modulos/loginNG/login/login.component';
+import { RegistrarComponent } from './modulos/usuarioNG/registrar/registrar.component';
+import { ModificarComponent } from './modulos/usuarioNG/modificar/modificar.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { HomeComponent } from './home/home.component';
     EditarMPComponent,
     AgregarMPComponent,
     HomeComponent,
+    LoginComponent,
+    RegistrarComponent,
+    ModificarComponent,
   ],
   imports: [
     BrowserModule,
