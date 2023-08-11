@@ -1,3 +1,10 @@
+<div class="month-select">
+  <label for="monthSelect">Seleccionar Mes:</label>
+  <select id="monthSelect" [(ngModel)]="selectedMonth" (change)="filtrarDatosPorMes()">
+    <option *ngFor="let month of monthNames" [value]="month">{{ month }}</option>
+  </select>
+</div>
+
 <h1>Valores Calculados</h1>
 <div class="card-container">
   <div class="card text-center" *ngFor="let valor of valoresCalculados">
@@ -90,37 +97,61 @@
   
 
 
-<!--
-  <h2>Ventas Mensuales</h2>
-<ul>
-  <li *ngFor="let venta of ventasMensuales">{{ venta.month }}{{ venta.total_Sales}}</li>
-</ul>
 
-
-<div class="chart-container">
-  <ngx-charts-bar-vertical
-    [view]="view"
-    [scheme]="colorScheme"
-    [results]="single"
-    [gradient]="gradient"
-    [xAxis]="showXAxis"
-    [yAxis]="showYAxis"
-    [legend]="showLegend"
-    [showXAxisLabel]="showXAxisLabel"
-    [showYAxisLabel]="showYAxisLabel"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
-    (select)="onSelect($event)">
-  </ngx-charts-bar-vertical>
-</div>
--->
-<select [(ngModel)]="selectedMonth" (ngModelChange)="filtrarVentasPorMes()">
-  <option *ngFor="let month of monthNames" [value]="month">{{ month }}</option>
-</select>
-<div *ngIf="!hayDatosDisponibles">Aún no hay ventas disponibles para el mes seleccionado.</div>
 <ngx-charts-pie-grid
   [view]="view"
   [scheme]="colorScheme"
   [results]="single"
   (select)="onSelect($event)">
 </ngx-charts-pie-grid>
+
+
+
+<div class="cardTable">
+  <div class="cardTable-wrapper">
+    <div class="cardTable-card text-center">
+      <h2>Productos Existencias del mes</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Costo</th>
+            <th>Tipo de producto</th>
+            <th>Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of productExis">
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.costo }}</td>
+            <td>{{ producto.tipo_producto }}</td>
+            <td>{{ producto.stock }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+ 
+    <div class="cardTable-card text-center">
+      <h2>Materias Existencias del mes</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Costo</th>
+            <th>Total obtenido</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let materia of materiaExist">
+            <td>{{ materia.nombre }}</td>
+            <td>{{ materia.cantidad }}</td>
+            <td>{{ materia.costo }}</td>
+            <td>{{ materia.total_obtenido }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -3,9 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
-import { ProveedoresComponent } from './modulos/proveedoresNg/proveedores/proveedores.component';
-import { AgregarComponent } from './modulos/proveedoresNg/agregar/agregar.component';
-import { EditarComponent } from './modulos/proveedoresNg/editar/editar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -34,7 +31,6 @@ import { AgregarDetalleComponent } from './modulos/detallePNG/agregar-detalle/ag
 import { EditarDetalleComponent } from './modulos/detallePNG/editar-detalle/editar-detalle.component';
 import { AgregarStockComponent } from './modulos/productosNg/agregar-stock/agregar-stock.component';
 
-import { direccionFilterPipe } from './direccion-filter.pipe';
 import { tarjetaFilterPipe } from './tarjeta-filter.pipe';
 
 import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
@@ -44,9 +40,6 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
     AppComponent,
     FinanzasComponent,
     MenuComponent,
-    ProveedoresComponent,
-    AgregarComponent,
-    EditarComponent,
     ProveedoresFilterPipe,
     ProductosFilterPipe,
     MateriaPComponent,
@@ -61,8 +54,6 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
     AgregarDetalleComponent,
     EditarDetalleComponent,
     AgregarStockComponent
-    direccionFilterPipe,
-    tarjetaFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -72,7 +63,6 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
     MaterialModule,
     FormsModule,
     HttpClientModule,
-    NgxChartsModule,
     HttpClientModule,
     TarjetasMModule,
     DireccionMModule,

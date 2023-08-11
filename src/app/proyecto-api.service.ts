@@ -121,6 +121,21 @@ export class ProyectoApiService {
     return this.http.get<VentasMensuales[]>('https://localhost:7160/api/Finanzas/VtaMes');
   }
 
+  public getProductosExistentes(): Observable<ProductoMenosVendido[]> {
+    return this.http.get<ProductoMenosVendido[]>('https://localhost:7160/api/Finanzas/ProductosEx');
+  }
+
+  public getMateriaExistentes(): Observable<ValorCalculado[]> {
+    return this.http.get<ValorCalculado[]>('https://localhost:7160/api/Finanzas/Materia');
+  }
+
+  public getTopClientes(): Observable<VentasMensuales[]> {
+    return this.http.get<VentasMensuales[]>('https://localhost:7160/api/Finanzas/Top5Clientes');
+  }
+
+
+
+
   public getProducto():Observable<ProductoSS[]>{
     return this.http.get<ProductoSS[]>('https://localhost:7165/api/Productos')
   }
@@ -169,7 +184,7 @@ export class ProyectoApiService {
 
   obtenerDetalle(id:number):Observable<DetalleProductoSS[]>{
     return this.http.get<DetalleProductoSS[]>(`https://localhost:7165/api/DetalleProducto/obtener-id/${id}`);
-    
+  }
   /* Links de Direccion */
   public getDireccion():Observable<Direccion[]>{
     return this.http.get<Direccion[]>('https://localhost:7267/api/Direccion')
