@@ -27,29 +27,9 @@
             <mat-icon color="primary">perm_identity</mat-icon>
             Finanzas
           </a>
-          <a mat-list-item routerLinkActive="active" routerLink="Agregar">
-            <mat-icon color="accent">add</mat-icon>
-            Agregar Proveedor
-          </a>
-          <a mat-list-item routerLinkActive="active" routerLink="AgregarMP">
-            <mat-icon color="accent">add</mat-icon>
-            Agregar Materia Prima
-          </a>
-          <a mat-list-item routerLinkActive="active" routerLink="verProveedores">
-            <mat-icon color="primary">perm_identity</mat-icon>
-            Ver Proveedor
-          </a>
-          <a mat-list-item routerLinkActive="active" routerLink="verMateriaPrima">
-            <mat-icon color="primary">perm_identity</mat-icon>
-            Ver Materia Prima
-          </a>
           <a mat-list-item routerLinkActive="active" routerLink="login">
             <mat-icon color="primary">perm_identity</mat-icon>
             Login
-          </a>
-          <a mat-list-item routerLinkActive="active" routerLink="modificar">
-            <mat-icon color="primary">perm_identity</mat-icon>
-            Modificar perfil
           </a>
           <a mat-list-item routerLinkActive="active" routerLink="registrar">
             <mat-icon color="primary">perm_identity</mat-icon>
@@ -63,149 +43,92 @@
             <mat-icon color="accent">add</mat-icon>
             Agregar Producto
           </a>
-        </mat-nav-list>
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Mis tarjetas
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <mat-nav-list>
-              <a mat-list-item routerLinkActive="active" routerLink="verTarjetas">
-                <mat-icon color="primary">credit_card</mat-icon>
-                Ver Tarjetas
-              </a>
-              <a mat-list-item routerLinkActive="active" routerLink="AgregarTar">
-                <mat-icon color="primary">add</mat-icon>
-                Agregar Tarjeta
-              </a>
-            </mat-nav-list>
-          </mat-expansion-panel>
-        </mat-accordion>
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Mis Direcciones
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <mat-nav-list>
-              <a mat-list-item routerLinkActive="active" routerLink="verDirecciones">
-                <mat-icon color="primary">pin_drop</mat-icon>
-                Ver Direcciones
-              </a>
-              <a mat-list-item routerLinkActive="active" routerLink="AgregarDir">
-                <mat-icon color="primary">add_location</mat-icon>
-                Agregar Direcci&oacute;n
-              </a>
-            </mat-nav-list>
-          </mat-expansion-panel>
-        </mat-accordion>
-        <mat-accordion>
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Más
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <mat-nav-list>
-              <a mat-list-item href='#'>
-                Acerca de
-              </a>
-              <a mat-list-item href='#'>
-                Ayuda
-              </a>
-            </mat-nav-list>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </mat-sidenav>
-      <mat-sidenav-content class="padding-10">
           <!-- Acordeon Proveedores start -->
           <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Proveedores
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-      
-              <mat-nav-list>
-                <a mat-list-item routerLinkActive="active" routerLink="verProveedores">
-                  <mat-icon color="primary">credit_card</mat-icon>
-                  Ver Proveedores
-                </a>
-                <a mat-list-item routerLinkActive="active" routerLink="Agregar">
-                  <mat-icon color="primary">add</mat-icon>
-                  Nuevo Proveedor
-                </a>
-              </mat-nav-list>
-            </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Proveedores
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+        
+                <mat-nav-list>
+                  <a mat-list-item routerLinkActive="active" routerLink="verProveedores">
+                    <mat-icon color="primary">credit_card</mat-icon>
+                    Ver Proveedores
+                  </a>
+                  <a mat-list-item routerLinkActive="active" routerLink="Agregar">
+                    <mat-icon color="primary">add</mat-icon>
+                    Nuevo Proveedor
+                  </a>
+                </mat-nav-list>
+              </mat-expansion-panel>
           </mat-accordion>
           <!-- Acordeon Proveedores end -->
           <!-- Acordeon Materia Prima start -->
           <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Materia Prima
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <mat-nav-list>
-                <a mat-list-item routerLinkActive="active" routerLink="verMateriaPrima">
-                  <mat-icon color="primary">pin_drop</mat-icon>
-                  Ver Materia Prima
-                </a>
-                <a mat-list-item routerLinkActive="active" routerLink="AgregarMP">
-                  <mat-icon color="primary">add_location</mat-icon>
-                  Agregar Materia Prima
-                </a>
-              </mat-nav-list>
-            </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Materia Prima
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                  <a mat-list-item routerLinkActive="active" routerLink="verMateriaPrima">
+                    <mat-icon color="primary">pin_drop</mat-icon>
+                    Ver Materia Prima
+                  </a>
+                  <a mat-list-item routerLinkActive="active" routerLink="AgregarMP">
+                    <mat-icon color="primary">add_location</mat-icon>
+                    Agregar Materia Prima
+                  </a>
+                </mat-nav-list>
+              </mat-expansion-panel>
           </mat-accordion>
           <!-- Acordeon Materia Prima end -->
           <!-- Acordeon Perfil start -->
           <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Mi Perfil
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-      
-              <mat-nav-list>
-                <a mat-list-item routerLinkActive="active" routerLink="verTarjetas">
-                  <mat-icon color="primary">credit_card</mat-icon>
-                  Mis Tarjetas
-                </a>
-                <a mat-list-item routerLinkActive="active" routerLink="verDirecciones">
-                  <mat-icon color="primary">add_location</mat-icon>
-                  Mis Direcciones
-                </a>
-              </mat-nav-list>
-            </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Mi Perfil
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+        
+                <mat-nav-list>
+                  <a mat-list-item routerLinkActive="active" routerLink="verTarjetas">
+                    <mat-icon color="primary">credit_card</mat-icon>
+                    Mis Tarjetas
+                  </a>
+                  <a mat-list-item routerLinkActive="active" routerLink="verDirecciones">
+                    <mat-icon color="primary">add_location</mat-icon>
+                    Mis Direcciones
+                  </a>
+                  <a mat-list-item routerLinkActive="active" routerLink="modificar">
+                    <mat-icon color="primary">perm_identity</mat-icon>
+                    Modificar perfil
+                  </a>
+                </mat-nav-list>
+              </mat-expansion-panel>
           </mat-accordion>
           <!-- Acordeon Perfil end -->
           <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Más
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-    
-              <mat-nav-list>
-                <a mat-list-item href='#'>
-                  Acerca de
-                </a>
-                <a mat-list-item href='#'>
-                  Ayuda
-                </a>
-              </mat-nav-list>
-            </mat-expansion-panel>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Más
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+      
+                <mat-nav-list>
+                  <a mat-list-item href='#'>
+                    Acerca de
+                  </a>
+                  <a mat-list-item href='#'>
+                    Ayuda
+                  </a>
+                </mat-nav-list>
+              </mat-expansion-panel>
           </mat-accordion>
         </mat-nav-list>
       </mat-sidenav>

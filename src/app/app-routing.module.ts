@@ -33,6 +33,7 @@ import { EditarDirComponent } from './modulos/direccion/editar-dir/editar-dir.co
 import { HomeComponent } from './home/home.component';
 import { PreviewComponent } from './modulos/carrito/preview/preview.component'; 
 import { GotopayComponent } from './modulos/carrito/gotopay/gotopay.component';
+import { CompraComponent } from './modulos/compra/compraProveedor/compra.component';
 
 const routes: Routes = [
   {path: '',redirectTo: '/home', pathMatch:'full'},
@@ -63,6 +64,7 @@ const routes: Routes = [
   {path: 'verDetalle/:id', component: DetalleComponent},
   {path: 'AgregarDetalle/:id', component: AgregarDetalleComponent},
   {path: 'EditarDetalle/:id', component: EditarDetalleComponent},
+  {path: 'SurtirMP', component: CompraComponent}
 ];
 
 @NgModule({

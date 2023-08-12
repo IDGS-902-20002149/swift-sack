@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Tarjeta } from 'src/app/interfaces/tarjeta';
+import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
 
 @Component({
@@ -22,6 +23,17 @@ export class GotopayComponent {
     },
   ]
 
+  usuario:UsuarioMod = {
+    id: 0,
+    name: '0',
+    email: '0',
+    password: '0',
+    telefono: '0',
+    active: false,
+    confirmed_at: '0',
+    roleId: 0,
+  };
+
   direcciones:any[]=[]
 
   firstFormGroup = this._formBuilder.group({
@@ -35,7 +47,7 @@ export class GotopayComponent {
   constructor(private _formBuilder: FormBuilder, public objApi:ProyectoApiService){}
 
   getTarjetas(){
-    this.objApi.getTarjeta().subscribe(
+    this.objApi.getTarjeta(this.usuario.id).subscribe(
       {
         next: response=>{
       this.tarjetas=response;
@@ -46,7 +58,7 @@ export class GotopayComponent {
   }
 
   getDirecciones(){
-    this.objApi.getDireccion().subscribe(
+    this.objApi.getDireccion(this.usuario.id).subscribe(
       {
         next: response=>{
       this.direcciones=response;
@@ -56,7 +68,19 @@ export class GotopayComponent {
     );
   }
 
+  obtenerUsuario(){
+    const userData = sessionStorage.getItem('userData');
+    
+    if (userData) {
+      this.usuario = JSON.parse(userData);
+      console.log('Usuario: ' + this.usuario.name + ' recuperado');
+    } else {
+      console.log('El objeto no fue encontrado en sessionStorage.');
+    }
+  }
+
   ngOnInit(): void {
+    this.obtenerUsuario();
     this.getTarjetas();
     this.getDirecciones();
   }

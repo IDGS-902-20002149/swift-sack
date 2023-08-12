@@ -41,6 +41,7 @@ import { direccionFilterPipe } from './direccion-filter.pipe';
 import { tarjetaFilterPipe } from './tarjeta-filter.pipe';
 
 import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
+import { CompraMModule } from './modulos/compra/compra-m/compra-m.module';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,7 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
     DetalleComponent,
     AgregarDetalleComponent,
     EditarDetalleComponent,
-    AgregarStockComponent
+    AgregarStockComponent,
     direccionFilterPipe,
     tarjetaFilterPipe
   ],
@@ -82,7 +83,8 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
     HttpClientModule,
     TarjetasMModule,
     DireccionMModule,
-    CarritoMModule
+    CarritoMModule,
+    CompraMModule
   ],
   providers: [],
   bootstrap: [AppComponent]

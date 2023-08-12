@@ -1,5 +1,5 @@
 import { ProductoMasVendido, ProductoMenosVendido, ValorCalculado, VentasMensuales } from './interfaces/finanzas';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MateriaPSS, ProveedorSS, ProductoSS, DetalleProductoSS } from './interfaces/swiftsack';
 import { Observable } from 'rxjs';
@@ -9,13 +9,19 @@ import { Usuario, UsuarioMod, UsuarioRegistro } from './interfaces/usuario';
 
 import { Direccion } from './interfaces/direccion';
 import { Tarjeta } from './interfaces/tarjeta';
+import { Compra, DetalleCompra } from './interfaces/compra';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json' // Cambia este valor según el formato que estés utilizando (p. ej., application/json)
+  })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProyectoApiService {
-
+  
   private _proveedoresss:ProveedorSS[]=[
     {
       id:0,
@@ -213,8 +219,8 @@ export class ProyectoApiService {
   }
     
   /* Links de Direccion */
-  public getDireccion():Observable<Direccion[]>{
-    return this.http.get<Direccion[]>('https://localhost:7267/api/Direccion')
+  public getDireccion(idUser:number):Observable<Direccion[]>{
+    return this.http.get<Direccion[]>(`https://localhost:7267/api/Direccion/obtener-direcciones/${idUser}`)
   }
   
   addDireccion(datos:Direccion){
@@ -236,8 +242,8 @@ export class ProyectoApiService {
   }
 
   /* Links de Tarjetas */
-  public getTarjeta():Observable<Tarjeta[]>{
-    return this.http.get<Tarjeta[]>('https://localhost:7267/api/Tarjeta')
+  public getTarjeta(idUser:number):Observable<Tarjeta[]>{
+    return this.http.get<Tarjeta[]>(`https://localhost:7267/api/Tarjeta/obtener-tarjetas/${idUser}`)
   }
 
   addTarjeta(datos:Tarjeta){
@@ -258,4 +264,17 @@ export class ProyectoApiService {
     return this.http.get<Tarjeta[]>(`https://localhost:7267/api/Tarjeta/${id}`);
   }
 
+  /*Links de Compra*/
+  getMateriaProveedor(id:number):Observable<MateriaPSS[]>{
+    return this.http.get<MateriaPSS[]>(`https://localhost:7267/api/Compra/${id}`);
+  }
+
+  addCompra(datos: Compra):Observable<Compra> {  
+    return this.http.post<Compra>('https://localhost:7267/api/Compra',datos);
+  }
+
+  addDetalleCompra(detalles: DetalleCompra) {
+    return this.http.post('https://localhost:7267/api/DetalleCompra',detalles);
+  }
+  
 }
