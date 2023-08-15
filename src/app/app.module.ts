@@ -60,7 +60,7 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
     DetalleComponent,
     AgregarDetalleComponent,
     EditarDetalleComponent,
-    AgregarStockComponent
+    AgregarStockComponent,
     direccionFilterPipe,
     tarjetaFilterPipe
   ],

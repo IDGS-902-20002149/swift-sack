@@ -39,8 +39,8 @@ export class ProyectoApiService {
 
   _direccion:Direccion[]=[
     {
-      idDireccion: 0, 
-      idUser: 0, 
+      idDireccion: 0,
+      idUser: 0,
       nombreCompleto: '',
       calleNumero: '',
       codigoPostal: '',
@@ -122,63 +122,63 @@ export class ProyectoApiService {
   }
 
   public getProducto():Observable<ProductoSS[]>{
-    return this.http.get<ProductoSS[]>('https://localhost:7165/api/Productos')
+    return this.http.get<ProductoSS[]>('https://localhost:7267/api/Productos')
   }
-  
+
   /* Links de Producto*/
   agregarProducto(datos:ProductoSS){
-    return this.http.post('https://localhost:7165/api/Productos',datos)
+    return this.http.post('https://localhost:7267/api/Productos',datos)
   }
 
   editarProducto(datos: ProductoSS) {
-    const url = `https://localhost:7165/api/Productos/${datos.id}`;
+    const url = `https://localhost:7267/api/Productos/${datos.id}`;
     return this.http.put(url, datos);
   }
 
   eliminarProducto(id:number) {
-    const url = `https://localhost:7165/api/Productos/${id}`;
+    const url = `https://localhost:7267/api/Productos/${id}`;
     return this.http.delete(url);
   }
 
   obtenerProducto(id:number):Observable<ProductoSS[]>{
-    return this.http.get<ProductoSS[]>(`https://localhost:7165/api/Productos/${id}`);
+    return this.http.get<ProductoSS[]>(`https://localhost:7267/api/Productos/${id}`);
   }
 
   verDetalle(id:number):Observable<DetalleProductoSS[]>{
-    return this.http.get<DetalleProductoSS[]>(`https://localhost:7165/api/DetalleProducto/${id}`);
+    return this.http.get<DetalleProductoSS[]>(`https://localhost:7267/api/DetalleProducto/${id}`);
   }
 
   agregarStock(stock: number, id:number) {
-    const url = `https://localhost:7165/api/Productos/agregar-stock/${id}`;
+    const url = `https://localhost:7267/api/Productos/agregar-stock/${id}`;
     return this.http.put(url, stock);
   }
 
   agregarDetalle(datos:DetalleProductoSS){
-    return this.http.post('https://localhost:7165/api/DetalleProducto',datos)
+    return this.http.post('https://localhost:7267/api/DetalleProducto',datos)
   }
 
   editarDetalle(datos: DetalleProductoSS) {
-    const url = `https://localhost:7165/api/DetalleProducto/${datos.id}`;
+    const url = `https://localhost:7267/api/DetalleProducto/${datos.id}`;
     return this.http.put(url, datos);
   }
 
   eliminarDetalle(id:number) {
-    const url = `https://localhost:7165/api/DetalleProducto/${id}`;
+    const url = `https://localhost:7267/api/DetalleProducto/${id}`;
     return this.http.delete(url);
   }
 
   obtenerDetalle(id:number):Observable<DetalleProductoSS[]>{
-    return this.http.get<DetalleProductoSS[]>(`https://localhost:7165/api/DetalleProducto/obtener-id/${id}`);
-    
+    return this.http.get<DetalleProductoSS[]>(`https://localhost:7267/api/DetalleProducto/obtener-id/${id}`);
+  }
   /* Links de Direccion */
   public getDireccion():Observable<Direccion[]>{
     return this.http.get<Direccion[]>('https://localhost:7267/api/Direccion')
   }
-  
+
   addDireccion(datos:Direccion){
     return this.http.post('https://localhost:7267/api/Direccion',datos)
   }
-  
+
   editarDireccion(datos: Direccion) {
     const url = `https://localhost:7267/api/Direccion/${datos.idDireccion}`;
     return this.http.put(url, datos);
@@ -201,7 +201,7 @@ export class ProyectoApiService {
   addTarjeta(datos:Tarjeta){
     return this.http.post('https://localhost:7267/api/Tarjeta',datos)
   }
-  
+
   editarTarjeta(datos: Tarjeta) {
     const url = `https://localhost:7267/api/Tarjeta/${datos.idTarjeta}`;
     return this.http.put(url, datos);

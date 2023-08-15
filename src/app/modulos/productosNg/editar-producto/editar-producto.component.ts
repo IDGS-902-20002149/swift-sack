@@ -21,6 +21,8 @@ export class EditarProductoComponent implements OnInit {
     receta:'',
     stock: 0
   }
+  fotoPreviewUrl: string | null = null;
+
 
   constructor(
     private productoss: ProyectoApiService,
@@ -32,12 +34,16 @@ export class EditarProductoComponent implements OnInit {
     this.obtenerId();
   }
 
+  obtenerFoto(){
+    if(this.regProducto.foto)
+      this.fotoPreviewUrl = `data:image/png;base64,${this.regProducto.foto}`;
+
+  }
+
   obtenerId() {
     const idP = this.route.snapshot.params['id'];
     this.regProducto.id = Number(idP);
     this.id = Number(idP);
-    console.log(this.id);
-
     this.productoss.obtenerProducto(this.id).subscribe({
       next: (response: ProductoSS[]) => {
         this.dataSource = response;
@@ -48,12 +54,41 @@ export class EditarProductoComponent implements OnInit {
           this.regProducto.receta = this.dataSource.receta;
           this.regProducto.stock = this.dataSource.stock;
           this.regProducto.costo = this.dataSource.costo;
+          this.obtenerFoto();
+
       },
       error: (error) => console.log(error)
     });
   }
 
 
+  handleFileInput(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      // Mostrar vista previa de la foto
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.fotoPreviewUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+
+      // Convertir la imagen a base64 y asignarla a regProducto.foto
+      this.convertToBase64(file).then(base64 => {
+        this.regProducto.foto = base64;
+      });
+    }
+  }
+
+  convertToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const base64 = e.target.result.split(',')[1];
+        resolve(base64);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
 
   editar() {
     this.productoss.editarProducto(this.regProducto).subscribe(

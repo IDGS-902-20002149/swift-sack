@@ -22,11 +22,42 @@ export class AgregarProductoComponent  {
     stock: 0
   }
 
+  fotoPreviewUrl: string | null = null;
+
+  handleFileInput(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      // Mostrar vista previa de la foto
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.fotoPreviewUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+
+      // Convertir la imagen a base64 y asignarla a regProducto.foto
+      this.convertToBase64(file).then(base64 => {
+        this.regProducto.foto = base64;
+      });
+    }
+  }
+
+  convertToBase64(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const base64 = e.target.result.split(',')[1];
+        resolve(base64);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
   constructor(private productoss: ProyectoApiService,
     private router: Router
     ) { }
 
   agregar() {
+    console.log(this.regProducto.foto)
     this.productoss.agregarProducto(this.regProducto).subscribe({
       next: () => {
         console.log('Producto agregada correctamente');
