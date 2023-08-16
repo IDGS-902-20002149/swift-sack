@@ -5,17 +5,20 @@ import { DetalleClienteComponent } from '../detalle-cliente/detalle-cliente.comp
 import { RouterModule } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ProductosCFilterPipe } from 'src/app/productosC-filter.pipe';
 
 @NgModule({
   declarations: [
     ProductosCComponent,
     DetalleClienteComponent,
+    ProductosCFilterPipe
+
   ],
   imports: [
     CommonModule,
     RouterModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [
     ProductosCComponent,

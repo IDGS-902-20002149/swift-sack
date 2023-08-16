@@ -53,43 +53,43 @@
   .product-item:hover {
     box-shadow: 0 0 30px #DDDDDD;
   }
-  
+
   .product-item:hover .product-action {
     background: rgba(255, 255, 255, 0.7);
   }
-  
+
   .product-item:hover .product-action a.btn:first-child {
     opacity: 1;
     margin-top: 0;
     transition: .3s 0s;
   }
-  
+
   .product-item:hover .product-action a.btn:nth-child(2) {
     opacity: 1;
     margin-top: 0;
     transition: .3s .05s;
   }
-  
+
   .product-item:hover .product-action a.btn:nth-child(3) {
     opacity: 1;
     margin-top: 0;
     transition: .3s .1s;
   }
-  
+
   .product-item:hover .product-action a.btn:nth-child(4) {
     opacity: 1;
     margin-top: 0;
     transition: .3s .15s;
   }
-  
+
   .product-item .product-img img {
     transition: .5s;
   }
-  
+
   .product-item:hover .product-img img {
     transform: scale(1.2);
   }
-  
+
   .product-item .btn:hover {
     color: #B2D3D8 !important;
   }
@@ -97,7 +97,7 @@
   .bg-light {
     background-color: #FFFFFF !important;
   }
-  
+
   a.bg-light:hover, a.bg-light:focus,
   button.bg-light:hover,
   button.bg-light:focus {
@@ -107,7 +107,7 @@
   .product-item .product-img img {
     transition: .5s;
   }
-  
+
   .product-item:hover .product-img img {
     transform: scale(1.2);
   }
@@ -123,7 +123,7 @@
     justify-content: center;
     transition: .5s;
   }
-  
+
   .product-action a.btn {
     position: relative;
     margin: 0 3px;
@@ -134,25 +134,25 @@
   .product-item:hover .product-action {
     background: rgba(255, 255, 255, 0.7);
   }
-  
+
   .product-item:hover .product-action a.btn:first-child {
     opacity: 1;
     margin-top: 0;
     transition: .3s 0s;
   }
-  
+
   .product-item:hover .product-action a.btn:nth-child(2) {
     opacity: 1;
     margin-top: 0;
     transition: .3s .05s;
   }
-  
+
   .product-item:hover .product-action a.btn:nth-child(3) {
     opacity: 1;
     margin-top: 0;
     transition: .3s .1s;
   }
-  
+
   .product-item:hover .product-action a.btn:nth-child(4) {
     opacity: 1;
     margin-top: 0;
@@ -176,4 +176,9 @@
 
   label {
     color: #303030;
+  }
+  .img-fixed-size {
+    width: 338px; /* Cambia este valor al tamaño deseado */
+    height: 320px; /* Cambia este valor al tamaño deseado */
+    object-fit: cover; /* Puedes ajustar esta propiedad según tus necesidades */
   }
