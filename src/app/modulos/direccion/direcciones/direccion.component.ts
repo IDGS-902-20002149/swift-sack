@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Direccion } from 'src/app/interfaces/direccion';
+import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
 
 @Component({
@@ -9,20 +10,20 @@ import { ProyectoApiService } from 'src/app/proyecto-api.service';
 })
 export class DireccionComponent {
   listFilter:string=''
-  direcciones:any=[];
+  direcciones:Direccion[]=[];
 
   constructor(public dir:ProyectoApiService){}
- 
-  direccionObject:Direccion[]=[
-    {
-      idDireccion: 1, 
-      idUser: 1, 
-      nombreCompleto: 'Luis German',
-      calleNumero: 'Tordo 148',
-      codigoPostal: '37459',
-      telefono: '4776741723',
-    },
-  ]
+
+  usuario:UsuarioMod = {
+    id: 0,
+    name: '0',
+    email: '0',
+    password: '0',
+    telefono: '0',
+    active: false,
+    confirmed_at: '0',
+    roleId: 0,
+  };
 
   eliminarDireccion(id:number){
     
@@ -39,7 +40,7 @@ export class DireccionComponent {
   }
 
   actualizarTabla(){
-    this.dir.getDireccion().subscribe(
+    this.dir.getDireccion(this.usuario.id).subscribe(
       {
         next: response=>{
       this.direcciones=response;
@@ -49,7 +50,19 @@ export class DireccionComponent {
     );
   }
 
+  obtenerUsuario(){
+    const userData = sessionStorage.getItem('userData');
+    
+    if (userData) {
+      this.usuario = JSON.parse(userData);
+      console.log('Usuario: ' + this.usuario.name + ' recuperado');
+    } else {
+      console.log('El objeto no fue encontrado en sessionStorage.');
+    }
+  }
+
   ngOnInit(): void {
+    this.obtenerUsuario();
     this.actualizarTabla();
   }
 }

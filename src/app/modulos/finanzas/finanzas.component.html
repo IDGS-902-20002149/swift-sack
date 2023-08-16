@@ -18,8 +18,8 @@
     </div>
   </div>
   
-  <div class="card" *ngFor="let valor of valoresCalculados">
-    <div class="card-header text-center">
+  <div class="card text-center" *ngFor="let valor of valoresCalculados">
+    <div class="card-header">
       Total de Usuarios
     </div>
     <div class="card-body">
@@ -27,7 +27,7 @@
     </div>
   </div>
   
-  <div class="card" *ngFor="let valor of valoresCalculados">
+  <div class="card text-center" *ngFor="let valor of valoresCalculados">
     <div class="card-header">
       Valor de Venta Promedio
     </div>
@@ -114,7 +114,7 @@
   </ngx-charts-bar-vertical>
 </div>
 -->
-<select [(ngModel)]="selectedMonth" (ngModelChange)="filtrarVentasPorMes()">
+<select [(ngModel)]="selectedMonth" (ngModelChange)="filtrarVentasPorMes()" class="form-control">
   <option *ngFor="let month of monthNames" [value]="month">{{ month }}</option>
 </select>
 <div *ngIf="!hayDatosDisponibles">Aún no hay ventas disponibles para el mes seleccionado.</div>

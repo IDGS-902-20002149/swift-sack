@@ -24,6 +24,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { TarjetasMModule } from './modulos/tarjetas/tarjetas-m/tarjetas-m.module';
 import { DireccionMModule } from './modulos/direccion/direccion-m/direccion-m.module';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './modulos/loginNG/login/login.component';
+import { RegistrarComponent } from './modulos/usuarioNG/registrar/registrar.component';
+import { ModificarComponent } from './modulos/usuarioNG/modificar/modificar.component';
 
 import { ProductosComponent } from './modulos/productosNg/productos/productos.component';
 import { ProductosFilterPipe } from './productos-filter.pipe';
@@ -38,6 +41,11 @@ import { direccionFilterPipe } from './direccion-filter.pipe';
 import { tarjetaFilterPipe } from './tarjeta-filter.pipe';
 
 import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
+import { CompraMModule } from './modulos/compra/compra-m/compra-m.module';
+
+import { ProductosMModule } from './modulos/productosC/productos-m/productos-m.module';
+import { PedidosMModule } from './modulos/pedidos/pedidos-m/pedidos-m.module';
+import { PedidosMainCComponent } from './modulos/pedidos/pedidos-main-c/pedidos-main-c.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +62,9 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
     EditarMPComponent,
     AgregarMPComponent,
     HomeComponent,
+    LoginComponent,
+    RegistrarComponent,
+    ModificarComponent,
     ProductosComponent,
     EditarProductoComponent,
     AgregarProductoComponent,
@@ -62,7 +73,8 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
     EditarDetalleComponent,
     AgregarStockComponent,
     direccionFilterPipe,
-    tarjetaFilterPipe
+    tarjetaFilterPipe,
+    PedidosMainCComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +88,10 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
     HttpClientModule,
     TarjetasMModule,
     DireccionMModule,
-    CarritoMModule
+    CarritoMModule,
+    CompraMModule,
+    ProductosMModule,
+    PedidosMModule
   ],
   providers: [],
   bootstrap: [AppComponent]

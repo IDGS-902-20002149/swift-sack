@@ -1,141 +1,145 @@
 <div class="contenedor-padre">
-  <mat-toolbar class="barra fixed-top" color="dark">
-    <mat-toolbar-row>
-      <button (click)="cajon.toggle()" mat-icon-button>
-        <mat-icon>menu</mat-icon>
-      </button>
-      <span>
-        <img src="../../assets/img/swiftsack_logo_letras.png" height="50px" width="auto"> &nbsp;
-      </span>
-      <span>
-        <a mat-stroked-button href="">HOME</a>&nbsp;
-      </span>
-      <span>
-        <a mat-stroked-button href="">PRODUCTOS</a>&nbsp;
-      </span>
-      <div style="position: relative; right: -48rem;">
-          <a mat-stroked-button href="" style="padding-right: 0rem;" routerLink="PreviewCar">
-            <mat-icon>shopping_cart</mat-icon>
+    <mat-toolbar class="barra fixed-top" color="dark">
+      <mat-toolbar-row>
+        <button (click)="cajon.toggle()" mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>
+          <img src="../../assets/img/swiftsack_logo_letras.png" height="50px" width="auto"> &nbsp;
+        </span>
+        <span>
+          <a mat-stroked-button href="">HOME</a>&nbsp;
+        </span>
+        <span>
+          <a mat-stroked-button routerLink="verProductosC">PRODUCTOS</a>&nbsp;
+        </span>
+        <div style="position: relative; right: -48rem;">
+            <a mat-stroked-button href="" style="padding-right: 0rem;" routerLink="PreviewCar">
+              <mat-icon>shopping_cart</mat-icon>
+            </a>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-sidenav-container class="contenido">
+      <mat-sidenav style="min-width: 300px;" class="mainburguer" #cajon mode="side" opened>
+        <mat-nav-list>          
+          <a mat-list-item routerLinkActive="active" routerLink="finanzas">
+            <mat-icon color="primary">perm_identity</mat-icon>
+            Finanzas
           </a>
-      </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  <mat-sidenav-container class="contenido">
-    <mat-sidenav style="min-width: 300px;" class="mainburguer" #cajon mode="side" opened>
-      <mat-nav-list>
-        <a mat-list-item routerLinkActive="active" routerLink="finanzas">
-          <mat-icon color="primary">perm_identity</mat-icon>
-          Finanzas
-        </a>
-        <a mat-list-item routerLinkActive="active" routerLink="login">
-          <mat-icon color="primary">perm_identity</mat-icon>
-          Login
-        </a>
-        <a mat-list-item routerLinkActive="active" routerLink="registrar">
-          <mat-icon color="primary">perm_identity</mat-icon>
-          Registrar
-        </a>
-        <a mat-list-item routerLinkActive="active" routerLink="verProductos">
-          <mat-icon color="primary">perm_identity</mat-icon>
-          Ver Productos
-        </a>
-        <a mat-list-item routerLinkActive="active" routerLink="AgregarProd">
-          <mat-icon color="accent">add</mat-icon>
-          Agregar Producto
-        </a>
-        <!-- Acordeon Proveedores start -->
-        <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Proveedores
-                </mat-panel-title>
-              </mat-expansion-panel-header>
+          <a mat-list-item routerLinkActive="active" routerLink="login">
+            <mat-icon color="primary">perm_identity</mat-icon>
+            Login
+          </a>
+          <a mat-list-item routerLinkActive="active" routerLink="registrar">
+            <mat-icon color="primary">perm_identity</mat-icon>
+            Registrar 
+          </a>
+          <a mat-list-item routerLinkActive="active" routerLink="verProductos">
+            <mat-icon color="primary">perm_identity</mat-icon>
+            Ver Productos
+          </a>
+          <a mat-list-item routerLinkActive="active" routerLink="AgregarProd">
+            <mat-icon color="accent">add</mat-icon>
+            Agregar Producto
+          </a>
+          <!-- Acordeon Proveedores start -->
+          <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Proveedores
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+        
+                <mat-nav-list>
+                  <a mat-list-item routerLinkActive="active" routerLink="verProveedores">
+                    <mat-icon color="primary">credit_card</mat-icon>
+                    Ver Proveedores
+                  </a>
+                  <a mat-list-item routerLinkActive="active" routerLink="Agregar">
+                    <mat-icon color="primary">add</mat-icon>
+                    Nuevo Proveedor
+                  </a>
+                </mat-nav-list>
+              </mat-expansion-panel>
+          </mat-accordion>
+          <!-- Acordeon Proveedores end -->
+          <!-- Acordeon Materia Prima start -->
+          <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Materia Prima
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-nav-list>
+                  <a mat-list-item routerLinkActive="active" routerLink="verMateriaPrima">
+                    <mat-icon color="primary">pin_drop</mat-icon>
+                    Ver Materia Prima
+                  </a>
+                  <a mat-list-item routerLinkActive="active" routerLink="AgregarMP">
+                    <mat-icon color="primary">add_location</mat-icon>
+                    Agregar Materia Prima
+                  </a>
+                </mat-nav-list>
+              </mat-expansion-panel>
+          </mat-accordion>
+          <!-- Acordeon Materia Prima end -->
+          <!-- Acordeon Perfil start -->
+          <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Mi Perfil
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+        
+                <mat-nav-list>
+                  <a mat-list-item routerLinkActive="active" routerLink="verTarjetas">
+                    <mat-icon color="primary">credit_card</mat-icon>
+                    Mis Tarjetas
+                  </a>
+                  <a mat-list-item routerLinkActive="active" routerLink="verDirecciones">
+                    <mat-icon color="primary">add_location</mat-icon>
+                    Mis Direcciones
+                  </a>
+                  <a mat-list-item routerLinkActive="active" routerLink="modificar">
+                    <mat-icon color="primary">perm_identity</mat-icon>
+                    Modificar Perfil
+                  </a>
+                  <a mat-list-item routerLinkActive="active" routerLink="MisPedidos">
+                    <mat-icon color="primary">perm_identity</mat-icon>
+                    Mis Pedidos
+                  </a>
+                </mat-nav-list>
+              </mat-expansion-panel>
+          </mat-accordion>
+          <!-- Acordeon Perfil end -->
+          <mat-accordion>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Más
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+      
+                <mat-nav-list>
+                  <a mat-list-item href='#'>
+                    Acerca de
+                  </a>
+                  <a mat-list-item href='#'>
+                    Ayuda
+                  </a>
+                </mat-nav-list>
+              </mat-expansion-panel>
+          </mat-accordion>
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content class="padding-10" style="top: 5rem; min-height: 120vh; margin-bottom: 4rem;">
+        
+          <router-outlet></router-outlet>
 
-              <mat-nav-list>
-                <a mat-list-item routerLinkActive="active" routerLink="verProveedores">
-                  <mat-icon color="primary">credit_card</mat-icon>
-                  Ver Proveedores
-                </a>
-                <a mat-list-item routerLinkActive="active" routerLink="Agregar">
-                  <mat-icon color="primary">add</mat-icon>
-                  Nuevo Proveedor
-                </a>
-              </mat-nav-list>
-            </mat-expansion-panel>
-        </mat-accordion>
-        <!-- Acordeon Proveedores end -->
-        <!-- Acordeon Materia Prima start -->
-        <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Materia Prima
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <mat-nav-list>
-                <a mat-list-item routerLinkActive="active" routerLink="verMateriaPrima">
-                  <mat-icon color="primary">pin_drop</mat-icon>
-                  Ver Materia Prima
-                </a>
-                <a mat-list-item routerLinkActive="active" routerLink="AgregarMP">
-                  <mat-icon color="primary">add_location</mat-icon>
-                  Agregar Materia Prima
-                </a>
-              </mat-nav-list>
-            </mat-expansion-panel>
-        </mat-accordion>
-        <!-- Acordeon Materia Prima end -->
-        <!-- Acordeon Perfil start -->
-        <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Mi Perfil
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <mat-nav-list>
-                <a mat-list-item routerLinkActive="active" routerLink="verTarjetas">
-                  <mat-icon color="primary">credit_card</mat-icon>
-                  Mis Tarjetas
-                </a>
-                <a mat-list-item routerLinkActive="active" routerLink="verDirecciones">
-                  <mat-icon color="primary">add_location</mat-icon>
-                  Mis Direcciones
-                </a>
-                <a mat-list-item routerLinkActive="active" routerLink="modificar">
-                  <mat-icon color="primary">perm_identity</mat-icon>
-                  Modificar perfil
-                </a>
-              </mat-nav-list>
-            </mat-expansion-panel>
-        </mat-accordion>
-        <!-- Acordeon Perfil end -->
-        <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Más
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-
-              <mat-nav-list>
-                <a mat-list-item href='#'>
-                  Acerca de
-                </a>
-                <a mat-list-item href='#'>
-                  Ayuda
-                </a>
-              </mat-nav-list>
-            </mat-expansion-panel>
-        </mat-accordion>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content class="padding-10" style="top: 5rem; min-height: 120vh; margin-bottom: 4rem;">
-
-        <router-outlet></router-outlet>
-
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>

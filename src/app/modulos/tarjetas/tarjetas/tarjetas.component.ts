@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Tarjeta } from 'src/app/interfaces/tarjeta';
+import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ProyectoApiService } from 'src/app/proyecto-api.service';
   styleUrls: ['./tarjetas.component.css']
 })
 export class TarjetasComponent {
-  tarjetas:any=[];
+  tarjetas:Tarjeta[]=[];
 
   constructor(public tar:ProyectoApiService){}
  
@@ -40,7 +41,26 @@ export class TarjetasComponent {
   }
 
   actualizarTabla(){
-    this.tar.getTarjeta().subscribe(
+    const userData = sessionStorage.getItem('userData');
+    let usuario:UsuarioMod = {
+      id: 0,
+      name: '0',
+      email: '0',
+      password: '0',
+      telefono: '0',
+      active: false,
+      confirmed_at: '0',
+      roleId: 0,
+    };
+    
+    if (userData) {
+      usuario = JSON.parse(userData);
+      console.log('Usuario: ' + usuario.name + ' recuperado');
+    } else {
+      console.log('El objeto no fue encontrado en sessionStorage.');
+    }
+
+    this.tar.getTarjeta(usuario.id).subscribe(
       {
         next: response=>{
       this.tarjetas=response;

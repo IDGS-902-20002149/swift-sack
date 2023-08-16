@@ -111,3 +111,7 @@ h2, h3, h4, h5, th {
   padding: 5px 10px;
   width: 200px;
 }
+
+ngx-charts-pie-grid{
+  fill: white;
+}
