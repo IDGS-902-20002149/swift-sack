@@ -45,7 +45,6 @@ import { CompraMModule } from './modulos/compra/compra-m/compra-m.module';
 
 import { ProductosMModule } from './modulos/productosC/productos-m/productos-m.module';
 import { PedidosMModule } from './modulos/pedidos/pedidos-m/pedidos-m.module';
-import { PedidosMainCComponent } from './modulos/pedidos/pedidos-main-c/pedidos-main-c.component';
 
 @NgModule({
   declarations: [
@@ -73,8 +72,7 @@ import { PedidosMainCComponent } from './modulos/pedidos/pedidos-main-c/pedidos-
     EditarDetalleComponent,
     AgregarStockComponent,
     direccionFilterPipe,
-    tarjetaFilterPipe,
-    PedidosMainCComponent
+    tarjetaFilterPipe
   ],
   imports: [
     BrowserModule,

@@ -322,4 +322,17 @@ export class ProyectoApiService {
   obtenerPedido(id:number):Observable<Pedido[]>{
     return this.http.get<Pedido[]>(`https://localhost:7267/api/Pedido/${id}`);
   }
+
+  getPedidoItems(id:number):Observable<ProductoSS[]>{
+    return this.http.get<ProductoSS[]>(`https://localhost:7267/api/DetallePedido/obtener-id/${id}`)
+  }
+
+  getDetallePedido(id:number):Observable<DetallePedido[]>{
+    return this.http.get<DetallePedido[]>(`https://localhost:7267/api/DetallePedido/${id}`)
+  }
+
+  actualizarPedido(datos: Pedido) {
+    const url = `https://localhost:7267/api/Pedido/${datos.id}`;
+    return this.http.put(url, datos);
+  }
 }

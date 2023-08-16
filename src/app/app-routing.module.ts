@@ -39,6 +39,8 @@ import { ProductosCComponent } from './modulos/productosC/productosC/productosC.
 import { DetalleClienteComponent } from './modulos/productosC/detalle-cliente/detalle-cliente.component';
 import { PedidosCComponent } from './modulos/pedidos/pedidos-c/pedidos-c.component';
 import { PedidosMainCComponent } from './modulos/pedidos/pedidos-main-c/pedidos-main-c.component';
+import { PedidosComponent } from './modulos/pedidos/pedidos/pedidos.component';
+import { DetallePedidoComponent } from './modulos/pedidos/detalle-pedido/detalle-pedido.component';
 
 const routes: Routes = [
   {path: '',redirectTo: '/home', pathMatch:'full'},
@@ -74,7 +76,9 @@ const routes: Routes = [
   {path: 'verProductosC', component: ProductosCComponent},
   {path: 'verDetalleProducto/:id', component: DetalleClienteComponent},
   {path: 'MisPedidos', component:PedidosMainCComponent},
-  {path: 'verDetallePedido/:id', component:PedidosCComponent}
+  {path: 'verDetallePedidoC/:id', component:PedidosCComponent},
+  {path: 'Pedidos', component:PedidosComponent},
+  {path: 'VerDetallePedido/:id', component:DetallePedidoComponent},
 ];
 
 @NgModule({

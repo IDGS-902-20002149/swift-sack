@@ -5,16 +5,17 @@ import { Pedido } from 'src/app/interfaces/pedido';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
 
 @Component({
-  selector: 'app-pedidos-c',
-  templateUrl: './pedidos-c.component.html',
-  styleUrls: ['./pedidos-c.component.css']
+  selector: 'app-detalle-pedido',
+  templateUrl: './detalle-pedido.component.html',
+  styleUrls: ['./detalle-pedido.component.css']
 })
-export class PedidosCComponent {
+export class DetallePedidoComponent {
   dataSource:any=[];
   direccionSelect:any=[];
   detalles:any=[];
   items:any=[];
   datos:any=[];
+  total:number = 0;
 
   pedido:Pedido = {
     id:0,
@@ -53,7 +54,6 @@ export class PedidosCComponent {
         this.pedido.idDireccion = this.dataSource.idDireccion;
         this.pedido.folio = this.dataSource.folio;
         this.pedido.estatus = this.dataSource.estatus;
-        console.log(this.pedido)
         this.obtenerDireccion(this.pedido.idDireccion);
         this.getDetalle(idPedido);
         this.getItems(idPedido);
@@ -96,15 +96,39 @@ export class PedidosCComponent {
   }
 
   cargarDatos(){
+    this.datos = [];
+    this.total = 0;
+    console.log(this.items)
     for (let i = 0; i < this.items.length; i++) {
       const element = this.items[i];
+      let check = false;
+      if(element.stock > this.detalles[i].cantidad){
+        check = true;
+      }
+
+      this.total += this.detalles[i].costoTotal;
+
       const producto = {
+        checkmark: check,
         nombre: element.nombre,
         cantidad: this.detalles[i].cantidad,
         subtotal: this.detalles[i].costoTotal,
       }
       this.datos.push(producto);
     }
+  }
+
+  actualizarEstatus(estatus:number){
+    console.log(this.pedido);
+    this.pedido.estatus = estatus;
+    this.objApi.actualizarPedido(this.pedido).subscribe(
+      () => {
+        this.ngOnInit();
+      },
+      error => {
+        console.error('Error al editar la tarjeta:', error);
+      }
+    );
   }
 
   ngOnInit() {

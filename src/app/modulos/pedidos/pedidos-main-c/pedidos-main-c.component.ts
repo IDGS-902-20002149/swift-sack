@@ -9,7 +9,7 @@ import { ProyectoApiService } from 'src/app/proyecto-api.service';
   styleUrls: ['./pedidos-main-c.component.css']
 })
 export class PedidosMainCComponent {
-  pedidos:Pedido[] = []
+  pedidos:Pedido[] = [];
 
   usuario:UsuarioMod = {
     id: 0,
