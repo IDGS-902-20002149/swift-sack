@@ -11,7 +11,7 @@
           <a mat-stroked-button href="">HOME</a>&nbsp;
         </span>
         <span>
-          <a mat-stroked-button href="">PRODUCTOS</a>&nbsp;
+          <a mat-stroked-button routerLink="verProductosC">PRODUCTOS</a>&nbsp;
         </span>
         <div style="position: relative; right: -48rem;">
             <a mat-stroked-button href="" style="padding-right: 0rem;" routerLink="PreviewCar">
@@ -106,7 +106,11 @@
                   </a>
                   <a mat-list-item routerLinkActive="active" routerLink="modificar">
                     <mat-icon color="primary">perm_identity</mat-icon>
-                    Modificar perfil
+                    Modificar Perfil
+                  </a>
+                  <a mat-list-item routerLinkActive="active" routerLink="MisPedidos">
+                    <mat-icon color="primary">perm_identity</mat-icon>
+                    Mis Pedidos
                   </a>
                 </mat-nav-list>
               </mat-expansion-panel>

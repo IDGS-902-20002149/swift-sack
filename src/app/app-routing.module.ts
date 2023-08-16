@@ -35,6 +35,11 @@ import { PreviewComponent } from './modulos/carrito/preview/preview.component';
 import { GotopayComponent } from './modulos/carrito/gotopay/gotopay.component';
 import { CompraComponent } from './modulos/compra/compraProveedor/compra.component';
 
+import { ProductosCComponent } from './modulos/productosC/productosC/productosC.component';
+import { DetalleClienteComponent } from './modulos/productosC/detalle-cliente/detalle-cliente.component';
+import { PedidosCComponent } from './modulos/pedidos/pedidos-c/pedidos-c.component';
+import { PedidosMainCComponent } from './modulos/pedidos/pedidos-main-c/pedidos-main-c.component';
+
 const routes: Routes = [
   {path: '',redirectTo: '/home', pathMatch:'full'},
   {path: 'home', component: HomeComponent},
@@ -64,7 +69,12 @@ const routes: Routes = [
   {path: 'verDetalle/:id', component: DetalleComponent},
   {path: 'AgregarDetalle/:id', component: AgregarDetalleComponent},
   {path: 'EditarDetalle/:id', component: EditarDetalleComponent},
-  {path: 'SurtirMP', component: CompraComponent}
+  {path: 'SurtirMP', component: CompraComponent},
+
+  {path: 'verProductosC', component: ProductosCComponent},
+  {path: 'verDetalleProducto/:id', component: DetalleClienteComponent},
+  {path: 'MisPedidos', component:PedidosMainCComponent},
+  {path: 'verDetallePedido/:id', component:PedidosCComponent}
 ];
 
 @NgModule({

@@ -10,7 +10,7 @@ import { ProyectoApiService } from 'src/app/proyecto-api.service';
 })
 export class DireccionComponent {
   listFilter:string=''
-  direcciones:any=[];
+  direcciones:Direccion[]=[];
 
   constructor(public dir:ProyectoApiService){}
 

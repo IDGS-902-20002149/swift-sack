@@ -10,6 +10,8 @@ import { Usuario, UsuarioMod, UsuarioRegistro } from './interfaces/usuario';
 import { Direccion } from './interfaces/direccion';
 import { Tarjeta } from './interfaces/tarjeta';
 import { Compra, DetalleCompra } from './interfaces/compra';
+import { Carrito } from './interfaces/carrito';
+import { DetallePedido, Pedido } from './interfaces/pedido';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -276,5 +278,48 @@ export class ProyectoApiService {
   addDetalleCompra(detalles: DetalleCompra) {
     return this.http.post('https://localhost:7267/api/DetalleCompra',detalles);
   }
-  
+
+  /*Links de Carrito*/
+  getCarritoUser(id:number):Observable<Carrito[]>{
+    return this.http.get<Carrito[]>(`https://localhost:7267/api/Carrito/obtener-carrito/${id}`)
+  }
+
+  getCarritoItems(id:number):Observable<ProductoSS[]>{
+    return this.http.get<ProductoSS[]>(`https://localhost:7267/api/Carrito/obtener-items/${id}`)
+  }
+
+  addCarrito(datos:Carrito){
+    return this.http.post('https://localhost:7267/api/Carrito',datos)
+  }
+
+  eliminarItem(id:number) {
+    const url = `https://localhost:7267/api/Carrito?Id=${id}`;
+    return this.http.delete(url);
+  }
+
+  eliminarItemsByUser(id:number) {
+    const url = `https://localhost:7267/api/Carrito/limpiar-carrito/${id}`;
+    return this.http.delete(url);
+  }
+
+  /*Links de pedidos*/
+  getMisPedidos(id:number):Observable<Pedido[]>{
+    return this.http.get<Pedido[]>(`https://localhost:7267/api/Pedido/obtener-mis-pedidos/${id}`)
+  }
+
+  getPedidos():Observable<Pedido[]>{
+    return this.http.get<Pedido[]>('https://localhost:7267/api/Pedido')
+  }
+
+  addPedido(datos: Pedido):Observable<Pedido> {  
+    return this.http.post<Pedido>('https://localhost:7267/api/Pedido',datos);
+  }
+
+  addDetallePedido(detalles: DetallePedido) {
+    return this.http.post('https://localhost:7267/api/DetallePedido',detalles);
+  }
+
+  obtenerPedido(id:number):Observable<Pedido[]>{
+    return this.http.get<Pedido[]>(`https://localhost:7267/api/Pedido/${id}`);
+  }
 }

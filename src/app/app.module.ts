@@ -43,6 +43,10 @@ import { tarjetaFilterPipe } from './tarjeta-filter.pipe';
 import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
 import { CompraMModule } from './modulos/compra/compra-m/compra-m.module';
 
+import { ProductosMModule } from './modulos/productosC/productos-m/productos-m.module';
+import { PedidosMModule } from './modulos/pedidos/pedidos-m/pedidos-m.module';
+import { PedidosMainCComponent } from './modulos/pedidos/pedidos-main-c/pedidos-main-c.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +73,8 @@ import { CompraMModule } from './modulos/compra/compra-m/compra-m.module';
     EditarDetalleComponent,
     AgregarStockComponent,
     direccionFilterPipe,
-    tarjetaFilterPipe
+    tarjetaFilterPipe,
+    PedidosMainCComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +89,9 @@ import { CompraMModule } from './modulos/compra/compra-m/compra-m.module';
     TarjetasMModule,
     DireccionMModule,
     CarritoMModule,
-    CompraMModule
+    CompraMModule,
+    ProductosMModule,
+    PedidosMModule
   ],
   providers: [],
   bootstrap: [AppComponent]

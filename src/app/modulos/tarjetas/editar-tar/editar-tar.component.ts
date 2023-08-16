@@ -41,7 +41,7 @@ export class EditarTarComponent {
     this.tarjeta.obtenerTarjeta(this.id).subscribe({
       next: (response: Tarjeta[]) => {
         this.dataSource = response;
-        this.tar.idUser = 1;       
+        this.tar.idUser = this.dataSource.idTarjeta;       
         this.tar.numeroTarjeta = this.dataSource.numeroTarjeta;
         this.tar.nombreTarjeta = this.dataSource.nombreTarjeta;
         this.tar.mesVencimiento = this.dataSource.mesVencimiento;

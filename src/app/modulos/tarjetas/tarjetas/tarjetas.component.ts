@@ -9,7 +9,7 @@ import { ProyectoApiService } from 'src/app/proyecto-api.service';
   styleUrls: ['./tarjetas.component.css']
 })
 export class TarjetasComponent {
-  tarjetas:any=[];
+  tarjetas:Tarjeta[]=[];
 
   constructor(public tar:ProyectoApiService){}
  

@@ -11,13 +11,10 @@
   <div class="container mt-0 mb-5">
     <div class="col-6">
       <mat-radio-group>
-        <div *ngIf="direcciones.size > 0">
+        <div *ngIf="direcciones.length > 0">
           <div *ngFor="let direccion of direcciones" class="card mt-5 bg-dark">
             <div class="card-body">
               <div class="row">
-                <div class="col-2 form-check d-flex align-items-center">
-                  <mat-radio-button color="primary" value="{{direccion.idDireccion}}" class="btnRadio" aria-label="Establecer predeterminado"></mat-radio-button>
-                </div>
                 <div class="col-7">
                   <h3 class="mb-0">{{direccion.nombreCompleto}}</h3>
                   <h3 class="mb-0">{{direccion.calleNumero}}</h3>
