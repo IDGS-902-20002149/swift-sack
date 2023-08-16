@@ -69,13 +69,12 @@ h2, h3, h4, h5, th {
 
 /* Estilos para la gráfica */
 .chart-container {
-  margin-top: 100px;
-  margin-bottom: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 400px; /* Ajusta la altura deseada */
-  width: 80%; /* Ajusta el ancho deseado */
+  width: 100%; 
+  max-width: 1800px;
+  margin: 30px ;
 }
 
 .chart-card {

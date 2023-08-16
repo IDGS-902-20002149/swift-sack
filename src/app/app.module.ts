@@ -34,6 +34,7 @@ import { AgregarStockComponent } from './modulos/productosNg/agregar-stock/agreg
 import { tarjetaFilterPipe } from './tarjeta-filter.pipe';
 
 import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
+import { MesFilterPipe } from './finanzas-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
     ProductosFilterPipe,
     MateriaPComponent,
     MateriaPFilterPipe,
+    MesFilterPipe,
     EditarMPComponent,
     AgregarMPComponent,
     HomeComponent,
@@ -57,6 +59,8 @@ import { CarritoMModule } from './modulos/carrito/carrito-m/carrito-m.module';
   ],
   imports: [
     BrowserModule,
+    BrowserModule,
+    FormsModule,
     NgxChartsModule,
     AppRoutingModule,
     BrowserAnimationsModule,

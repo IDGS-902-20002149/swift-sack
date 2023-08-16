@@ -1,30 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { ProyectoApiService } from '../../proyecto-api.service';
 import {  ColorHelper, ScaleType } from '@swimlane/ngx-charts';
+
 import { NgxChartsModule } from '@swimlane/ngx-charts'; 
 import { formatDate } from '@angular/common';
+import { MesFilterPipe } from 'src/app/finanzas-filter.pipe';
+import { ValorCalculado } from 'src/app/interfaces/finanzas';
 
 
 @Component({
   selector: 'app-finanzas',
   templateUrl: './finanzas.component.html',
   styleUrls: ['./finanzas.component.css'],
+  providers: [MesFilterPipe]
 })
 export class FinanzasComponent implements OnInit {
   productosMasVendidos!: any[];
   productosMenosVendidos!: any[];
   valoresCalculados!: any[];
+  valoresCalculadosOriginales!: any[];
   productExis!:any[];
   materiaExist!:any[];
   topClientes!:any[];
-
-
+  
+  monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  selectedMonth: number = 7; 
 
   ventasMensuales!: any[];
   single: any[] = [];
   //monthNames: string[] = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
   name!:string;
-monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Representaci√≥n num√©rica de los meses
+  
   
 
   constructor(private apiService: ProyectoApiService) { }
@@ -37,13 +43,26 @@ monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Representaci√
     this.obtenerTopClientes();
     this.obtenerProductoExistentes();
     this.obtenerMateriaExistentes();
-    this.filtrarDatosPorMes();
+
+
+  }
+
+  filtar():void{
+    this.obtenerProductosMasVendidos();
+    this.obtenerProductosMenosVendidos();
+    this.obtenerValoresCalculados();
+    this.obtenerProductoExistentes();
+    this.obtenerMateriaExistentes();
+    this.obtenerTopClientes();
+    this.obtenerVentasMensuales();
+
   }
 
   obtenerProductosMasVendidos(): void {
     this.apiService.getProductosMasVendidos().subscribe(
       data => {
         this.productosMasVendidos = data;
+        this.filtrarDatosPorMes();
       },
       error => {
         console.log(error);
@@ -55,6 +74,7 @@ monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Representaci√
     this.apiService.getProductosMenosVendidos().subscribe(
       data => {
         this.productosMenosVendidos = data;
+        this.filtrarDatosPorMes();
       },
       error => {
         console.log(error);
@@ -64,9 +84,12 @@ monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Representaci√
 
   obtenerValoresCalculados(): void {
     this.apiService.getValoresCalculados().subscribe(
-      data => {
-        this.valoresCalculados = data;
-      },
+      data =>  {
+        this.valoresCalculados = data; 
+      this.valoresCalculadosOriginales = data;
+      this.filtrarDatosPorMes();
+
+          },
       error => {
         console.log(error);
       }
@@ -77,6 +100,7 @@ monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Representaci√
     this.apiService.getTopClientes().subscribe(
       data => {
         this.topClientes = data;
+        this.filtrarDatosPorMes();
       },
       error => {
         console.log(error);
@@ -87,6 +111,7 @@ monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Representaci√
     this.apiService.getMateriaExistentes().subscribe(
       data => {
         this.materiaExist = data;
+        this.filtrarDatosPorMes();
       },
       error => {
         console.log(error);
@@ -97,6 +122,7 @@ monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Representaci√
     this.apiService.getProductosExistentes().subscribe(
       data => {
         this.productExis = data;
+        this.filtrarDatosPorMes();
       },
       error => {
         console.log(error);
@@ -109,58 +135,90 @@ monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Representaci√
     this.apiService.getVentasMensuales().subscribe(
       data => {
         this.ventasMensuales = data;
+        this.filtrarDatosPorMes();
       },
       error => {
         console.log(error);
       }
     );
   }
-  
-  // Elimina la llamada a mostrarGraficaVentasMensuales() desde obtenerVentasMensuales()
-  filteredSales!: any[]; 
-  selectedMonth: number = 7;
-  hayDatosDisponibles: boolean = true;
-  
+
+
   filtrarDatosPorMes(): void {
+    
     const selectedMonthIndex = this.selectedMonth - 1;
-    const selectedMonth = this.monthNames[selectedMonthIndex];
-    
-    this.productosMasVendidos = this.productosMasVendidos.filter(producto => {
-      // Obtener el mes de la fecha y formatearlo como n√∫mero de 2 d√≠gitos (por ejemplo, "07")
-      const monthFromItem = new Date(producto.fecha).getMonth() + 1
-      console.log(selectedMonth)
-      
-      return monthFromItem === selectedMonth;
-      
-    });
-    // Filtrar productos m√°s vendidos
-    this.productosMasVendidos = this.productosMasVendidos.filter(producto => producto.fecha === selectedMonth);
-    console.log(selectedMonth)
-    // Filtrar productos menos vendidos
-    this.productosMenosVendidos = this.productosMenosVendidos.filter(producto => producto.fecha === selectedMonth);
+  
+    if (selectedMonthIndex >= 0 && selectedMonthIndex < this.monthNames.length) {
+      const selectedMonth = this.monthNames[selectedMonthIndex];
+  
+      this.valoresCalculados = this.valoresCalculados.filter(item => {
+        // Asegurarse de que item.fecha y selectedMonth sean n√∫meros antes de comparar
+        if (typeof item.fecha === 'number' && typeof selectedMonth === 'number') {
+          return item.fecha === selectedMonth;
+        }
+        return false;
+      });
+      this.productosMasVendidos = this.productosMasVendidos.filter(item => {
+        // Asegurarse de que item.fecha y selectedMonth sean n√∫meros antes de comparar
+        if (typeof item.fecha === 'number' && typeof selectedMonth === 'number') {
+          return item.fecha === selectedMonth;
+        }
+        return false;
+      });
+      this.productosMenosVendidos = this.productosMenosVendidos.filter(item => {
+        // Asegurarse de que item.fecha y selectedMonth sean n√∫meros antes de comparar
+        if (typeof item.fecha === 'number' && typeof selectedMonth === 'number') {
+          return item.fecha === selectedMonth;
+        }
+        return false;
+      });
+      this.productExis = this.productExis.filter(item => {
+        // Asegurarse de que item.fecha y selectedMonth sean n√∫meros antes de comparar
+        if (typeof item.fecha === 'number' && typeof selectedMonth === 'number') {
+          return item.fecha === selectedMonth;
+        }
+        return false;
+      });
+      this.materiaExist = this.materiaExist.filter(item => {
+        // Asegurarse de que item.fecha y selectedMonth sean n√∫meros antes de comparar
+        if (typeof item.fecha === 'number' && typeof selectedMonth === 'number') {
+          return item.fecha === selectedMonth;
+        }
+        return false;
+      });
+      this.topClientes = this.topClientes.filter(item => {
+        // Asegurarse de que item.fecha y selectedMonth sean n√∫meros antes de comparar
+        if (typeof item.fecha === 'number' && typeof selectedMonth === 'number') {
+          return item.fecha === selectedMonth;
+        }
+        return false;
+      });
 
-    // Filtrar valores calculados
-    this.valoresCalculados = this.valoresCalculados.filter(valor => valor.month === selectedMonth);
 
-    // Filtrar otras colecciones de datos seg√∫n corresponda
+      this.topClientes.sort((a, b) => b.numPedidos - a.numPedidos)
+      this.productosMasVendidos.sort((a, b) => b.cantidad - a.cantidad)
+      this.productosMenosVendidos.sort((a, b) => b.cantidad - a.cantidad)
+      this.productExis.sort((a, b) => b.stock - a.stock)
+      this.materiaExist.sort((a, b) => b.cantidad - a.cantidad)
 
-    // Actualizar gr√°ficas u otros componentes que dependan de los datos filtrados
-    this.filteredSales = this.ventasMensuales.filter(item => item.month === selectedMonth);
-    // Actualiza otros componentes si es necesario
-  }
-  filtrarVentasPorMes(): void {
-    
-    const selectedMonthIndex = this.selectedMonth - 1; // Restamos 1 para obtener el √≠ndice correcto en monthNames
-    const selectedMonth = this.monthNames[selectedMonthIndex];
-    this.filteredSales = this.ventasMensuales.filter(item => item.month === selectedMonth);
+      this.ventasMensuales = this.ventasMensuales.filter(item => item.month === selectedMonth);
+      this.ventasMensuales.sort((a, b) => b.total_vendido - a.total_vendido)
+      console.log(this.ventasMensuales)
     console.log(this.selectedMonth);
-    this.hayDatosDisponibles = this.filteredSales.length > 0;
     this.mostrarGraficaVentasMensuales();
+    } else {
+      console.log("√çndice de mes seleccionado inv√°lido.");
+   
+    }
   }
+  
+  
+  
+  
   
   
   mostrarGraficaVentasMensuales(): void {
-    const salesData = this.filteredSales.map(item => {
+    const salesData = this.ventasMensuales.map(item => {
       return {
         name: item.nombre,
         value: item.total_vendido
@@ -191,7 +249,7 @@ monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Representaci√
 
  
   view: [number, number] = [800, 400];
-  margin: any = { top: 20, right: 20, bottom: 50, left: 70 }; 
+  margin: any = { top: 20, right: 0, bottom: 50, left: 0 }; 
 
   colorScheme: any = {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5'],
@@ -200,11 +258,13 @@ monthNames: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]; // Representaci√
  
 
   onSelect(event: any) {
-    console.log(event);
-    this.filtrarDatosPorMes();
+    console.log('Selected month changed:');
+    this.obtenerValoresCalculados();
+  
   }
 
 
+  
   
   }
   
