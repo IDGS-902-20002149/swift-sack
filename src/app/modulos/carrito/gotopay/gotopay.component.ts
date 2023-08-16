@@ -193,7 +193,7 @@ export class GotopayComponent {
       iduser: this.usuario.id,
       idDireccion: this.dir.idDireccion,
       folio: uniqueFolio,
-      estatus:1
+      estatus:0
     }
 
     console.log(pedido);
