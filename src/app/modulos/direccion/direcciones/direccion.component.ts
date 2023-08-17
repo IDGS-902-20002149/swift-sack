@@ -26,7 +26,7 @@ export class DireccionComponent {
   };
 
   eliminarDireccion(id:number){
-    
+
       this.dir.eliminarDireccion(id).subscribe(
         () => {
           console.log('Direccion eliminada correctamente');
@@ -36,14 +36,16 @@ export class DireccionComponent {
           console.error('Error al eliminar direccion', error);
         }
       );
-    
+
   }
 
   actualizarTabla(){
+    console.log(this.usuario.id)
     this.dir.getDireccion(this.usuario.id).subscribe(
       {
         next: response=>{
       this.direcciones=response;
+      console.log(this.direcciones)
     },
     error: error=>console.log(error)
   }
@@ -52,7 +54,7 @@ export class DireccionComponent {
 
   obtenerUsuario(){
     const userData = sessionStorage.getItem('userData');
-    
+
     if (userData) {
       this.usuario = JSON.parse(userData);
       console.log('Usuario: ' + this.usuario.name + ' recuperado');

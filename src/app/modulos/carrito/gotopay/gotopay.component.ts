@@ -25,8 +25,8 @@ export class GotopayComponent {
   detallespedido:DetallePedido[] = [];
 
   tar:Tarjeta = {
-    idTarjeta:0, 
-    idUser:0, 
+    idTarjeta:0,
+    idUser:0,
     numeroTarjeta:'',
     numTarEncryp:'',
     nombreTarjeta:'',
@@ -36,8 +36,8 @@ export class GotopayComponent {
   }
 
   dir:Direccion = {
-    idDireccion:0, 
-    idUser:0, 
+    idDireccion:0,
+    idUser:0,
     nombreCompleto:'',
     calleNumero:'',
     codigoPostal:'',
@@ -89,6 +89,7 @@ export class GotopayComponent {
     this.objApi.getDireccion(this.usuario.id).subscribe({
       next: response=>{
         this.direcciones=response;
+
       },
       error: error=>console.log(error)
     });
@@ -96,7 +97,7 @@ export class GotopayComponent {
 
   obtenerUsuario(){
     const userData = sessionStorage.getItem('userData');
-    
+
     if (userData) {
       this.usuario = JSON.parse(userData);
       console.log('Usuario: ' + this.usuario.name + ' recuperado');
@@ -113,11 +114,12 @@ export class GotopayComponent {
       this.objApi.obtenerDireccion(parseInt(iddireccionSelect)).subscribe({
         next: (response: Direccion[]) => {
           this.direccionSelect = response;
-          this.dir.idDireccion = this.direccionSelect.idDireccion;       
+          this.dir.idDireccion = this.direccionSelect.idDireccion;
           this.dir.nombreCompleto = this.direccionSelect.nombreCompleto;
           this.dir.calleNumero = this.direccionSelect.calleNumero;
           this.dir.codigoPostal = this.direccionSelect.codigoPostal;
-          this.dir.telefono = this.direccionSelect.telefono;        
+          this.dir.telefono = this.direccionSelect.telefono;
+          this.dir.idUser = this.direccionSelect.idUser;
         },
         error: (error) => console.log(error)
       });
@@ -127,12 +129,12 @@ export class GotopayComponent {
       this.objApi.obtenerTarjeta(parseInt(idtarjetaSelect)).subscribe({
         next: (response: Tarjeta[]) => {
           this.tarjetaSelect = response;
-          this.tar.idUser = this.tarjetaSelect.idTarjeta;       
+          this.tar.idUser = this.tarjetaSelect.idTarjeta;
           this.tar.numeroTarjeta = this.tarjetaSelect.numeroTarjeta;
           this.tar.numTarEncryp = this.tarjetaSelect.numTarEncryp;
           this.tar.nombreTarjeta = this.tarjetaSelect.nombreTarjeta;
           this.tar.mesVencimiento = this.tarjetaSelect.mesVencimiento;
-          this.tar.annioVencimiento = this.tarjetaSelect.annioVencimiento;        
+          this.tar.annioVencimiento = this.tarjetaSelect.annioVencimiento;
         },
         error: (error) => console.log(error)
       });
@@ -186,7 +188,7 @@ export class GotopayComponent {
 
   setPedido(){
     const uniqueFolio: string = uuidv4();
-
+    console.log(this.dir)
     let pedido:Pedido = {
       id:0,
       fecha: new Date (),
@@ -202,7 +204,7 @@ export class GotopayComponent {
       next: response => {
         this.pedido = response;
         this.insertDetallePedido(this.pedido.id);
-        console.log(this.pedido)
+        console.log(this.pedido.id)
         console.log('Pedido agregado correctamente');
       },
       error: (e) => console.error(e),
