@@ -23,7 +23,7 @@ export class MenuComponent {
 
   obtenerUsuario(){
     const userData = sessionStorage.getItem('userData');
-    
+
     if (userData) {
       this.usuario = JSON.parse(userData);
       console.log('Usuario: ' + this.usuario.name + ' recuperado');
@@ -39,5 +39,6 @@ export class MenuComponent {
   cerrarSesion(){
     sessionStorage.clear();
     this.router.navigate(['/home']);
+    window.location.reload();
   }
 }
