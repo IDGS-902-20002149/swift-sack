@@ -9,6 +9,9 @@
           <input [(ngModel)]="listFilter" class="form-control" name="filter" type="text">
         </div>
       </div>
+      <div class="d-flex justify-content-end">
+        <button mat-flat-button color="primary" [routerLink]="['/AgregarProd']" >Nuevo Producto</button>
+      </div>
       <div class="row">
         <div class="col-md-6">
           <h3>Filtro: {{listFilter}} </h3>

@@ -24,7 +24,9 @@ export class LoginComponent {
         console.log('Datos del usuario almacenados en sessionStorage:', response);
         // Redirigir al contenido del sistema
         this.router.navigate(['/home']);
-        window.location.reload();
+        setTimeout(function() {
+          window.location.reload();
+        }, 2);
       },
       (error) => {
         console.error('Error de autenticación:', error);

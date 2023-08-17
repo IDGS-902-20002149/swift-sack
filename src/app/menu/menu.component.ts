@@ -39,6 +39,8 @@ export class MenuComponent {
   cerrarSesion(){
     sessionStorage.clear();
     this.router.navigate(['/home']);
-    window.location.reload();
+    setTimeout(function() {
+      window.location.reload();
+    }, 2);
   }
 }
