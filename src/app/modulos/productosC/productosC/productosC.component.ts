@@ -8,7 +8,7 @@ import { ProyectoApiService } from 'src/app/proyecto-api.service';
   styleUrls: ['./productosC.component.css']
 })
 export class ProductosCComponent {
-  productos:ProductoSS[] = []
+  productos:ProductoSS[] = [];
 
   constructor(public objApi:ProyectoApiService){}
 
@@ -24,6 +24,7 @@ export class ProductosCComponent {
   }
 
   ngOnInit(): void {
+
     this.cargarProductos();
   }
 }

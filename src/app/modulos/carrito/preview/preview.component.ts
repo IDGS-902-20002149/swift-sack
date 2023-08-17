@@ -1,4 +1,5 @@
 import { Component, ChangeDetectorRef  } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductoSS } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
@@ -25,7 +26,7 @@ export class PreviewComponent {
   carrito: any = [];
   items:ProductoSS[] = []
 
-  constructor(public objApi: ProyectoApiService, private cdr: ChangeDetectorRef) {}
+  constructor(public objApi: ProyectoApiService, private router: Router) {}
 
   getCarrito() {
     this.objApi.getCarritoUser(this.usuario.id).subscribe({
@@ -91,5 +92,8 @@ export class PreviewComponent {
 
   ngOnInit(): void {
     this.obtenerUsuario();
+    if(this.usuario.roleId != 3){
+      this.router.navigate(['/home']);
+    }
   }
 }

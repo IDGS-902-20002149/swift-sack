@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Pedido } from 'src/app/interfaces/pedido';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
@@ -22,7 +23,7 @@ export class PedidosMainCComponent {
     roleId: 0,
   };
 
-  constructor(public objApi:ProyectoApiService){}
+  constructor(public objApi:ProyectoApiService, private router:Router){}
 
   obtenerMisPedidos(){
     this.objApi.getMisPedidos(this.usuario.id).subscribe({
@@ -46,6 +47,9 @@ export class PedidosMainCComponent {
 
   ngOnInit(): void {
     this.obtenerUsuario();
+    if(this.usuario.roleId != 3){
+      this.router.navigate(['/home']);
+    }	
     this.obtenerMisPedidos();
   }
 

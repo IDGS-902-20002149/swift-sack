@@ -23,7 +23,7 @@ export class LoginComponent {
         sessionStorage.setItem('userData', JSON.stringify(response));
         console.log('Datos del usuario almacenados en sessionStorage:', response);
         // Redirigir al contenido del sistema
-        this.router.navigate(['/modificar']);
+        this.router.navigate(['/home']);
       },
       (error) => {
         console.error('Error de autenticación:', error);

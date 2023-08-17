@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MateriaPSS, ProveedorSS } from 'src/app/interfaces/swiftsack';
+import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
 
 @Component({
@@ -20,6 +21,17 @@ export class AgregarMPComponent implements OnInit {
     costo: 0,
     idProveedor: 0,
     estatus: true
+  };
+
+  usuario:UsuarioMod = {
+    id: 0,
+    name: '0',
+    email: '0',
+    password: '0',
+    telefono: '0',
+    active: false,
+    confirmed_at: '0',
+    roleId: 0,
   };
 
   constructor(private materiapss: ProyectoApiService, private router: Router, private proveedoress: ProyectoApiService) { }
@@ -58,7 +70,22 @@ export class AgregarMPComponent implements OnInit {
     );
   }
 
+  obtenerUsuario(){
+    const userData = sessionStorage.getItem('userData');
+    
+    if (userData) {
+      this.usuario = JSON.parse(userData);
+      console.log('Usuario: ' + this.usuario.name + ' recuperado');
+    } else {
+      console.log('El objeto no fue encontrado en sessionStorage.');
+    }
+  }
+
   ngOnInit(): void {
+    this.obtenerUsuario();
+    if(this.usuario.roleId != 1 && this.usuario.roleId != 2){
+      this.router.navigate(['/home']);
+    }
     this.obtenerProveedores();
   }
 

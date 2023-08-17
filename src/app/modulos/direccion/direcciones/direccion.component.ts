@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Direccion } from 'src/app/interfaces/direccion';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
@@ -12,7 +13,7 @@ export class DireccionComponent {
   listFilter:string=''
   direcciones:Direccion[]=[];
 
-  constructor(public dir:ProyectoApiService){}
+  constructor(public dir:ProyectoApiService, private router: Router){}
 
   usuario:UsuarioMod = {
     id: 0,
@@ -63,6 +64,9 @@ export class DireccionComponent {
 
   ngOnInit(): void {
     this.obtenerUsuario();
+    if(this.usuario.roleId != 3){
+      this.router.navigate(['/home']);
+    }	
     this.actualizarTabla();
   }
 }

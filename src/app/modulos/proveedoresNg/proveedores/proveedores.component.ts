@@ -1,6 +1,8 @@
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
 import { Component, OnInit } from '@angular/core';
 import { ProveedorSS } from 'src/app/interfaces/swiftsack';
+import { UsuarioMod } from 'src/app/interfaces/usuario';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-proveedores',
   templateUrl: './proveedores.component.html',
@@ -15,7 +17,7 @@ export class ProveedoresComponent implements OnInit {
   listFilter:string=''
   alumnoTitle!:string
   dataSource:any=[];
-  constructor(public proveedoress:ProyectoApiService){}
+  constructor(public proveedoress:ProyectoApiService, private router: Router){}
  
   showImage():void{
     this.muestraImg=!this.muestraImg;
@@ -27,7 +29,6 @@ export class ProveedoresComponent implements OnInit {
     return this.dataSource.slice(startIndex, endIndex);
   }
 
-  
   proveedorIric:ProveedorSS[]=[
     {
       id:0,
@@ -42,6 +43,17 @@ export class ProveedoresComponent implements OnInit {
     
   ]
 
+  usuario:UsuarioMod = {
+    id: 0,
+    name: '0',
+    email: '0',
+    password: '0',
+    telefono: '0',
+    active: false,
+    confirmed_at: '0',
+    roleId: 0,
+  };
+
   eliminarProve(id:number){
     
       this.proveedoress.eliminarProveedor(id).subscribe(
@@ -53,7 +65,6 @@ export class ProveedoresComponent implements OnInit {
           console.error('Error al eliminar el proveedor:', error);
         }
       );
-    
   }
  
   onCalificaClick(message:string){
@@ -73,6 +84,21 @@ export class ProveedoresComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerUsuario();
+    if(this.usuario.roleId != 1){
+      this.router.navigate(['/home']);
+    }
     this.actualizarTabla();
-}
+  }
+
+  obtenerUsuario(){
+    const userData = sessionStorage.getItem('userData');
+    
+    if (userData) {
+      this.usuario = JSON.parse(userData);
+      console.log('Usuario: ' + this.usuario.name + ' recuperado');
+    } else {
+      console.log('El objeto no fue encontrado en sessionStorage.');
+    }
+  }
 }
