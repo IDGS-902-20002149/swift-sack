@@ -17,7 +17,7 @@
                         <td class="align-middle">${{item.precio}}</td>
                         <td class="align-middle">
                             <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <input type="text" class="form-control form-control-sm border-0 text-center" value="{{item.cantidad}}">
+                                <input type="text" class="form-control form-control-sm border-0 text-center" value="{{item.cantidad}}" readonly>
                             </div>
                         </td>
                         <td class="align-middle">${{item.subtotal}}</td>
@@ -31,7 +31,7 @@
                 <div class="border-bottom pb-2">
                     <div class="d-flex justify-content-between mb-3">
                         <h6>Subtotal</h6>
-                        <h6>${{subtotal}}</h6>
+                        <h6>${{subtotal.toFixed(2)}}</h6>
                     </div>
                     <div class="d-flex justify-content-between">
                         <h6 class="font-weight-medium">Env&iacute;o</h6>
