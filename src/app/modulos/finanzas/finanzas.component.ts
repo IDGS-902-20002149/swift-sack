@@ -143,6 +143,7 @@ export class FinanzasComponent implements OnInit {
     );
   }
 
+  noDataAvailable: boolean = true;
 
   filtrarDatosPorMes(): void {
     
@@ -200,6 +201,16 @@ export class FinanzasComponent implements OnInit {
       this.productosMenosVendidos.sort((a, b) => b.cantidad - a.cantidad)
       this.productExis.sort((a, b) => b.stock - a.stock)
       this.materiaExist.sort((a, b) => b.cantidad - a.cantidad)
+
+      const isDataAvailable =
+    this.valoresCalculados.length > 0 ||
+    this.productosMasVendidos.length > 0 ||
+    this.productosMenosVendidos.length > 0 ||
+    this.productExis.length > 0 ||
+    this.materiaExist.length > 0 ||
+    this.topClientes.length > 0;
+
+  this.noDataAvailable = !isDataAvailable;
 
       this.ventasMensuales = this.ventasMensuales.filter(item => item.month === selectedMonth);
       this.ventasMensuales.sort((a, b) => b.total_vendido - a.total_vendido)

@@ -5,16 +5,22 @@
   </select>
 </div>
 
+<div class="card text-center" *ngIf="noDataAvailable">
+  <div class="card-body">
+    <p style="color: red;">No hay datos disponibles</p>
+  </div>
+</div>
 
-<h1>Valores Calculados</h1>
+<h1 *ngFor="let valor of valoresCalculados">Valores Calculados</h1>
 <div class="card-container">
+  
   <div class="card text-center" *ngFor="let valor of valoresCalculados">
+   
     <div class="card-header">
       Beneficio Bruto
     </div>
     <div class="card-body">
       $ {{ valor.gross_profit }}
-      {{ valor.fecha }}
     </div>
   </div>
   
@@ -45,9 +51,9 @@
     </div>
   </div>
 </div>
-
+<br><br>
 <div >
-  <div class="cardTable-card text-center">
+  <div class="cardTable-card text-center" *ngIf="topClientes.length > 0">
     <h2>Top 5 clientes</h2>
     <table class="table">
       <thead>
@@ -70,8 +76,8 @@
   </div>
 
 <div class="cardTable">
-  <div class="cardTable-wrapper">
-    <div class="cardTable-card text-center">
+  <div class="cardTable-wrapper" >
+    <div class="cardTable-card text-center" *ngIf="productosMasVendidos.length > 0">
       <h2>Productos Más Vendidos</h2>
       <table class="table table-striped">
         <thead>
@@ -93,7 +99,7 @@
       </table>
     </div>
  
-    <div class="cardTable-card text-center">
+    <div class="cardTable-card text-center" *ngIf="productosMenosVendidos.length > 0">
       <h2>Productos Menos Vendidos</h2>
       <table class="table table-striped">
         <thead>
@@ -120,7 +126,7 @@
 
 
 
-<div class="chart-container">
+<div class="chart-container" *ngIf="ventasMensuales.length > 0">
   <ngx-charts-pie-grid
   [view]="view"
   [scheme]="colorScheme"
@@ -134,7 +140,7 @@
 
 <div class="cardTable">
   <div class="cardTable-wrapper">
-    <div class="cardTable-card text-center">
+    <div class="cardTable-card text-center" *ngIf="productExis.length > 0">
       <h2>Productos Existencias del mes</h2>
       <table class="table table-striped">
         <thead>
@@ -157,7 +163,7 @@
     </div>
     
  
-    <div class="cardTable-card text-center">
+    <div class="cardTable-card text-center" *ngIf="materiaExist.length > 0">
       <h2>Materias Existencias del mes</h2>
       <table class="table table-striped">
         <thead>
