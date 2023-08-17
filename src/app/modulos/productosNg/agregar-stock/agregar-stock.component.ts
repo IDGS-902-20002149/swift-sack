@@ -54,6 +54,7 @@ export class AgregarStockComponent implements OnInit{
   agregarStock(){
       const id = this.regProducto.id
       const stock = this.regProducto.stock
+      console.log(id,stock)
       this.productoss.agregarStock(stock, id).subscribe({
         next: response=>{
             response;
@@ -62,27 +63,7 @@ export class AgregarStockComponent implements OnInit{
             },
             error: error=>console.log(error)
       });
-
   }
-
-  // agregarDetalle(){
-  //   this.regDetalleProducto.id_producto = this.route.snapshot.params['id'];
-  //   this.productoss.agregarDetalle(this.regDetalleProducto).subscribe({
-  //     next: () => {
-  //       console.log('Detalle agregado correctamente');
-  //       this.router.navigate(['/verDetalle',  this.route.snapshot.params['id']]);
-  //     },
-  //     error: (e) => console.error(e),
-  //     complete: () => console.info('Solicitud completada')
-  //   });
-
-  //   this.regDetalleProducto = {
-  //     id: 0,
-  //   id_materia: 0,
-  //   cantidad: 0,
-  //   id_producto: 0
-  //   };
-  // }
 
   ngOnInit(): void {
     this.obtenerUsuario();
@@ -94,7 +75,7 @@ export class AgregarStockComponent implements OnInit{
 
   obtenerUsuario(){
     const userData = sessionStorage.getItem('userData');
-    
+
     if (userData) {
       this.usuario = JSON.parse(userData);
       console.log('Usuario: ' + this.usuario.name + ' recuperado');

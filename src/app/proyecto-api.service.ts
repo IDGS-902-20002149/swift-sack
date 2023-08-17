@@ -15,7 +15,7 @@ import { DetallePedido, Pedido } from './interfaces/pedido';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json' // Cambia este valor según el formato que estés utilizando (p. ej., application/json)
+    'Content-Type': 'application/json' // Cambia este valor segï¿½n el formato que estï¿½s utilizando (p. ej., application/json)
   })
 };
 
@@ -23,7 +23,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ProyectoApiService {
-  
+
   private _proveedoresss:ProveedorSS[]=[
     {
       id:0,
@@ -52,8 +52,8 @@ export class ProyectoApiService {
 
   _direccion:Direccion[]=[
     {
-      idDireccion: 0, 
-      idUser: 0, 
+      idDireccion: 0,
+      idUser: 0,
       nombreCompleto: '',
       calleNumero: '',
       codigoPostal: '',
@@ -62,12 +62,12 @@ export class ProyectoApiService {
   ]
 
   constructor(private http:HttpClient) { }
-  
+
   /*Links de usuarios*/
   public register(usuario: UsuarioRegistro): Observable<any> {
     return this.http.post<any>('https://localhost:7267/api/Auth/register', usuario);
   }
- 
+
   public login(datos:Usuario): Observable<any> {
     return this.http.post<any>('https://localhost:7267/api/Auth/Login', datos);
   }
@@ -182,12 +182,12 @@ export class ProyectoApiService {
   public getTopClientes(): Observable<VentasMensuales[]> {
     return this.http.get<VentasMensuales[]>('https://localhost:7160/api/Finanzas/Top5Clientes');
   }
-  
+
   /* Links de Producto*/
   public getProducto():Observable<ProductoSS[]>{
     return this.http.get<ProductoSS[]>('https://localhost:7267/api/Productos')
   }
-  
+
   agregarProducto(datos:ProductoSS){
     return this.http.post('https://localhost:7267/api/Productos',datos)
   }
@@ -212,7 +212,11 @@ export class ProyectoApiService {
 
   agregarStock(stock: number, id:number) {
     const url = `https://localhost:7267/api/Productos/agregar-stock/${id}`;
-    return this.http.put(url, stock);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.put(url, stock, { headers });
   }
 
   agregarDetalle(datos:DetalleProductoSS){
@@ -232,16 +236,16 @@ export class ProyectoApiService {
   obtenerDetalle(id:number):Observable<DetalleProductoSS[]>{
     return this.http.get<DetalleProductoSS[]>(`https://localhost:7267/api/DetalleProducto/obtener-id/${id}`);
   }
-    
+
   /* Links de Direccion */
   public getDireccion(idUser:number):Observable<Direccion[]>{
     return this.http.get<Direccion[]>(`https://localhost:7267/api/Direccion/obtener-direcciones/${idUser}`)
   }
-  
+
   addDireccion(datos:Direccion){
     return this.http.post('https://localhost:7267/api/Direccion',datos)
   }
-  
+
   editarDireccion(datos: Direccion) {
     const url = `https://localhost:7267/api/Direccion/${datos.idDireccion}`;
     return this.http.put(url, datos);
@@ -264,7 +268,7 @@ export class ProyectoApiService {
   addTarjeta(datos:Tarjeta){
     return this.http.post('https://localhost:7267/api/Tarjeta',datos)
   }
-  
+
   editarTarjeta(datos: Tarjeta) {
     const url = `https://localhost:7267/api/Tarjeta/${datos.idTarjeta}`;
     return this.http.put(url, datos);
@@ -284,7 +288,7 @@ export class ProyectoApiService {
     return this.http.get<MateriaPSS[]>(`https://localhost:7267/api/Compra/${id}`);
   }
 
-  addCompra(datos: Compra):Observable<Compra> {  
+  addCompra(datos: Compra):Observable<Compra> {
     return this.http.post<Compra>('https://localhost:7267/api/Compra',datos);
   }
 
@@ -324,7 +328,7 @@ export class ProyectoApiService {
     return this.http.get<Pedido[]>('https://localhost:7267/api/Pedido')
   }
 
-  addPedido(datos: Pedido):Observable<Pedido> {  
+  addPedido(datos: Pedido):Observable<Pedido> {
     return this.http.post<Pedido>('https://localhost:7267/api/Pedido',datos);
   }
 

@@ -67,7 +67,9 @@ export class ProductosCComponent {
   ngOnInit(): void {
     this.obtenerUsuario();
     if(this.usuario.roleId != 3){
-      this.router.navigate(['/home']);
+    this.cargarProductos();
+
+      // this.router.navigate(['/home']);
     }
     this.cargarProductos();
   }
