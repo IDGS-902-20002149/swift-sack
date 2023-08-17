@@ -12,14 +12,14 @@
         </mat-form-field>
         <mat-form-field class="example-full-width form-group">
             <mat-label>C&oacute;digo Postal</mat-label>
-            <input name="codigoPostal" matInput placeholder="12345" [(ngModel)]="dir.codigoPostal" required maxlength="5">
+            <input name="codigoPostal" matInput placeholder="12345" [(ngModel)]="dir.codigoPostal" pattern="[0-9]*" required maxlength="5">
         </mat-form-field>
         <mat-form-field class="example-full-width form-group">
             <mat-label>Tel&eacute;fono</mat-label>
-            <input name="telefono" matInput placeholder="4771234567" [(ngModel)]="dir.telefono" required maxlength="10">
+            <input name="telefono" matInput placeholder="4771234567" [(ngModel)]="dir.telefono" pattern="[0-9]*" required maxlength="10">
         </mat-form-field>
         <div class="d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary">Guardar Direcci&oacute;n</button>
+            <button mat-raised-button color="primary">Agregar</button>
         </div>
     </form>
   </div>

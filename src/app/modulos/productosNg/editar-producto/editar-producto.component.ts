@@ -107,15 +107,19 @@ export class EditarProductoComponent implements OnInit {
   }
 
   editar() {
-    this.productoss.editarProducto(this.regProducto).subscribe(
-      () => {
-        console.log('Producto editado correctamente');
-        this.router.navigate(['verProductos']);
-      },
-      error => {
-        console.error('Error al editar el producto:', error);
-      }
-    );
+    if (this.regProducto.costo >= 1) {
+      this.productoss.editarProducto(this.regProducto).subscribe(
+        () => {
+          console.log('Producto editado correctamente');
+          this.router.navigate(['verProductos']);
+        },
+        error => {
+          console.error('Error al editar el producto:', error);
+        }
+      );
+    } else {
+      window.alert('El costo no puede ser negativo.');
+    }
   }
 
   obtenerUsuario(){

@@ -69,17 +69,20 @@ export class AgregarProductoComponent  {
     ) { }
 
   agregar() {
-    console.log(this.regProducto.foto)
-    this.productoss.agregarProducto(this.regProducto).subscribe({
-      next: () => {
-        console.log('Producto agregada correctamente');
-        // Realizar la redirección después de que se complete la solicitud
-        this.router.navigate(['verProductos']);
-      },
-      error: (e) => console.error(e),
-      complete: () => console.info('Solicitud completada')
-    });
-
+    if (this.regProducto.costo >= 1) {
+      this.productoss.agregarProducto(this.regProducto).subscribe({
+        next: () => {
+          console.log('Producto agregada correctamente');
+          // Realizar la redirección después de que se complete la solicitud
+          this.router.navigate(['verProductos']);
+        },
+        error: (e) => console.error(e),
+        complete: () => console.info('Solicitud completada')
+      });
+    } else {
+      window.alert('El costo no puede ser negativo.');
+    }
+      
     this.regProducto = {
       id:0,
       nombre:'',

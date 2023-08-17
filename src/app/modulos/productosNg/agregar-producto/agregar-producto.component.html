@@ -16,7 +16,7 @@
     </mat-form-field>
     <mat-form-field class="example-full-width form-group">
       <mat-label>Tipo de producto</mat-label>
-      <input name="tipo_producto" matInput placeholder="Nombre" [(ngModel)]="regProducto.tipo_producto" required>
+      <input name="tipo_producto" matInput placeholder="Tipo del producto" [(ngModel)]="regProducto.tipo_producto" required>
     </mat-form-field>
     <div class="form-group">
       <label for="foto">Foto </label>
@@ -27,11 +27,9 @@
         <img [src]="fotoPreviewUrl" alt="Foto del producto">
       </div>
     </div>
-    <div class="form-group">
-      <label for="tipo_producto">Tipo de producto </label>
-      <input type="text" name="tipo_producto" [(ngModel)]="regProducto.tipo_producto" id="tipo_producto" class="form-control" placeholder="tipo_producto" required>
+    <div class="d-flex justify-content-center">
+      <button mat-raised-button color="primary" type="submit">Agregar</button>
     </div>
-    <button type="submit" class="btn btn-primary">Agregar</button>
   </form>
 </div>
 
