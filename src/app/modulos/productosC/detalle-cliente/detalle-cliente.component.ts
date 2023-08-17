@@ -47,11 +47,11 @@ export class DetalleClienteComponent {
     this.producto.id = Number(idProducto);
     this.id = Number(idProducto);
     console.log(this.id);
-    
+
     this.objApi.obtenerProducto(this.id).subscribe({
       next: (response: ProductoSS[]) => {
         this.dataSource = response;
-        this.producto.id = this.dataSource.id;         
+        this.producto.id = this.dataSource.id;
         this.producto.nombre = this.dataSource.nombre;
         this.producto.descripcion = this.dataSource.descripcion;
         this.producto.costo = this.dataSource.costo;
@@ -59,6 +59,14 @@ export class DetalleClienteComponent {
         this.producto.tipo_producto = this.dataSource.tipo_producto;
         this.producto.receta = this.dataSource.receta;
         this.producto.stock = this.dataSource.stock;
+
+          if(this.producto.foto){
+            this.producto.foto = `data:image/png;base64,${this.producto.foto}`;
+          }
+          else{
+            this.producto.foto = '../../assets/img/desconocido.png';
+          }
+
       },
       error: (error) => console.log(error)
     });
@@ -93,16 +101,16 @@ export class DetalleClienteComponent {
   }
 
   sumar(){
-    this.cantidad += 1; 
+    this.cantidad += 1;
   }
 
   restar(){
-    this.cantidad -= 1; 
+    this.cantidad -= 1;
   }
 
   obtenerUsuario(){
     const userData = sessionStorage.getItem('userData');
-    
+
     if (userData) {
       this.usuario = JSON.parse(userData);
       console.log('Usuario: ' + this.usuario.name + ' recuperado');

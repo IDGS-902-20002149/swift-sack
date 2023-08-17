@@ -30,7 +30,7 @@ import { DireccionComponent } from './modulos/direccion/direcciones/direccion.co
 import { AgregarDirComponent } from './modulos/direccion/agregar-dir/agregar-dir.component';
 import { EditarDirComponent } from './modulos/direccion/editar-dir/editar-dir.component';
 import { HomeComponent } from './home/home.component';
-import { PreviewComponent } from './modulos/carrito/preview/preview.component'; 
+import { PreviewComponent } from './modulos/carrito/preview/preview.component';
 import { GotopayComponent } from './modulos/carrito/gotopay/gotopay.component';
 import { CompraComponent } from './modulos/compra/compraProveedor/compra.component';
 
@@ -61,8 +61,8 @@ const routes: Routes = [
   {path: 'registrar', component: RegistrarComponent },
   {path: 'PreviewCar', component: PreviewComponent},
   {path: 'GoToPay', component: GotopayComponent},
-  
-  {path: 'EditarDir', component: EditarDirComponent},
+
+  {path: 'EditarDir/:id', component: EditarDirComponent},
   {path: 'verProductos', component: ProductosComponent},
   {path: 'AgregarProd', component: AgregarProductoComponent},
   {path: 'AgregarStock', component: AgregarStockComponent},

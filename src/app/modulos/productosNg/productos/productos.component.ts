@@ -15,7 +15,7 @@ export class ProductosComponent implements OnInit {
   imageWidth:number=50;
   imageMargin:number=2;
   muestraImg:boolean=true;
-  listFilter:string=''
+  listFilter:string='';
   dataSource:any=[];
 
   usuario:UsuarioMod = {

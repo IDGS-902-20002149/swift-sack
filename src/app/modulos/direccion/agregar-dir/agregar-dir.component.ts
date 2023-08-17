@@ -33,6 +33,7 @@ export class AgregarDirComponent {
   constructor(private direccion: ProyectoApiService, private router: Router) { }
 
   agregar() {
+    this.obtenerUsuario();
     this.dir.idUser = this.usuario.id;
     this.direccion.addDireccion(this.dir).subscribe({
       next: () => {

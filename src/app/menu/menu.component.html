@@ -22,14 +22,14 @@
     </mat-toolbar>
     <mat-sidenav-container class="contenido">
       <mat-sidenav style="min-width: 300px;" class="mainburguer" #cajon mode="side" opened>
-        <mat-nav-list>          
+        <mat-nav-list>
           <a *ngIf="usuario.roleId == 0" mat-list-item routerLinkActive="active" routerLink="login">
             <mat-icon color="primary">perm_identity</mat-icon>
             Login
           </a>
           <a *ngIf="usuario.roleId == 0 or usuario.roleId == 1" mat-list-item routerLinkActive="active" routerLink="registrar">
             <mat-icon color="primary">perm_identity</mat-icon>
-            Registrar 
+            Registrar
           </a>
           <a *ngIf="usuario.roleId == 1" mat-list-item routerLinkActive="active" routerLink="finanzas">
             <mat-icon color="primary">perm_identity</mat-icon>
@@ -63,7 +63,7 @@
                     Mi Perfil
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-        
+
                 <mat-nav-list>
                   <a *ngIf="usuario.roleId == 3" mat-list-item routerLinkActive="active" routerLink="verTarjetas">
                     <mat-icon color="primary">credit_card</mat-icon>
@@ -92,7 +92,7 @@
                     Más
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-      
+
                 <mat-nav-list>
                   <a mat-list-item href='#'>
                     Acerca de
@@ -106,7 +106,7 @@
         </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav-content class="padding-10" style="top: 5rem; min-height: 120vh; margin-bottom: 4rem;">
-        
+
           <router-outlet></router-outlet>
 
       </mat-sidenav-content>
