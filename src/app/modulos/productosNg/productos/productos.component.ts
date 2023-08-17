@@ -1,6 +1,8 @@
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
 import { Component, OnInit } from '@angular/core';
 import { ProductoSS } from 'src/app/interfaces/swiftsack';
+import { UsuarioMod } from 'src/app/interfaces/usuario';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-productos',
@@ -16,7 +18,18 @@ export class ProductosComponent implements OnInit {
   listFilter:string='';
   dataSource:any=[];
 
-  constructor(public productos:ProyectoApiService){}
+  usuario:UsuarioMod = {
+    id: 0,
+    name: '0',
+    email: '0',
+    password: '0',
+    telefono: '0',
+    active: false,
+    confirmed_at: '0',
+    roleId: 0,
+  };
+
+  constructor(public productos:ProyectoApiService, private router: Router){}
 
   getCurrentPageItems(): any[] {
     const startIndex = (this.currentPage - 1) * this.pageSize;
@@ -65,7 +78,22 @@ export class ProductosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerUsuario();
+    if(this.usuario.roleId != 1 && this.usuario.roleId != 2){
+      this.router.navigate(['/home']);
+    }
     this.actualizarTabla();
-}
+  }
+
+  obtenerUsuario(){
+    const userData = sessionStorage.getItem('userData');
+    
+    if (userData) {
+      this.usuario = JSON.parse(userData);
+      console.log('Usuario: ' + this.usuario.name + ' recuperado');
+    } else {
+      console.log('El objeto no fue encontrado en sessionStorage.');
+    }
+  }
 
 }

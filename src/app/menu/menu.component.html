@@ -8,12 +8,12 @@
           <img src="../../assets/img/swiftsack_logo_letras.png" height="50px" width="auto"> &nbsp;
         </span>
         <span>
-          <a mat-stroked-button href="">HOME</a>&nbsp;
+          <a *ngIf="usuario.roleId != 1 or usuario.roleId != 2" mat-stroked-button href="">HOME</a>&nbsp;
         </span>
-        <span>
+        <span *ngIf="usuario.roleId != 1 or usuario.roleId != 2">
           <a mat-stroked-button routerLink="verProductosC">PRODUCTOS</a>&nbsp;
         </span>
-        <div style="position: relative; right: -48rem;">
+        <div *ngIf="usuario.roleId == 3" style="position: relative; right: -48rem;">
             <a mat-stroked-button href="" style="padding-right: 0rem;" routerLink="PreviewCar">
               <mat-icon>shopping_cart</mat-icon>
             </a>
@@ -23,19 +23,19 @@
     <mat-sidenav-container class="contenido">
       <mat-sidenav style="min-width: 300px;" class="mainburguer" #cajon mode="side" opened>
         <mat-nav-list>          
-          <a mat-list-item routerLinkActive="active" routerLink="finanzas">
-            <mat-icon color="primary">perm_identity</mat-icon>
-            Finanzas
-          </a>
-          <a mat-list-item routerLinkActive="active" routerLink="login">
+          <a *ngIf="usuario.roleId == 0" mat-list-item routerLinkActive="active" routerLink="login">
             <mat-icon color="primary">perm_identity</mat-icon>
             Login
           </a>
-          <a mat-list-item routerLinkActive="active" routerLink="registrar">
+          <a *ngIf="usuario.roleId == 0 or usuario.roleId == 1" mat-list-item routerLinkActive="active" routerLink="registrar">
             <mat-icon color="primary">perm_identity</mat-icon>
             Registrar 
           </a>
-          <a mat-list-item routerLinkActive="active" routerLink="verProductos">
+          <a *ngIf="usuario.roleId == 1" mat-list-item routerLinkActive="active" routerLink="finanzas">
+            <mat-icon color="primary">perm_identity</mat-icon>
+            Finanzas
+          </a>
+          <a *ngIf="usuario.roleId != 1 or usuario.roleId != 2" mat-list-item routerLinkActive="active" routerLink="verProductos">
             <mat-icon color="primary">perm_identity</mat-icon>
             Ver Productos
           </a>
@@ -43,55 +43,32 @@
             <mat-icon color="accent">add</mat-icon>
             Agregar Producto
           </a>
-          <a mat-list-item routerLinkActive="active" routerLink="Pedidos">
+          <a *ngIf="usuario.roleId == 1 or usuario.roleId == 2" mat-list-item routerLinkActive="active" routerLink="Pedidos">
             <mat-icon color="accent">add</mat-icon>
             Pedidos
           </a>
-          <!-- Acordeon Proveedores start -->
-          <mat-accordion>
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    Proveedores
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-        
-                <mat-nav-list>
-                  <a mat-list-item routerLinkActive="active" routerLink="verProveedores">
-                    <mat-icon color="primary">credit_card</mat-icon>
-                    Ver Proveedores
-                  </a>
-                  <a mat-list-item routerLinkActive="active" routerLink="Agregar">
-                    <mat-icon color="primary">add</mat-icon>
-                    Nuevo Proveedor
-                  </a>
-                </mat-nav-list>
-              </mat-expansion-panel>
-          </mat-accordion>
-          <!-- Acordeon Proveedores end -->
-          <!-- Acordeon Materia Prima start -->
-          <mat-accordion>
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    Materia Prima
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <mat-nav-list>
-                  <a mat-list-item routerLinkActive="active" routerLink="verMateriaPrima">
-                    <mat-icon color="primary">pin_drop</mat-icon>
-                    Ver Materia Prima
-                  </a>
-                  <a mat-list-item routerLinkActive="active" routerLink="AgregarMP">
-                    <mat-icon color="primary">add_location</mat-icon>
-                    Agregar Materia Prima
-                  </a>
-                </mat-nav-list>
-              </mat-expansion-panel>
-          </mat-accordion>
-          <!-- Acordeon Materia Prima end -->
+          <a *ngIf="usuario.roleId == 1 or usuario.roleId == 2" mat-list-item routerLinkActive="active" routerLink="verProveedores">
+            <mat-icon color="primary">credit_card</mat-icon>
+            Ver Proveedores
+          </a>
+          <a mat-list-item routerLinkActive="active" routerLink="Agregar">
+            <mat-icon color="primary">add</mat-icon>
+            Nuevo Proveedor
+          </a>
+          <a *ngIf="usuario.roleId == 1 or usuario.roleId == 2" mat-list-item routerLinkActive="active" routerLink="verMateriaPrima">
+            <mat-icon color="primary">pin_drop</mat-icon>
+            Ver Materia Prima
+          </a>
+          <a mat-list-item routerLinkActive="active" routerLink="AgregarMP">
+            <mat-icon color="primary">add_location</mat-icon>
+            Agregar Materia Prima
+          </a>
+          <a *ngIf="usuario.roleId != 0" mat-list-item routerLinkActive="active" (click)="cerrarSesion()">
+            <mat-icon color="primary">add_location</mat-icon>
+            Cerrar Sesi&oacute;n
+          </a>
           <!-- Acordeon Perfil start -->
-          <mat-accordion>
+          <mat-accordion *ngIf="usuario.roleId != 0">
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   <mat-panel-title>
@@ -100,27 +77,27 @@
                 </mat-expansion-panel-header>
         
                 <mat-nav-list>
-                  <a mat-list-item routerLinkActive="active" routerLink="verTarjetas">
+                  <a *ngIf="usuario.roleId == 3" mat-list-item routerLinkActive="active" routerLink="verTarjetas">
                     <mat-icon color="primary">credit_card</mat-icon>
                     Mis Tarjetas
                   </a>
-                  <a mat-list-item routerLinkActive="active" routerLink="verDirecciones">
+                  <a *ngIf="usuario.roleId == 3" mat-list-item routerLinkActive="active" routerLink="verDirecciones">
                     <mat-icon color="primary">add_location</mat-icon>
                     Mis Direcciones
+                  </a>
+                  <a *ngIf="usuario.roleId == 3" mat-list-item routerLinkActive="active" routerLink="MisPedidos">
+                    <mat-icon color="primary">perm_identity</mat-icon>
+                    Mis Pedidos
                   </a>
                   <a mat-list-item routerLinkActive="active" routerLink="modificar">
                     <mat-icon color="primary">perm_identity</mat-icon>
                     Modificar Perfil
                   </a>
-                  <a mat-list-item routerLinkActive="active" routerLink="MisPedidos">
-                    <mat-icon color="primary">perm_identity</mat-icon>
-                    Mis Pedidos
-                  </a>
                 </mat-nav-list>
               </mat-expansion-panel>
           </mat-accordion>
           <!-- Acordeon Perfil end -->
-          <mat-accordion>
+          <mat-accordion *ngIf="usuario.roleId == 3">
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
                   <mat-panel-title>

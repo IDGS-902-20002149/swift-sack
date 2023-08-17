@@ -45,6 +45,13 @@ export class AgregarDirComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.obtenerUsuario();
+    if(this.usuario.roleId != 3){
+      this.router.navigate(['/home']);
+    }	
+  }
+
   obtenerUsuario() {
     const userData = sessionStorage.getItem('userData');
     if (userData) {

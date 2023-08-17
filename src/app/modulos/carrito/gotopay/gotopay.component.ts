@@ -180,6 +180,9 @@ export class GotopayComponent {
 
   ngOnInit(): void {
     this.obtenerUsuario();
+    if(this.usuario.roleId != 3){
+      this.router.navigate(['/home']);
+    }
     this.getTarjetas();
     this.getDirecciones();
     this.getCarrito();

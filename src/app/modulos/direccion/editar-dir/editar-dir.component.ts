@@ -21,13 +21,28 @@ export class EditarDirComponent implements OnInit {
     telefono: ''
   };
 
+  usuario:UsuarioMod = {
+    id: 0,
+    name: '0',
+    email: '0',
+    password: '0',
+    telefono: '0',
+    active: false,
+    confirmed_at: '0',
+    roleId: 0,
+  };
+
   constructor(
     private direccion: ProyectoApiService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.obtenerUsuario();
+    if(this.usuario.roleId != 3){
+      this.router.navigate(['/home']);
+    }
     this.obtenerIdDireccion();
   }
 
@@ -60,5 +75,16 @@ export class EditarDirComponent implements OnInit {
         console.error('Error al editar la direccion:', error);
       }
     );
+  }
+
+  obtenerUsuario(){
+    const userData = sessionStorage.getItem('userData');
+    
+    if (userData) {
+      this.usuario = JSON.parse(userData);
+      console.log('Usuario: ' + this.usuario.name + ' recuperado');
+    } else {
+      console.log('El objeto no fue encontrado en sessionStorage.');
+    }
   }
 }

@@ -2,6 +2,7 @@ import { ProyectoApiService } from 'src/app/proyecto-api.service';
 import { Component, OnInit } from '@angular/core';
 import { DetalleProductoSS, MateriaPSS, ProductoSS, DetalleCompleto} from 'src/app/interfaces/swiftsack';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsuarioMod } from 'src/app/interfaces/usuario';
 
 @Component({
   selector: 'app-detalle',
@@ -16,6 +17,17 @@ export class DetalleComponent implements OnInit {
   dataSource:any=[];
   dataSource1:any=[];
   id:number=0;
+
+  usuario:UsuarioMod = {
+    id: 0,
+    name: '0',
+    email: '0',
+    password: '0',
+    telefono: '0',
+    active: false,
+    confirmed_at: '0',
+    roleId: 0,
+  };
 
   getCurrentPageItems(): any[] {
     const startIndex = (this.currentPage - 1) * this.pageSize;
@@ -39,11 +51,27 @@ export class DetalleComponent implements OnInit {
   }
   constructor(
     private detalless: ProyectoApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.obtenerUsuario();
+    if(this.usuario.roleId != 1 && this.usuario.roleId != 2){
+      this.router.navigate(['/home']);
+    }
     this.verDetalle();
+  }
+
+  obtenerUsuario(){
+    const userData = sessionStorage.getItem('userData');
+    
+    if (userData) {
+      this.usuario = JSON.parse(userData);
+      console.log('Usuario: ' + this.usuario.name + ' recuperado');
+    } else {
+      console.log('El objeto no fue encontrado en sessionStorage.');
+    }
   }
 
   verDetalle() {

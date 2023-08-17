@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MateriaPSS, DetalleProductoSS, DetalleCompleto } from 'src/app/interfaces/swiftsack';
+import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
 
 @Component({
@@ -22,6 +23,16 @@ export class EditarDetalleComponent implements OnInit{
     estatus: false
   }
 
+  usuario:UsuarioMod = {
+    id: 0,
+    name: '0',
+    email: '0',
+    password: '0',
+    telefono: '0',
+    active: false,
+    confirmed_at: '0',
+    roleId: 0,
+  };
 
   regDetalleProducto: DetalleProductoSS = {
     id: 0,
@@ -86,8 +97,22 @@ obtenerMateria(id: number){
 }
 
   ngOnInit(): void {
-
+    this.obtenerUsuario();
+    if(this.usuario.roleId != 1 && this.usuario.roleId != 2){
+      this.router.navigate(['/home']);
+    }
     this.actualizarTabla();
+  }
+
+  obtenerUsuario(){
+    const userData = sessionStorage.getItem('userData');
+    
+    if (userData) {
+      this.usuario = JSON.parse(userData);
+      console.log('Usuario: ' + this.usuario.name + ' recuperado');
+    } else {
+      console.log('El objeto no fue encontrado en sessionStorage.');
+    }
   }
 
 }

@@ -21,29 +21,21 @@ export class AgregarTarComponent {
     ccv: '',
   };
 
+  usuario:UsuarioMod = {
+    id: 0,
+    name: '0',
+    email: '0',
+    password: '0',
+    telefono: '0',
+    active: false,
+    confirmed_at: '0',
+    roleId: 0,
+  };
+
   constructor(private tarjeta: ProyectoApiService, private router: Router) { }
 
   agregar() {
-    const userData = sessionStorage.getItem('userData');
-    let usuario:UsuarioMod = {
-      id: 0,
-      name: '0',
-      email: '0',
-      password: '0',
-      telefono: '0',
-      active: false,
-      confirmed_at: '0',
-      roleId: 0,
-    };
-
-    if (userData) {
-      usuario = JSON.parse(userData);
-      console.log('Usuario: ' + usuario.name + ' recuperado');
-    } else {
-      console.log('El objeto no fue encontrado en sessionStorage.');
-    }
-
-    this.tar.idUser = usuario.id;
+    this.tar.idUser = this.usuario.id;
     console.log(this.tar);
 
     this.tarjeta.addTarjeta(this.tar).subscribe({
@@ -54,5 +46,23 @@ export class AgregarTarComponent {
       error: (e) => console.error(e),
       complete: () => console.info('Solicitud completada')
     });
+  }
+
+  ngOnInit(): void {
+    this.obtenerUsuario();
+    if(this.usuario.roleId != 3){
+      this.router.navigate(['/home']);
+    }
+  }
+
+  obtenerUsuario(){
+    const userData = sessionStorage.getItem('userData');
+    
+    if (userData) {
+      this.usuario = JSON.parse(userData);
+      console.log('Usuario: ' + this.usuario.name + ' recuperado');
+    } else {
+      console.log('El objeto no fue encontrado en sessionStorage.');
+    }
   }
 }

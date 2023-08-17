@@ -92,9 +92,12 @@ export class DetalleClienteComponent {
     });
   }
 
-  ngOnInit() {
-    this.obtenerIdProducto();
+  ngOnInit(): void {
     this.obtenerUsuario();
+    if(this.usuario.roleId != 3){
+      this.router.navigate(['/home']);
+    }
+    this.obtenerIdProducto();
   }
 
   sumar(){

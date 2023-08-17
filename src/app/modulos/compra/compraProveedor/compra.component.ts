@@ -47,6 +47,17 @@ export class CompraComponent {
     precio:0,
   }
 
+  usuario:UsuarioMod = {
+    id: 0,
+    name: '0',
+    email: '0',
+    password: '0',
+    telefono: '0',
+    active: false,
+    confirmed_at: '0',
+    roleId: 0,
+  };
+
   constructor(
     private materiapss: ProyectoApiService, 
     private proveedoress: ProyectoApiService,
@@ -86,7 +97,22 @@ export class CompraComponent {
   }
   
   ngOnInit(): void {
+    this.obtenerUsuario();
+    if(this.usuario.roleId != 1 && this.usuario.roleId != 2){
+      this.router.navigate(['/home']);
+    }
     this.obtenerProveedores();
+  }
+
+  obtenerUsuario(){
+    const userData = sessionStorage.getItem('userData');
+    
+    if (userData) {
+      this.usuario = JSON.parse(userData);
+      console.log('Usuario: ' + this.usuario.name + ' recuperado');
+    } else {
+      console.log('El objeto no fue encontrado en sessionStorage.');
+    }
   }
   
   setMateriaCompra() {
@@ -113,31 +139,12 @@ export class CompraComponent {
 
 
   insertarCompra() {
-    const userData = sessionStorage.getItem('userData');
-    let usuario:UsuarioMod = {
-      id: 0,
-      name: '0',
-      email: '0',
-      password: '0',
-      telefono: '0',
-      active: false,
-      confirmed_at: '0',
-      roleId: 0,
-    };
-    
-    if (userData) {
-      usuario = JSON.parse(userData);
-      console.log('Usuario: ' + usuario.name + ' recuperado');
-    } else {
-      console.log('El objeto no fue encontrado en sessionStorage.');
-    }
-    
     const uniqueFolio: string = uuidv4();
 
     let compra:Compra = {
       idCompra:0,
       fecha: new Date (),
-      iduser: usuario.id,
+      iduser: this.usuario.id,
       idProveedor: this.regMateriaPss.idProveedor,
       folio: uniqueFolio,
       estatus: 1,
