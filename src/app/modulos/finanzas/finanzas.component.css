@@ -67,15 +67,14 @@ h2, h3, h4, h5, th {
   color: black;
 }
 
-/* Estilos para la gr√°fica */
+/* Estilos para la gr·fica */
 .chart-container {
-  margin-top: 100px;
-  margin-bottom: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 400px; /* Ajusta la altura deseada */
-  width: 80%; /* Ajusta el ancho deseado */
+  width: 100%; 
+  max-width: 1800px;
+  margin: 30px ;
 }
 
 .chart-card {
@@ -110,8 +109,4 @@ h2, h3, h4, h5, th {
   font-size: 16px;
   padding: 5px 10px;
   width: 200px;
-}
-
-ngx-charts-pie-grid{
-  fill: white;
 }

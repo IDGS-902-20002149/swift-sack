@@ -82,8 +82,6 @@ import { PedidosMModule } from './modulos/pedidos/pedidos-m/pedidos-m.module';
     MaterialModule,
     FormsModule,
     HttpClientModule,
-    NgxChartsModule,
-    HttpClientModule,
     TarjetasMModule,
     DireccionMModule,
     CarritoMModule,
@@ -92,6 +90,6 @@ import { PedidosMModule } from './modulos/pedidos/pedidos-m/pedidos-m.module';
     PedidosMModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -35,13 +35,9 @@
             <mat-icon color="primary">perm_identity</mat-icon>
             Finanzas
           </a>
-          <a *ngIf="usuario.roleId != 1 or usuario.roleId != 2" mat-list-item routerLinkActive="active" routerLink="verProductos">
+          <a *ngIf="usuario.roleId == 1 or usuario.roleId == 2" mat-list-item routerLinkActive="active" routerLink="verProductos">
             <mat-icon color="primary">perm_identity</mat-icon>
             Ver Productos
-          </a>
-          <a mat-list-item routerLinkActive="active" routerLink="AgregarProd">
-            <mat-icon color="accent">add</mat-icon>
-            Agregar Producto
           </a>
           <a *ngIf="usuario.roleId == 1 or usuario.roleId == 2" mat-list-item routerLinkActive="active" routerLink="Pedidos">
             <mat-icon color="accent">add</mat-icon>
@@ -51,17 +47,9 @@
             <mat-icon color="primary">credit_card</mat-icon>
             Ver Proveedores
           </a>
-          <a mat-list-item routerLinkActive="active" routerLink="Agregar">
-            <mat-icon color="primary">add</mat-icon>
-            Nuevo Proveedor
-          </a>
           <a *ngIf="usuario.roleId == 1 or usuario.roleId == 2" mat-list-item routerLinkActive="active" routerLink="verMateriaPrima">
             <mat-icon color="primary">pin_drop</mat-icon>
             Ver Materia Prima
-          </a>
-          <a mat-list-item routerLinkActive="active" routerLink="AgregarMP">
-            <mat-icon color="primary">add_location</mat-icon>
-            Agregar Materia Prima
           </a>
           <a *ngIf="usuario.roleId != 0" mat-list-item routerLinkActive="active" (click)="cerrarSesion()">
             <mat-icon color="primary">add_location</mat-icon>

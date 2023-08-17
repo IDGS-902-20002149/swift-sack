@@ -7,6 +7,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { MatExpansionModule } from '@angular/material/expansion';
  
@@ -23,7 +26,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
       MatToolbarModule,
       MatListModule,
       MatIconModule ,
-      MatExpansionModule
+      MatExpansionModule,
+      FormsModule,
+      MatFormFieldModule,
+      MatInputModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA] 
 })

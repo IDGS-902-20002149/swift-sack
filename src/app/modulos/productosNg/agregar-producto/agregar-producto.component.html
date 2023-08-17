@@ -2,25 +2,25 @@
   <h3>Agregar Producto</h3>
   <hr>
   <form (ngSubmit)="agregar()">
-    <div class="form-group">
-      <label for="nombre">Nombre </label>
-      <input type="text" name="nombre" [(ngModel)]="regProducto.nombre" id="nombre" class="form-control" placeholder="Nombre" >
-    </div>
-    <div class="form-group">
-      <label for="descripcion">Descripcion </label>
-      <input type="text" name="descripcion" [(ngModel)]="regProducto.descripcion" class="form-control" placeholder="descripcion" required>
-    </div>
-    <div class="form-group">
-      <label for="costo">Costo </label>
-      <input type="text" name="costo" [(ngModel)]="regProducto.costo" id="costo" class="form-control" placeholder="Costo" required>
-    </div>
+    <mat-form-field class="example-full-width form-group">
+      <mat-label>Nombre</mat-label>
+      <input name="nombre" matInput placeholder="Nombre" [(ngModel)]="regProducto.nombre" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width form-group">
+      <mat-label>Descripcion</mat-label>
+      <input name="descripcion" matInput placeholder="Descripcion" [(ngModel)]="regProducto.descripcion" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width form-group">
+      <mat-label>Costo</mat-label>
+      <input name="costo" type="number" matInput placeholder="Costo" [(ngModel)]="regProducto.costo" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width form-group">
+      <mat-label>Tipo de producto</mat-label>
+      <input name="tipo_producto" matInput placeholder="Nombre" [(ngModel)]="regProducto.tipo_producto" required>
+    </mat-form-field>
     <div class="form-group">
       <label for="foto">Foto </label>
       <input type="text" name="foto" [(ngModel)]="regProducto.foto" id="foto" class="form-control" placeholder="Foto" required>
-    </div>
-    <div class="form-group">
-      <label for="tipo_producto">Tipo de producto </label>
-      <input type="text" name="tipo_producto" [(ngModel)]="regProducto.tipo_producto" id="tipo_producto" class="form-control" placeholder="tipo_producto" required>
     </div>
     <button type="submit" class="btn btn-primary">Agregar</button>
   </form>

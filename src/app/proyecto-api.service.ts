@@ -154,6 +154,7 @@ export class ProyectoApiService {
     return this.http.get<MateriaPSS[]>(`https://localhost:7267/api/MateriaP/${id}`);
   }
 
+  /*Links de finanzas*/
   public getProductosMasVendidos(): Observable<ProductoMasVendido[]> {
     return this.http.get<ProductoMasVendido[]>('https://localhost:7160/api/Finanzas/MasVta');
   }
@@ -170,11 +171,23 @@ export class ProyectoApiService {
     return this.http.get<VentasMensuales[]>('https://localhost:7160/api/Finanzas/VtaMes');
   }
 
+  public getProductosExistentes(): Observable<ProductoMenosVendido[]> {
+    return this.http.get<ProductoMenosVendido[]>('https://localhost:7160/api/Finanzas/ProductosEx');
+  }
+
+  public getMateriaExistentes(): Observable<ValorCalculado[]> {
+    return this.http.get<ValorCalculado[]>('https://localhost:7160/api/Finanzas/Materia');
+  }
+
+  public getTopClientes(): Observable<VentasMensuales[]> {
+    return this.http.get<VentasMensuales[]>('https://localhost:7160/api/Finanzas/Top5Clientes');
+  }
+  
+  /* Links de Producto*/
   public getProducto():Observable<ProductoSS[]>{
     return this.http.get<ProductoSS[]>('https://localhost:7267/api/Productos')
   }
   
-  /* Links de Producto*/
   agregarProducto(datos:ProductoSS){
     return this.http.post('https://localhost:7267/api/Productos',datos)
   }

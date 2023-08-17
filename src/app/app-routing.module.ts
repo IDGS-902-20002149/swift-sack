@@ -5,7 +5,6 @@ import { LoginComponent } from './modulos/loginNG/login/login.component'; // Aju
 import { ModificarComponent } from './modulos/usuarioNG/modificar/modificar.component'; // Importa el componente de modificación
 import { RegistrarComponent } from './modulos/usuarioNG/registrar/registrar.component'; // Importa el componente de modificación
 
-
 import { FinanzasComponent } from './modulos/finanzas/finanzas.component';
 
 import { ProductosComponent } from './modulos/productosNg/productos/productos.component';
