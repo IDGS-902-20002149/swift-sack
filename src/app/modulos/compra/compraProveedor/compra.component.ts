@@ -16,6 +16,11 @@ export class CompraComponent {
   dataSource:any = [];
   total:number= 0;
   idCompra:number = 0;
+  tipoCompra:string="mayoreo";
+  tipoConversion:string="";
+  cantUnitMay:number=0;
+  cantContenido:number=0;
+  precioMay:number=0;
 
   proveedores: ProveedorSS[] = [];
   materias: MateriaPSS[] = [];
@@ -33,7 +38,7 @@ export class CompraComponent {
     id: 0,
     nombre: '',
     cantidad: 0,
-    unidad_medida: '',
+    unidadMedida: '',
     costo: 0,
     idProveedor: 0,
     estatus: true
@@ -80,6 +85,7 @@ export class CompraComponent {
       {
         next: response => {
           this.materias = response;
+          
         },
         error: error => console.log(error)
       }
@@ -91,44 +97,64 @@ export class CompraComponent {
   
     if (materiaEncontrada) {
       this.regMateriaPss.nombre = materiaEncontrada.nombre;
+       // Asignar la unidad de medida
+      this.regMateriaPss.unidadMedida = materiaEncontrada.unidadMedida;
+    console.log(this.regMateriaPss.unidadMedida);
+      console.log(this.regMateriaPss.unidadMedida);
     } else {
-      console.log(`No se encontr� una materia con id ${idMateria}`);
+      console.log(`No se encontr� una materia con id ${idMateria}`);
     }
   }
   
   ngOnInit(): void {
-    this.obtenerUsuario();
-    if(this.usuario.roleId != 1 && this.usuario.roleId != 2){
-      this.router.navigate(['/home']);
-    }
+
     this.obtenerProveedores();
   }
 
-  obtenerUsuario(){
-    const userData = sessionStorage.getItem('userData');
-    
-    if (userData) {
-      this.usuario = JSON.parse(userData);
-      console.log('Usuario: ' + this.usuario.name + ' recuperado');
-    } else {
-      console.log('El objeto no fue encontrado en sessionStorage.');
-    }
-  }
-  
   setMateriaCompra() {
-    const newRowData = {
+    if (this.tipoCompra === 'mayoreo') {
+      // Realizar cálculos específicos para el tipo de compra "mayoreo"
+      this.calcularCostoMayoreo();
+    } else {
+      // Realizar cálculos para otros tipos de compra
+      const newRowData = {
         nombre: this.regMateriaPss.nombre,
         cantidad: this.setMateria.cantidad,
+        unidadMedida: this.regMateriaPss.unidadMedida,
         precio: this.setMateria.precio,
         subtotal: this.setMateria.precio * this.setMateria.cantidad
-    };
+      };
+      this.dataSource.push(newRowData);
+      // Calcular total para otros tipos de compra
+      this.calcularTotal();
+    }
 
-    this.dataSource.push(newRowData);
-
-    this.calcularTotal();
     this.setMateria.idProducto = this.regMateriaPss.id;
     this.setMaterias.push(this.setMateria);
     console.log(this.setMaterias);
+  }
+
+  calcularCostoMayoreo() {
+    if (this.cantUnitMay && this.cantContenido && this.precioMay) {
+      const cantidadFinal = this.cantUnitMay * this.cantContenido;
+
+      // Calcular el costo total
+      const costoTotal = this.precioMay * this.cantUnitMay;
+
+      // Calcular el costo por unidad (por metro)
+      const costoPorUnidad =  costoTotal/cantidadFinal;
+
+      const newRowData = {
+        nombre: this.regMateriaPss.nombre,
+        cantidad: cantidadFinal,
+        unidadMedida: this.regMateriaPss.unidadMedida,
+        precio: costoPorUnidad,
+        subtotal: costoTotal,
+       
+      };
+
+      this.dataSource.push(newRowData);
+    }
   }
 
   calcularTotal(){
@@ -140,7 +166,7 @@ export class CompraComponent {
 
   insertarCompra() {
     const uniqueFolio: string = uuidv4();
-
+    console.log(this.regMateriaPss.unidadMedida);
     let compra:Compra = {
       idCompra:0,
       fecha: new Date (),
