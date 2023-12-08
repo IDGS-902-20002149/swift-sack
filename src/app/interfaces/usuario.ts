@@ -21,4 +21,5 @@ export interface UsuarioRegistro {
   telefono: string;
   active: boolean;
   confirmed_at: string;
+  roleId: number;
 }
