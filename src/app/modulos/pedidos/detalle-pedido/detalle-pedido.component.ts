@@ -4,6 +4,7 @@ import { Direccion } from 'src/app/interfaces/direccion';
 import { Pedido } from 'src/app/interfaces/pedido';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detalle-pedido',
@@ -130,15 +131,27 @@ export class DetallePedidoComponent {
     }
   }
 
-  actualizarEstatus(estatus:number){
+  actualizarEstatus(estatus: number) {
     console.log(this.pedido);
     this.pedido.estatus = estatus;
     this.objApi.actualizarPedido(this.pedido).subscribe(
       () => {
         this.ngOnInit();
+        Swal.fire({
+          title: 'Éxito',
+          text: 'Estatus actualizado correctamente',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
       },
       error => {
-        console.error('Error al editar la tarjeta:', error);
+        console.error('Error al editar el pedido:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'Error al actualizar el estatus del pedido. Consulte la consola para más detalles.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       }
     );
   }

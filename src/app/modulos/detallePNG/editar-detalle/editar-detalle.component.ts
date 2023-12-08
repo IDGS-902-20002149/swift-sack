@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MateriaPSS, DetalleProductoSS, DetalleCompleto } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-detalle',
@@ -51,14 +52,29 @@ export class EditarDetalleComponent implements OnInit{
     editar() {
       this.materiaPss.editarDetalle(this.regDetalleProducto).subscribe(
         () => {
-          console.log('Detalle editado correctamente');
-          this.router.navigate(['/verDetalle',  this.regDetalleProducto.id_producto]);
+          // Mostrar SweetAlert de éxito
+          Swal.fire({
+            icon: 'success',
+            title: 'Detalle editado correctamente',
+            text: 'El detalle del producto se ha editado correctamente.',
+          });
+    
+          // Redirigir a la vista de detalles
+          this.router.navigate(['/verDetalle', this.regDetalleProducto.id_producto]);
         },
-        error => {
+        (error) => {
           console.error('Error al editar el detalle del producto:', error);
+    
+          // Mostrar SweetAlert de error
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al editar el detalle del producto',
+            text: 'Hubo un problema al editar el detalle del producto. Inténtalo de nuevo.',
+          });
         }
       );
     }
+    
 
   actualizarTabla(){
     const idP = this.route.snapshot.params['id'];

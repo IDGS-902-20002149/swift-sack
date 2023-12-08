@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Tarjeta } from 'src/app/interfaces/tarjeta';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agregar-tar',
@@ -41,9 +42,29 @@ export class AgregarTarComponent {
     this.tarjeta.addTarjeta(this.tar).subscribe({
       next: () => {
         console.log('Tarjeta agregada correctamente');
-        this.router.navigate(['verTarjetas']);
+
+        // SweetAlert para notificar que la tarjeta se agregó correctamente
+        Swal.fire({
+          icon: 'success',
+          title: 'Tarjeta agregada',
+          text: 'La tarjeta se ha agregado correctamente.',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          // Redireccionar después de cerrar SweetAlert
+          this.router.navigate(['verTarjetas']);
+        });
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+        console.error(e);
+
+        // SweetAlert para mostrar mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al agregar tarjeta',
+          text: 'Hubo un problema al agregar la tarjeta. Inténtalo de nuevo.',
+          confirmButtonText: 'OK'
+        });
+      },
       complete: () => console.info('Solicitud completada')
     });
   }

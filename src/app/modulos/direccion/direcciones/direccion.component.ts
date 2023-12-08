@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Direccion } from 'src/app/interfaces/direccion';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-direccion',
@@ -26,19 +27,32 @@ export class DireccionComponent {
     roleId: 0,
   };
 
-  eliminarDireccion(id:number){
-
-      this.dir.eliminarDireccion(id).subscribe(
-        () => {
-          console.log('Direccion eliminada correctamente');
-          this.actualizarTabla();
-        },
-        error => {
-          console.error('Error al eliminar direccion', error);
-        }
-      );
-
+  eliminarDireccion(id: number) {
+    this.dir.eliminarDireccion(id).subscribe(
+      () => {
+        // Mostrar SweetAlert de éxito
+        Swal.fire({
+          icon: 'success',
+          title: 'Dirección eliminada correctamente',
+          text: 'La dirección se ha eliminado correctamente.',
+        });
+  
+        // Actualizar la tabla después de la eliminación
+        this.actualizarTabla();
+      },
+      error => {
+        console.error('Error al eliminar dirección', error);
+  
+        // Mostrar SweetAlert de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al eliminar dirección',
+          text: 'Hubo un problema al eliminar la dirección. Inténtalo de nuevo.',
+        });
+      }
+    );
   }
+  
 
   actualizarTabla(){
     console.log(this.usuario.id)

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MateriaPSS, ProveedorSS } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar',
@@ -97,10 +98,23 @@ export class EditarMPComponent implements OnInit {
     this.materiaPss.editarMateria(this.regMateriaP).subscribe(
       () => {
         console.log('Materia Prima editado correctamente');
-        this.router.navigate(['verMateriaPrima']);
+        Swal.fire({
+          title: 'Éxito',
+          text: 'Materia prima editada correctamente',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          this.router.navigate(['verMateriaPrima']);
+        });
       },
       error => {
         console.error('Error al editar la materia prima:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'Error al editar la materia prima. Consulte la consola para más detalles.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       }
     );
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modificar',
@@ -49,9 +50,24 @@ export class ModificarComponent implements OnInit {
           // Redirigir a la página de inicio o a donde sea necesario
           this.router.navigate(['/verProveedores']); // Cambia '/nueva-pagina' por la ruta que desees
 
+          // SweetAlert para mostrar mensaje de éxito
+          Swal.fire({
+            icon: 'success',
+            title: 'Perfil actualizado',
+            text: 'Tu perfil se ha actualizado correctamente.',
+            confirmButtonText: 'OK',
+          });
         },
         (error) => {
           console.error('Error al actualizar el perfil:', error);
+
+          // SweetAlert para mostrar mensaje de error
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al actualizar perfil',
+            text: 'Hubo un problema al actualizar tu perfil. Inténtalo de nuevo.',
+            confirmButtonText: 'OK',
+          });
         }
       );
     }

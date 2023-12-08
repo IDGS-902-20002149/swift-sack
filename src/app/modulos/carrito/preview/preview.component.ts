@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ProductoSS } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-preview',
@@ -49,16 +50,30 @@ export class PreviewComponent {
   }
 
   eliminarItem(id: number) {
-    this.objApi.eliminarItem(id).subscribe(
-      () => {
-        console.log('Elemento eliminado correctamente');
-        this.ngOnInit();
-      },
-      (error) => {
-        console.error('Error al eliminar direccion', error);
-      }
-    );
-  }
+  this.objApi.eliminarItem(id).subscribe(
+    () => {
+      console.log('Elemento eliminado correctamente');
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Elemento eliminado',
+        text: '¡El elemento se ha eliminado correctamente!',
+      });
+
+      this.ngOnInit();  
+    },
+    (error) => {
+      console.error('Error al eliminar elemento', error);
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al eliminar elemento',
+        text: 'Hubo un problema al eliminar el elemento. Inténtalo de nuevo.',
+      });
+    }
+  );
+}
+
 
   obtenerUsuario() {
     const userData = sessionStorage.getItem('userData');
@@ -92,8 +107,16 @@ export class PreviewComponent {
 
   ngOnInit(): void {
     this.obtenerUsuario();
-    if(this.usuario.roleId != 3){
+    if (this.usuario.roleId != 3) {
       this.router.navigate(['/home']);
+    } else {
+      // Mostrar SweetAlert de advertencia si no se encuentra el usuario
+      Swal.fire({
+        icon: 'warning',
+        title: 'Usuario no encontrado',
+        text: 'No se ha encontrado información del usuario. Por favor, inicia sesión nuevamente.',
+      });
     }
   }
+  
 }

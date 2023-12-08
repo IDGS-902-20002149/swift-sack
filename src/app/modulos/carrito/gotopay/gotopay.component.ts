@@ -8,6 +8,8 @@ import { Tarjeta } from 'src/app/interfaces/tarjeta';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
 import { v4 as uuidv4 } from 'uuid';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-gotopay',
@@ -209,6 +211,12 @@ export class GotopayComponent {
         this.insertDetallePedido(this.pedido.id);
         console.log(this.pedido.id)
         console.log('Pedido agregado correctamente');
+        // Mostrar SweetAlert de éxito
+      Swal.fire({
+        icon: 'success',
+        title: 'Pedido completado',
+        text: '¡Tu pedido ha sido realizado con éxito!',
+      });
       },
       error: (e) => console.error(e),
       complete: () => console.info('Pedido completado')
@@ -223,11 +231,25 @@ export class GotopayComponent {
         next: () => {
           console.log('Detalle de compra agregado correctamente');
         },
-        error: (e) => console.error(e),
+        error: (e) => {
+          console.error(e);
+          // Mostrar SweetAlert de error
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al agregar detalle de compra',
+            text: 'Hubo un problema al agregar el detalle de compra. Inténtalo de nuevo.',
+          });
+        },
         complete: () => console.info('Solicitud completada')
       });
     });
     console.log('Detalles de pedido agregados correctamente');
+    // Mostrar SweetAlert de éxito
+  Swal.fire({
+    icon: 'success',
+    title: 'Detalles de pedido agregados',
+    text: '¡Los detalles de tu pedido se han agregado correctamente!',
+  });
     this.limpiarCarrito(this.usuario.id);
     this.router.navigate(['MisPedidos']);
   }
@@ -236,9 +258,19 @@ export class GotopayComponent {
     this.objApi.eliminarItemsByUser(id).subscribe(
       () => {
         console.log('Direccion eliminada correctamente');
+        Swal.fire({
+          icon: 'success',
+          title: 'Carrito limpiado',
+          text: '¡El carrito se ha limpiado correctamente!',
+        });
       },
       (error) => {
         console.error('Error al eliminar direccion', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al limpiar carrito',
+          text: 'Hubo un problema al limpiar el carrito. Inténtalo de nuevo.',
+        });
       }
     );
   }

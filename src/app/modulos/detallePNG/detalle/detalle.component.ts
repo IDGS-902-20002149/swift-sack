@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DetalleProductoSS, MateriaPSS, ProductoSS, DetalleCompleto} from 'src/app/interfaces/swiftsack';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detalle',
@@ -35,20 +36,33 @@ export class DetalleComponent implements OnInit {
     return this.detalleCompletoList.slice(startIndex, endIndex);
   }
 
-  eliminarProducto(id:number){
-
-      this.detalless.eliminarDetalle(id).subscribe(
-        () => {
-          console.log('Detalle de producto eliminado correctamente');
-          this.detalleCompletoList = [];
-          this.verDetalle();
-        },
-        error => {
-          console.error('Error al eliminar el deyalle del producto:', error);
-        }
-      );
-
+  eliminarProducto(id: number) {
+    this.detalless.eliminarDetalle(id).subscribe(
+      () => {
+        // Mostrar SweetAlert de éxito
+        Swal.fire({
+          icon: 'success',
+          title: 'Detalle de producto eliminado correctamente',
+          text: 'El detalle de producto se ha eliminado correctamente.',
+        });
+  
+        // Limpiar la lista y volver a cargar los detalles
+        this.detalleCompletoList = [];
+        this.verDetalle();
+      },
+      (error) => {
+        console.error('Error al eliminar el detalle del producto:', error);
+  
+        // Mostrar SweetAlert de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al eliminar el detalle del producto',
+          text: 'Hubo un problema al eliminar el detalle del producto. Inténtalo de nuevo.',
+        });
+      }
+    );
   }
+  
   constructor(
     private detalless: ProyectoApiService,
     private route: ActivatedRoute,

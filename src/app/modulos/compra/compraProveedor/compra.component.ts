@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { Router } from '@angular/router';
 import { v4 as uuidv4 } from 'uuid';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-compra',
@@ -167,43 +169,75 @@ export class CompraComponent {
   insertarCompra() {
     const uniqueFolio: string = uuidv4();
     console.log(this.regMateriaPss.unidadMedida);
-    let compra:Compra = {
-      idCompra:0,
-      fecha: new Date (),
+    let compra: Compra = {
+      idCompra: 0,
+      fecha: new Date(),
       iduser: this.usuario.id,
       idProveedor: this.regMateriaPss.idProveedor,
       folio: uniqueFolio,
       estatus: 1,
     };
-
-    this.materiapss.addCompra(compra).subscribe(
-      {
-        next: response => {
-          this.compra = response;
-          this.insertDetalle(this.compra.idCompra);
-          console.log('Orden de compra agregada correctamente');
-        },
-        error: (e) => console.error(e),
-        complete: () => console.info('Compra completada')
-      });
-
+  
+    this.materiapss.addCompra(compra).subscribe({
+      next: (response) => {
+        this.compra = response;
+  
+        Swal.fire({
+          icon: 'success',
+          title: 'Orden de compra agregada',
+          text: 'La orden de compra se ha agregado correctamente.',
+        });
+  
+        this.insertDetalle(this.compra.idCompra);
+        console.log('Orden de compra agregada correctamente');
+      },
+      error: (e) => {
+        console.error(e);
+  
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al agregar orden de compra',
+          text: 'Hubo un problema al agregar la orden de compra. Inténtalo de nuevo.',
+        });
+      },
+    });
   }
+  
 
   insertDetalle(idCompra: number) {
-    this.setMaterias.forEach(element => {
+    this.setMaterias.forEach((element) => {
       element.idCompra = idCompra;
       console.log(element);
       this.materiapss.addDetalleCompra(element).subscribe({
         next: () => {
           console.log('Detalle de compra agregado correctamente');
         },
-        error: (e) => console.error(e),
-        complete: () => console.info('Solicitud completada')
+        error: (e) => {
+          console.error(e);
+  
+          // Mostrar SweetAlert de error
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al agregar detalle de compra',
+            text: 'Hubo un problema al agregar el detalle de compra. Inténtalo de nuevo.',
+          });
+        },
+        complete: () => {
+          // Mostrar SweetAlert de éxito al completar la solicitud
+          Swal.fire({
+            icon: 'success',
+            title: 'Detalles de compra agregados',
+            text: 'Los detalles de la compra se han agregado correctamente.',
+          });
+  
+          // Redirigir después de completar la operación
+          this.router.navigate(['verMateriaPrima']);
+        },
       });
     });
     console.log('Detalles de compra agregados correctamente');
-    this.router.navigate(['verMateriaPrima']);
-}
+  }
+  
 
 
 }

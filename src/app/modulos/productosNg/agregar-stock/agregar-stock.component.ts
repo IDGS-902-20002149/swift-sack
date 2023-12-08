@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProductoSS  } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agregar-stock',
@@ -51,18 +52,36 @@ export class AgregarStockComponent implements OnInit{
     );
   }
 
-  agregarStock(){
-      const id = this.regProducto.id
-      const stock = this.regProducto.stock
-      this.productoss.agregarStock(stock, id).subscribe({
-        next: response=>{
-            response;
-            console.log(response)
-            this.router.navigate(['verProductos']);
-            },
-            error: error=>console.log(error)
-      });
+  agregarStock() {
+    const id = this.regProducto.id;
+    const stock = this.regProducto.stock;
 
+    this.productoss.agregarStock(stock, id).subscribe({
+      next: response => {
+        console.log(response);
+
+        // SweetAlert para notificar que el stock se agregó correctamente
+        Swal.fire({
+          icon: 'success',
+          title: 'Stock agregado',
+          text: 'El stock se ha agregado correctamente.',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          this.router.navigate(['verProductos']);
+        });
+      },
+      error: error => {
+        console.log(error);
+
+        // SweetAlert para mostrar mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al agregar stock',
+          text: 'Hubo un problema al agregar el stock. Inténtalo de nuevo.',
+          confirmButtonText: 'OK'
+        });
+      }
+    });
   }
 
   // agregarDetalle(){

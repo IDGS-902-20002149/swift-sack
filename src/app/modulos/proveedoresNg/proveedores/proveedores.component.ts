@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProveedorSS } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-proveedores',
   templateUrl: './proveedores.component.html',
@@ -54,17 +56,34 @@ export class ProveedoresComponent implements OnInit {
     roleId: 0,
   };
 
-  eliminarProve(id:number){
-    
-      this.proveedoress.eliminarProveedor(id).subscribe(
-        () => {
-          console.log('Proveedor eliminado correctamente');
+  eliminarProve(id: number) {
+    this.proveedoress.eliminarProveedor(id).subscribe(
+      () => {
+        console.log('Proveedor eliminado correctamente');
+
+        // SweetAlert para notificar que el proveedor se eliminó correctamente
+        Swal.fire({
+          icon: 'success',
+          title: 'Proveedor eliminado',
+          text: 'El proveedor se ha eliminado correctamente.',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          // Actualizar la tabla después de cerrar SweetAlert
           this.actualizarTabla();
-        },
-        error => {
-          console.error('Error al eliminar el proveedor:', error);
-        }
-      );
+        });
+      },
+      error => {
+        console.error('Error al eliminar el proveedor:', error);
+
+        // SweetAlert para mostrar mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al eliminar proveedor',
+          text: 'Hubo un problema al eliminar el proveedor. Inténtalo de nuevo.',
+          confirmButtonText: 'OK'
+        });
+      }
+    );
   }
  
   onCalificaClick(message:string){

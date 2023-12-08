@@ -3,6 +3,8 @@ import { ProyectoApiService } from 'src/app/proyecto-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProveedorSS } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-editar',
   templateUrl: './editar.component.html',
@@ -81,10 +83,28 @@ export class EditarComponent implements OnInit {
     this.proveedorss.editarProveedor(this.regProveedor).subscribe(
       () => {
         console.log('Proveedor editado correctamente');
-        this.router.navigate(['verProveedores']);
+
+        // SweetAlert para notificar que el proveedor se editó correctamente
+        Swal.fire({
+          icon: 'success',
+          title: 'Proveedor editado',
+          text: 'El proveedor se ha editado correctamente.',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          // Realizar la redirección después de cerrar el SweetAlert
+          this.router.navigate(['verProveedores']);
+        });
       },
       error => {
         console.error('Error al editar el proveedor:', error);
+
+        // SweetAlert para mostrar mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al editar proveedor',
+          text: 'Hubo un problema al editar el proveedor. Inténtalo de nuevo.',
+          confirmButtonText: 'OK'
+        });
       }
     );
   }

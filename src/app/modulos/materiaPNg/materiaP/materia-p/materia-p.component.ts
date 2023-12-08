@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MateriaPSS } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-materia-p',
@@ -56,18 +57,28 @@ export class MateriaPComponent implements OnInit {
 
   ]
 
-  eliminarMateria(id:number){
-
-      this.materiaPss.eliminarMateria(id).subscribe(
-        () => {
-          console.log('Materia Prima eliminado correctamente');
-          this.actualizarTabla();
-        },
-        error => {
-          console.error('Error al eliminar el materia prima:', error);
-        }
-      );
-
+  eliminarMateria(id: number) {
+    this.materiaPss.eliminarMateria(id).subscribe(
+      () => {
+        console.log('Materia Prima eliminada correctamente');
+        this.actualizarTabla();
+        Swal.fire({
+          title: 'Éxito',
+          text: 'Materia prima eliminada correctamente',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      },
+      error => {
+        console.error('Error al eliminar la materia prima:', error);
+        Swal.fire({
+          title: 'Error',
+          text: 'Error al eliminar la materia prima. Consulte la consola para más detalles.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      }
+    );
   }
 
   onCalificaClick(message:string){

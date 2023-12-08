@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Pedido } from 'src/app/interfaces/pedido';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pedidos-main-c',
@@ -25,12 +26,27 @@ export class PedidosMainCComponent {
 
   constructor(public objApi:ProyectoApiService, private router:Router){}
 
-  obtenerMisPedidos(){
+  obtenerMisPedidos() {
     this.objApi.getMisPedidos(this.usuario.id).subscribe({
-      next: response=>{
-        this.pedidos=response;
+      next: (response) => {
+        this.pedidos = response;
+        // Muestra una alerta con SweetAlert
+        Swal.fire({
+          icon: 'success',
+          title: 'Pedidos obtenidos correctamente',
+          confirmButtonText: 'OK'
+        });
       },
-      error: error=>console.log(error)
+      error: (error) => {
+        console.log(error);
+        // Muestra una alerta con SweetAlert en caso de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al obtener tus pedidos',
+          text: 'Hubo un problema al obtener tus pedidos. Inténtalo de nuevo.',
+          confirmButtonText: 'OK'
+        });
+      }
     });
   }
 

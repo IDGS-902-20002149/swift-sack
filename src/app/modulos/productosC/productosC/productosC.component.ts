@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { Router } from '@angular/router';
 import { Carrito } from 'src/app/interfaces/carrito';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-productos',
@@ -72,22 +73,40 @@ export class ProductosCComponent {
     this.cargarProductos();
   }
 
-  addCarrito(cantidad:number, productId:number){
-    const carrito:Carrito = {
-      idCarrito:0,
+  addCarrito(cantidad: number, productId: number) {
+    const carrito: Carrito = {
+      idCarrito: 0,
       userId: this.usuario.id,
       productId: productId,
       cantidad: cantidad
-    }
+    };
 
     console.log(carrito);
 
     this.objApi.addCarrito(carrito).subscribe({
       next: () => {
         console.log('Producto agregado al carrito');
-        this.router.navigate(['PreviewCar']);
+        // SweetAlert para notificar que el producto se agregó al carrito
+        Swal.fire({
+          icon: 'success',
+          title: 'Producto agregado al carrito',
+          text: 'El producto se ha agregado al carrito correctamente.',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          // Redirige al componente de la vista previa del carrito
+          this.router.navigate(['PreviewCar']);
+        });
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+        console.error(e);
+        // SweetAlert en caso de error al agregar el producto al carrito
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al agregar producto al carrito',
+          text: 'Hubo un problema al agregar el producto al carrito. Inténtalo de nuevo.',
+          confirmButtonText: 'OK'
+        });
+      },
       complete: () => console.info('Solicitud completada')
     });
   }

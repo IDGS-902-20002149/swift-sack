@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoSS } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-producto',
@@ -111,10 +112,27 @@ export class EditarProductoComponent implements OnInit {
       this.productoss.editarProducto(this.regProducto).subscribe(
         () => {
           console.log('Producto editado correctamente');
-          this.router.navigate(['verProductos']);
+
+          // SweetAlert para notificar que el producto se editó correctamente
+          Swal.fire({
+            icon: 'success',
+            title: 'Producto editado',
+            text: 'El producto se ha editado correctamente.',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            this.router.navigate(['verProductos']);
+          });
         },
         error => {
           console.error('Error al editar el producto:', error);
+
+          // SweetAlert para mostrar mensaje de error
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al editar el producto',
+            text: 'Hubo un problema al editar el producto. Inténtalo de nuevo.',
+            confirmButtonText: 'OK'
+          });
         }
       );
     } else {

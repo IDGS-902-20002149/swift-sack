@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Tarjeta } from 'src/app/interfaces/tarjeta';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-tar',
@@ -71,10 +72,28 @@ export class EditarTarComponent {
     this.tarjeta.editarTarjeta(this.tar).subscribe(
       () => {
         console.log('Tarjeta editada correctamente');
-        this.router.navigate(['verTarjetas']);
+
+        // SweetAlert para notificar que la tarjeta se editó correctamente
+        Swal.fire({
+          icon: 'success',
+          title: 'Tarjeta editada',
+          text: 'La tarjeta se ha editado correctamente.',
+          confirmButtonText: 'OK',
+        }).then(() => {
+          // Redireccionar después de cerrar SweetAlert
+          this.router.navigate(['verTarjetas']);
+        });
       },
-      error => {
+      (error) => {
         console.error('Error al editar la tarjeta:', error);
+
+        // SweetAlert para mostrar mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al editar tarjeta',
+          text: 'Hubo un problema al editar la tarjeta. Inténtalo de nuevo.',
+          confirmButtonText: 'OK',
+        });
       }
     );
   }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ProductoSS } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agregar-producto',
@@ -68,32 +69,49 @@ export class AgregarProductoComponent  {
     private router: Router
     ) { }
 
-  agregar() {
-    if (this.regProducto.costo >= 1) {
-      this.productoss.agregarProducto(this.regProducto).subscribe({
-        next: () => {
-          console.log('Producto agregada correctamente');
-          // Realizar la redirección después de que se complete la solicitud
-          this.router.navigate(['verProductos']);
-        },
-        error: (e) => console.error(e),
-        complete: () => console.info('Solicitud completada')
-      });
-    } else {
-      window.alert('El costo no puede ser negativo.');
+    agregar() {
+      if (this.regProducto.costo >= 1) {
+        this.productoss.agregarProducto(this.regProducto).subscribe({
+          next: () => {
+            console.log('Producto agregada correctamente');
+            // SweetAlert para notificar que el producto se agregó correctamente
+            Swal.fire({
+              icon: 'success',
+              title: 'Producto agregado',
+              text: 'El producto se ha agregado correctamente.',
+              confirmButtonText: 'OK'
+            }).then(() => {
+              // Redirigir después de que se complete la solicitud
+              this.router.navigate(['verProductos']);
+            });
+          },
+          error: (e) => {
+            console.error(e);
+            // SweetAlert para mostrar mensaje de error
+            Swal.fire({
+              icon: 'error',
+              title: 'Error al agregar producto',
+              text: 'Hubo un problema al agregar el producto. Inténtalo de nuevo.',
+              confirmButtonText: 'OK'
+            });
+          },
+          complete: () => console.info('Solicitud completada')
+        });
+      } else {
+        window.alert('El costo no puede ser negativo.');
+      }
+        
+      this.regProducto = {
+        id: 0,
+        nombre: '',
+        descripcion: '',
+        costo: 0,
+        foto: '',
+        tipo_producto: '',
+        receta: '',
+        stock: 0
+      };
     }
-      
-    this.regProducto = {
-      id:0,
-      nombre:'',
-      descripcion: '',
-      costo:0,
-      foto:'',
-      tipo_producto:'',
-      receta:'',
-      stock: 0
-    };
-  }
 
   obtenerUsuario(){
     const userData = sessionStorage.getItem('userData');

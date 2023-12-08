@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Tarjeta } from 'src/app/interfaces/tarjeta';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tarjetas',
@@ -37,18 +38,34 @@ export class TarjetasComponent {
     },
   ]
 
-  eliminarTarjeta(id:number){
-    
-      this.tar.eliminarTarjeta(id).subscribe(
-        () => {
-          console.log('Tarjeta eliminada correctamente');
+  eliminarTarjeta(id: number) {
+    this.tar.eliminarTarjeta(id).subscribe(
+      () => {
+        console.log('Tarjeta eliminada correctamente');
+
+        // SweetAlert para notificar que la tarjeta se eliminó correctamente
+        Swal.fire({
+          icon: 'success',
+          title: 'Tarjeta eliminada',
+          text: 'La tarjeta se ha eliminado correctamente.',
+          confirmButtonText: 'OK',
+        }).then(() => {
+          // Redireccionar después de cerrar SweetAlert
           this.actualizarTabla();
-        },
-        error => {
-          console.error('Error al eliminar tarjeta', error);
-        }
-      );
-    
+        });
+      },
+      (error) => {
+        console.error('Error al eliminar tarjeta', error);
+
+        // SweetAlert para mostrar mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al eliminar tarjeta',
+          text: 'Hubo un problema al eliminar la tarjeta. Inténtalo de nuevo.',
+          confirmButtonText: 'OK',
+        });
+      }
+    );
   }
 
   actualizarTabla(){

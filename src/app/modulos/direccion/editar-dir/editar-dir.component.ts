@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Direccion } from 'src/app/interfaces/direccion';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-dir',
@@ -68,14 +69,29 @@ export class EditarDirComponent implements OnInit {
   editar() {
     this.direccion.editarDireccion(this.dir).subscribe(
       () => {
-        console.log('Direccion editada correctamente');
+        // Mostrar SweetAlert de éxito
+        Swal.fire({
+          icon: 'success',
+          title: 'Dirección editada correctamente',
+          text: 'La dirección se ha editado correctamente.',
+        });
+  
+        // Redirigir después de la edición
         this.router.navigate(['verDirecciones']);
       },
       error => {
-        console.error('Error al editar la direccion:', error);
+        console.error('Error al editar la dirección:', error);
+  
+        // Mostrar SweetAlert de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al editar dirección',
+          text: 'Hubo un problema al editar la dirección. Inténtalo de nuevo.',
+        });
       }
     );
   }
+  
 
   obtenerUsuario(){
     const userData = sessionStorage.getItem('userData');

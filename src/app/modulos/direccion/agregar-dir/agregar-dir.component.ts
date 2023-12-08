@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Direccion } from 'src/app/interfaces/direccion';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agregar-dir',
@@ -37,13 +38,30 @@ export class AgregarDirComponent {
     this.dir.idUser = this.usuario.id;
     this.direccion.addDireccion(this.dir).subscribe({
       next: () => {
-        console.log('Direccion agregada correctamente');
+        // Mostrar SweetAlert de éxito
+        Swal.fire({
+          icon: 'success',
+          title: 'Dirección agregada correctamente',
+          text: 'La dirección se ha agregado correctamente.',
+        });
+  
+        // Redirigir a la vista de direcciones
         this.router.navigate(['verDirecciones']);
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+        console.error(e);
+  
+        // Mostrar SweetAlert de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al agregar la dirección',
+          text: 'Hubo un problema al agregar la dirección. Inténtalo de nuevo.',
+        });
+      },
       complete: () => console.info('Solicitud completada')
     });
   }
+  
 
   ngOnInit(): void {
     this.obtenerUsuario();

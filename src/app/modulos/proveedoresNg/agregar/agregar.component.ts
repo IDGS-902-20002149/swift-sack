@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ProveedorSS } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agregar',
@@ -37,10 +38,29 @@ export class AgregarComponent {
     this.proveedoresss.agregarNuevoProveedor(this.regProveedor).subscribe({
       next: () => {
         console.log('Proveedor agregado correctamente');
-        // Realizar la redirección después de que se complete la solicitud
-        this.router.navigate(['verProveedores']);
+
+        // SweetAlert para notificar que el proveedor se agregó correctamente
+        Swal.fire({
+          icon: 'success',
+          title: 'Proveedor agregado',
+          text: 'El proveedor se ha agregado correctamente.',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          // Realizar la redirección después de cerrar el SweetAlert
+          this.router.navigate(['verProveedores']);
+        });
       },
-      error: (e) => console.error(e),
+      error: (e) => {
+        console.error(e);
+
+        // SweetAlert para mostrar mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al agregar proveedor',
+          text: 'Hubo un problema al agregar el proveedor. Inténtalo de nuevo.',
+          confirmButtonText: 'OK'
+        });
+      },
       complete: () => console.info('Solicitud completada')
     });
 

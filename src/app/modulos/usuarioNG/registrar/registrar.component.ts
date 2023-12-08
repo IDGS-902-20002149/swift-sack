@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UsuarioMod, UsuarioRegistro } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrar',
@@ -61,11 +62,27 @@ export class RegistrarComponent {
     this.proyectoApiService.register(this.usuarioRegistro).subscribe(
       (response) => {
         console.log('Registro exitoso:', response);
-        // Realizar acciones adicionales si es necesario, como redirigir a otra página
+        // SweetAlert para mostrar mensaje de éxito
+        Swal.fire({
+          icon: 'success',
+          title: 'Registro exitoso',
+          text: 'Tu cuenta se ha registrado correctamente. Ahora puedes iniciar sesión.',
+          confirmButtonText: 'OK',
+        });
+
+        // Redirigir a la página de inicio de sesión
         this.router.navigate(['/login']);
       },
       (error) => {
         console.error('Error en el registro:', error);
+
+        // SweetAlert para mostrar mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error en el registro',
+          text: 'Hubo un problema al registrar tu cuenta. Inténtalo de nuevo.',
+          confirmButtonText: 'OK',
+        });
       }
     );
   }

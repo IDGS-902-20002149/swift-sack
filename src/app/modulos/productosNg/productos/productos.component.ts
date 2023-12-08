@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductoSS } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-productos',
@@ -53,17 +54,32 @@ export class ProductosComponent implements OnInit {
   ]
 
   eliminarProducto(id:number){
+    this.productos.eliminarProducto(id).subscribe(
+      () => {
+        console.log('Producto eliminado correctamente');
 
-      this.productos.eliminarProducto(id).subscribe(
-        () => {
-          console.log('Producto eliminado correctamente');
+        // SweetAlert para notificar que el producto se eliminó correctamente
+        Swal.fire({
+          icon: 'success',
+          title: 'Producto eliminado',
+          text: 'El producto se ha eliminado correctamente.',
+          confirmButtonText: 'OK'
+        }).then(() => {
           this.actualizarTabla();
-        },
-        error => {
-          console.error('Error al eliminar el producto:', error);
-        }
-      );
+        });
+      },
+      error => {
+        console.error('Error al eliminar el producto:', error);
 
+        // SweetAlert para mostrar mensaje de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al eliminar el producto',
+          text: 'Hubo un problema al eliminar el producto. Inténtalo de nuevo.',
+          confirmButtonText: 'OK'
+        });
+      }
+    );
   }
 
   actualizarTabla(){

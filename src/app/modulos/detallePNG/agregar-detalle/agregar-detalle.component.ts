@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MateriaPSS, DetalleProductoSS } from 'src/app/interfaces/swiftsack';
 import { UsuarioMod } from 'src/app/interfaces/usuario';
 import { ProyectoApiService } from 'src/app/proyecto-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agregar-detalle',
@@ -49,24 +50,43 @@ export class AgregarDetalleComponent implements OnInit{
     );
   }
 
-  agregarDetalle(){
+  agregarDetalle() {
     this.regDetalleProducto.id_producto = this.route.snapshot.params['id'];
+  
     this.materiaPss.agregarDetalle(this.regDetalleProducto).subscribe({
       next: () => {
-        console.log('Detalle agregado correctamente');
-        this.router.navigate(['/verDetalle',  this.route.snapshot.params['id']]);
+        // Mostrar SweetAlert de éxito
+        Swal.fire({
+          icon: 'success',
+          title: 'Detalle agregado correctamente',
+          text: 'El detalle se ha agregado correctamente.',
+        });
+  
+        // Redirigir después de agregar el detalle
+        this.router.navigate(['/verDetalle', this.route.snapshot.params['id']]);
       },
-      error: (e) => console.error(e),
-      complete: () => console.info('Solicitud completada')
+      error: (e) => {
+        console.error(e);
+  
+        // Mostrar SweetAlert de error
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al agregar detalle',
+          text: 'Hubo un problema al agregar el detalle. Inténtalo de nuevo.',
+        });
+      },
+      complete: () => {
+        // Limpiar el formulario después de completar la operación
+        this.regDetalleProducto = {
+          id: 0,
+          id_materia: 0,
+          cantidad: 0,
+          id_producto: 0,
+        };
+      },
     });
-
-    this.regDetalleProducto = {
-      id: 0,
-    id_materia: 0,
-    cantidad: 0,
-    id_producto: 0
-    };
   }
+  
 
   obtenerUnidad(id: number): void {
     if (id > 0) {
