@@ -24,35 +24,37 @@
       <mat-sidenav style="min-width: 300px;" class="mainburguer" #cajon mode="side" opened>
         <mat-nav-list>
           <a *ngIf="usuario.roleId == 0" mat-list-item routerLinkActive="active" routerLink="login">
-            <mat-icon color="primary">perm_identity</mat-icon>
+            <mat-icon color="primary">person icon</mat-icon>
             Login
           </a>
           <a *ngIf="usuario.roleId == 0 or usuario.roleId == 1" mat-list-item routerLinkActive="active" routerLink="registrar">
-            <mat-icon color="primary">perm_identity</mat-icon>
+            <mat-icon color="primary">person_add</mat-icon>
             Registrar
           </a>
           <a *ngIf="usuario.roleId == 1" mat-list-item routerLinkActive="active" routerLink="finanzas">
-            <mat-icon color="primary">perm_identity</mat-icon>
+            <mat-icon color="primary">show_chart</mat-icon>
             Finanzas
           </a>
           <a *ngIf="usuario.roleId == 1 or usuario.roleId == 2" mat-list-item routerLinkActive="active" routerLink="verProductos">
-            <mat-icon color="primary">perm_identity</mat-icon>
+            <mat-icon color="primary">shopping_bag</mat-icon>
+
             Ver Productos
           </a>
           <a *ngIf="usuario.roleId == 1 or usuario.roleId == 2" mat-list-item routerLinkActive="active" routerLink="Pedidos">
-            <mat-icon color="accent">add</mat-icon>
+            <mat-icon color="primary">shopping_cart</mat-icon>
             Pedidos
           </a>
           <a *ngIf="usuario.roleId == 1 or usuario.roleId == 2" mat-list-item routerLinkActive="active" routerLink="verProveedores">
-            <mat-icon color="primary">credit_card</mat-icon>
+            <mat-icon color="primary">account_circle</mat-icon>
             Ver Proveedores
           </a>
           <a *ngIf="usuario.roleId == 1 or usuario.roleId == 2" mat-list-item routerLinkActive="active" routerLink="verMateriaPrima">
-            <mat-icon color="primary">pin_drop</mat-icon>
+            <mat-icon color="primary">list</mat-icon>
+
             Ver Materia Prima
           </a>
           <a *ngIf="usuario.roleId != 0" mat-list-item routerLinkActive="active" (click)="cerrarSesion()">
-            <mat-icon color="primary">add_location</mat-icon>
+            <mat-icon color="primary">input</mat-icon>
             Cerrar Sesi&oacute;n
           </a>
           <!-- Acordeon Perfil start -->
@@ -78,7 +80,7 @@
                     Mis Pedidos
                   </a>
                   <a mat-list-item routerLinkActive="active" routerLink="modificar">
-                    <mat-icon color="primary">perm_identity</mat-icon>
+                    <mat-icon color="primary">border_color</mat-icon>
                     Modificar Perfil
                   </a>
                 </mat-nav-list>

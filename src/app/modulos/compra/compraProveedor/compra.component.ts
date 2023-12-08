@@ -59,7 +59,7 @@ export class CompraComponent {
   };
 
   constructor(
-    private materiapss: ProyectoApiService, 
+    private materiapss: ProyectoApiService,
     private proveedoress: ProyectoApiService,
     private router: Router) {
    }
@@ -88,25 +88,25 @@ export class CompraComponent {
 
   obtenerMateria(idMateria: number) {
     const materiaEncontrada = this.materias.find(materia => materia.id === idMateria);
-  
+
     if (materiaEncontrada) {
       this.regMateriaPss.nombre = materiaEncontrada.nombre;
     } else {
-      console.log(`No se encontró una materia con id ${idMateria}`);
+      console.log(`No se encontrï¿½ una materia con id ${idMateria}`);
     }
   }
-  
+
   ngOnInit(): void {
     this.obtenerUsuario();
     if(this.usuario.roleId != 1 && this.usuario.roleId != 2){
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home'])
     }
     this.obtenerProveedores();
   }
 
   obtenerUsuario(){
     const userData = sessionStorage.getItem('userData');
-    
+
     if (userData) {
       this.usuario = JSON.parse(userData);
       console.log('Usuario: ' + this.usuario.name + ' recuperado');
@@ -114,7 +114,7 @@ export class CompraComponent {
       console.log('El objeto no fue encontrado en sessionStorage.');
     }
   }
-  
+
   setMateriaCompra() {
     const newRowData = {
         nombre: this.regMateriaPss.nombre,

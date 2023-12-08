@@ -212,11 +212,7 @@ export class ProyectoApiService {
 
   agregarStock(stock: number, id:number) {
     const url = `https://localhost:7267/api/Productos/agregar-stock/${id}`;
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.put(url, stock, { headers });
+    return this.http.put(url, stock);
   }
 
   agregarDetalle(datos:DetalleProductoSS){

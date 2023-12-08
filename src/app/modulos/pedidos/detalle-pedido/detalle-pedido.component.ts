@@ -28,8 +28,8 @@ export class DetallePedidoComponent {
   }
 
   dir:Direccion = {
-    idDireccion:0, 
-    idUser:0, 
+    idDireccion:0,
+    idUser:0,
     nombreCompleto:'',
     calleNumero:'',
     codigoPostal:'',
@@ -78,17 +78,18 @@ export class DetallePedidoComponent {
     this.objApi.obtenerDireccion(id).subscribe({
       next: (response: Direccion[]) => {
         this.direccionSelect = response;
-        this.dir.idDireccion = this.direccionSelect.idDireccion;       
+        this.dir.idDireccion = this.direccionSelect.idDireccion;
         this.dir.nombreCompleto = this.direccionSelect.nombreCompleto;
         this.dir.calleNumero = this.direccionSelect.calleNumero;
         this.dir.codigoPostal = this.direccionSelect.codigoPostal;
-        this.dir.telefono = this.direccionSelect.telefono;        
+        this.dir.telefono = this.direccionSelect.telefono;
       },
       error: (error) => console.log(error)
     });
   }
 
   getDetalle(id:number){
+    console.log(id)
     this.objApi.getDetallePedido(id).subscribe({
       next: response=>{
         this.detalles=response;
@@ -98,6 +99,7 @@ export class DetallePedidoComponent {
   }
 
   getItems(id:number){
+    console.log(id)
     this.objApi.getPedidoItems(id).subscribe({
       next: response=>{
         this.items=response;
@@ -153,7 +155,7 @@ export class DetallePedidoComponent {
 
   obtenerUsuario(){
     const userData = sessionStorage.getItem('userData');
-    
+
     if (userData) {
       this.usuario = JSON.parse(userData);
       console.log('Usuario: ' + this.usuario.name + ' recuperado');
